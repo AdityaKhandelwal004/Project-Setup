@@ -37,7 +37,7 @@ describe('routes', () => {
   it('should contain the correct application flow routes', () => {
     const { welcome, onboarding, thankYouSetup, main } = routes;
 
-    expect(welcome).toBe('/onboarding');
+    expect(welcome).toBe('/welcome');
     expect(onboarding).toBe('/onboarding');
     expect(thankYouSetup).toBe('/thank-you-setup');
     expect(main).toBe('/main');

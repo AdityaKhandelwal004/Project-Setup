@@ -1,27 +1,21 @@
-import React, { useEffect } from "react";
-import { motion } from "motion/react";
-import { AlertCircle } from "lucide-react";
-import md5 from "md5";
-import { useDispatch } from "react-redux";
-import {
-  TextInput,
-  PasswordInput,
-  MaterialDateInput,
-  Button,
-} from "@mono/components";
-import { useFormReducer } from "@mono/hooks/src/form";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { AlertCircle, Sparkles, TrendingUp, Target } from 'lucide-react';
+import md5 from 'md5';
+import { Checkbox, SvgIcon, Typography, FormControlLabel } from "@mui/material";
+import { TextInput, PasswordInput, MaterialDateInput, Button } from '@mono/components';
+import { useFormReducer } from '@mono/hooks/src/form';
 import {
   required,
   emailValidator,
   passwordValidator,
   confirmPassword,
-  dobValidator,
-} from "@mono/utils/src/validators";
-import messages from "../../messages";
-import packageMessages from "@mono/messages";
-import { AuthLeftSection } from "./AuthLeftSection";
-import { signup as signupAction } from "@mono/redux-global/src/actions";
-import logo from "../../assets/logo.png";
+  getSuccessMessage,
+} from '@mono/utils/src/validators';
+import messages from '../../messages';
+import packageMessages from '@mono/messages';
+import { brand, primitiveColors } from '@mono/theme/style.palette';
+import { AuthLeftSection } from './AuthLeftSection';
 
 import {
   ContentWrapper,
@@ -30,120 +24,110 @@ import {
   FormTitle,
   MainContainer,
   RightSection,
-  AuthNavLink,
-  SignupFormWrapper,
-  SignupFieldsGrid,
-  SignupFieldContainer,
-  SignupHeaderContainer,
-  SignupHeaderInner,
-  SignupFooterContainer,
-  SignupFooterText,
+  StyledTermsContainer,
   StyledRegularB1,
   StyledTermsLink,
-  ErrorContainer,
-  ErrorContent,
-  ErrorIcon,
-  ErrorText,
-  CenteredContainer,
-  MobileLogo,
-  DatePickerGlobalStyles,
-} from "./styles";
-import { fontFamilies } from "@mono/theme";
-import { sanitizeServerError } from "../../myUtils/commonFunctions";
-import moment from "moment";
-import { routes } from "../../myUtils";
-import { trackScreen } from "../../utils/mixpanel/trackScreens";
+  AuthNavLink,
+} from './styles';
+import { fontFamilies } from '@mono/theme';
+
+// Custom Checkbox Icons
+const CustomUncheckedIcon = () => (
+  <SvgIcon sx={{ width: 20, height: 20 }}>
+    <rect
+      x="1"
+      y="1"
+      width="18"
+      height="18"
+      rx="4"
+      fill="none"
+      stroke="#100937"
+      strokeWidth="1.5"
+    />
+  </SvgIcon>
+);
+
+const CustomCheckedIcon = () => (
+  <SvgIcon sx={{ width: 20, height: 20 }}>
+    <rect
+      x="1"
+      y="1"
+      width="18"
+      height="18"
+      rx="4"
+      fill="#E7E6EB"
+      stroke="#100937"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M6 10l2 2 4-4"
+      stroke="#100937"
+      strokeWidth="2"
+      fill="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </SvgIcon>
+);
 
 // Validators following the reference pattern
 const validators = {
   firstName: [required(packageMessages?.signUp?.errors?.firstName?.required)],
   lastName: [required(packageMessages?.signUp?.errors?.lastName?.required)],
-  email: [
-    required(packageMessages?.signUp?.errors?.email?.required),
-    emailValidator,
-  ],
-  dateOfBirth: [
-    required(packageMessages?.signUp?.errors?.dateOfBirth?.required),
-    dobValidator,
-  ],
-  password: [
-    required(packageMessages?.signUp?.errors?.password?.required),
-    passwordValidator,
-  ],
+  email: [required(packageMessages?.signUp?.errors?.email?.required), emailValidator],
+  dateOfBirth: [required(packageMessages?.signUp?.errors?.dateOfBirth?.required)],
+  password: [required(packageMessages?.signUp?.errors?.password?.required), passwordValidator],
   confirmPassword: [
     required(packageMessages?.signUp?.errors?.confirmPassword?.required),
-    confirmPassword("password"),
+    confirmPassword('password'),
   ],
 };
 
-export function Signup({
-  onComplete,
-  onSignIn,
-}: {
-  onComplete: () => void;
-  onSignIn: () => void;
-}) {
-  const reduxDispatch: any = useDispatch();
+export function Signup({ onComplete, onSignIn }: { onComplete: () => void; onSignIn: () => void }) {
   const {
     connectField,
     handleSubmit: formHandleSubmit,
-    submitError,
+    formValues,
+    hasError,
     submitting,
+    submitError,
     setSubmitError,
   } = useFormReducer(validators);
+  const [isChecked, setIsChecked] = useState(false);
 
   const handleFormSubmit = async (formData: Record<string, any>) => {
-    if (submitting) {
-      return;
+    try {
+      setSubmitError(undefined);
+
+      const signupCredentials = {
+        firstName: formData.firstName || '',
+        lastName: formData.lastName || '',
+        email: formData.email || '',
+        dateOfBirth: formData.dateOfBirth || '',
+        password: md5(formData.password || ''),
+      };
+
+    } catch (error: unknown) {
+      const errorMessage =
+        error instanceof Error ? error.message : 'Signup failed. Please try again.';
+      setSubmitError(errorMessage);
     }
-
-    const signupPayload = {
-      firstName: formData.firstName?.trim(),
-      lastName: formData.lastName?.trim(),
-      email: formData.email?.trim()?.toLowerCase(),
-      ...(formData.dateOfBirth &&
-        formData.dateOfBirth.trim() && {
-          dateOfBirth: formData.dateOfBirth.trim(),
-        }),
-      password: md5(formData.password || ""),
-      termAccepted: true,
-      privacyPolicyAccepted: true,
-    };
-
-    return new Promise<any>((resolve, reject) => {
-      reduxDispatch(
-        signupAction(
-          signupPayload as any,
-          (data: any) => resolve(data),
-          reject,
-        ),
-      );
-    })
-      .then(() => {
-        onComplete();
-      })
-      .catch((error) => {
-        const code = error?.message as string;
-        const errorMessage = sanitizeServerError(
-          (messages as any)?.signUp?.form?.errors?.[code],
-        );
-        setSubmitError(errorMessage);
-      });
   };
 
   const handleSubmit = formHandleSubmit(handleFormSubmit);
 
-  // Render-only error for terms (single instance, no duplication)
-  useEffect(() => {
-    trackScreen("Sign Up");
-  }, []);
+  const getFieldSuccessMessage = (name: string) => {
+    const value = formValues?.[name]?.value;
+    const hasError = formValues?.[name]?.error;
+
+    return getSuccessMessage(name, value, !!hasError, 'signUp');
+  };
 
   return (
     <MainContainer>
-      <DatePickerGlobalStyles />
       <ContentWrapper>
         {/* Left side  */}
-        <AuthLeftSection showEmpoweringMessage showSignUpFloatingButton />
+        <AuthLeftSection showEmpoweringMessage />
 
         {/* Right side - Sign up form */}
         <RightSection
@@ -152,7 +136,7 @@ export function Signup({
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          <CenteredContainer>
+          <div className="flex justify-center w-full">
             <FormContainer
               as={motion.div}
               initial={{ opacity: 0, y: 30 }}
@@ -160,168 +144,165 @@ export function Signup({
               transition={{ delay: 0.4 }}
             >
               {/* Header */}
-              <SignupHeaderContainer>
-                <MobileLogo src={logo} alt="Obie Money Logo" />
-                <SignupHeaderInner>
+              <div className="text-center mb-4 sm:mb-6 md:mb-6 lg:mb-6">
+                <div className="text-center mb-8">
                   <FormTitle>{messages?.signUp?.heading}</FormTitle>
                   <FormSubtitle>{messages?.signUp?.subHeading}</FormSubtitle>
-                </SignupHeaderInner>
-              </SignupHeaderContainer>
+                </div>
+              </div>
+              {/* Error Display */}
+              {/* Submit Error Display */}
+              {submitError && (
+                <div className="p-3 rounded-lg bg-red-50 border border-red-200">
+                  <div className="flex items-center gap-2">
+                    <AlertCircle size={16} className="text-red-500" />
+                    <span className="text-sm text-red-700">{submitError}</span>
+                  </div>
+                </div>
+              )}
 
               {/* Form */}
-              <SignupFormWrapper onSubmit={handleSubmit}>
-                <SignupFieldsGrid>
-                  <SignupFieldContainer>
-                    {connectField("firstName", {
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-3 sm:space-y-4 md:space-y-4 lg:space-y-5"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 break-words whitespace-normal ">
+                  <div className="flex flex-col">
+                    {connectField('firstName', {
                       title: messages?.signUp?.firstName?.label,
                       placeholder: messages?.signUp?.firstName?.placeHolder,
                       useTouchedValidation: false,
-                      inputSize: "full",
+                      inputSize: 'full',
                       // success: getFieldSuccessMessage('firstName'),
-                      isAuth: true,
+                      isAuth: true
                     })(TextInput)}
-                  </SignupFieldContainer>
+                  </div>
 
-                  <SignupFieldContainer>
-                    {connectField("lastName", {
+                  <div className="flex flex-col">
+                    {connectField('lastName', {
                       title: messages?.signUp?.lastName?.label,
                       placeholder: messages?.signUp?.lastName?.placeHolder,
                       useTouchedValidation: false,
-                      inputSize: "full",
+                      inputSize: 'full',
                       // success: getFieldSuccessMessage('lastName'),
-                      isAuth: true,
+                      isAuth: true
                     })(TextInput)}
-                  </SignupFieldContainer>
-                </SignupFieldsGrid>
+                  </div>
+                </div>
 
-                <SignupFieldsGrid>
-                  <SignupFieldContainer>
-                    {connectField("email", {
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="flex flex-col">
+                    {connectField('email', {
                       title: messages?.signUp?.email?.label,
                       placeholder: messages?.signUp?.email?.placeholder,
                       useTouchedValidation: false,
-                      inputSize: "full",
+                      inputSize: 'full',
                       // success: getFieldSuccessMessage('email'),
-                      isAuth: true,
+                      isAuth: true
                     })(TextInput)}
-                  </SignupFieldContainer>
+                  </div>
 
-                  <SignupFieldContainer>
-                    {connectField("dateOfBirth", {
+                  <div className="flex flex-col">
+                    {connectField('dateOfBirth', {
                       title: messages?.signUp?.dob?.label,
                       placeholder: messages?.signUp?.dob?.placeHolder,
                       useTouchedValidation: false,
-                      inputSize: "full",
+                      inputSize: 'full',
                       // success: getFieldSuccessMessage('dateOfBirth'),
-                      isAuth: true,
-                      maxDate: moment().subtract(18, "years").toDate(),
+                      isAuth: true
                     })(MaterialDateInput)}
-                  </SignupFieldContainer>
-                </SignupFieldsGrid>
+                  </div>
+                </div>
 
-                <SignupFieldContainer>
-                  {connectField("password", {
+                <div className="flex flex-col">
+                  {connectField('password', {
                     title: messages?.signUp?.createPassword?.label,
                     placeholder: messages?.signUp?.createPassword?.placeHolder,
                     useTouchedValidation: false,
-                    inputSize: "full",
+                    inputSize: 'full',
                     // success: getFieldSuccessMessage('password'),
-                    isAuth: true,
+                    isAuth: true
                   })(PasswordInput)}
-                </SignupFieldContainer>
+                </div>
 
-                <SignupFieldContainer>
-                  {connectField("confirmPassword", {
+                <div className="flex flex-col">
+                  {connectField('confirmPassword', {
                     title: messages?.signUp?.confirmPassword?.label,
                     placeholder: messages?.signUp?.confirmPassword?.placeHolder,
                     useTouchedValidation: false,
-                    inputSize: "full",
+                    inputSize: 'full',
                     // success: getFieldSuccessMessage('confirmPassword'),
-                    isAuth: true,
+                    isAuth: true
                   })(PasswordInput)}
-                </SignupFieldContainer>
-                {/* Submit Error Display */}
-                {submitError && (
-                  <ErrorContainer>
-                    <ErrorContent>
-                      <ErrorIcon>
-                        <AlertCircle size={16} />
-                      </ErrorIcon>
-                      <ErrorText>{submitError}</ErrorText>
-                    </ErrorContent>
-                  </ErrorContainer>
-                )}
-
-                {/* Submit button */}
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  size="large"
-                  isJsxRight={submitting}
-                  JsxImg={() => (
-                    <div
-                      className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent ml-2"
-                      style={{ display: "inline-block" }}
-                    />
-                  )}
-                  label={messages?.signUp?.signUpButton as string}
-                />
-
-                <div style={{ marginTop: "16px", textAlign: "left" }}>
-                  <StyledRegularB1>
-                    By clicking <i>Start building wealth today</i>, you agree to
-                    Obie's{" "}
-                    <StyledTermsLink
-                      as="a"
-                      href={routes.content.disclaimer}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {"Disclaimer"}
-                    </StyledTermsLink>
-                    {" , "}
-                    <StyledTermsLink
-                      as="a"
-                      href={routes.content.terms_and_conditions}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {messages?.signUp?.termsConditions}
-                    </StyledTermsLink>{" "}
-                    {messages?.signUp?.and}{" "}
-                    <StyledTermsLink
-                      as="a"
-                      href={routes.content.privacy_policy}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {"Data Privacy Policy"}
-                    </StyledTermsLink>
-                  </StyledRegularB1>
                 </div>
-              </SignupFormWrapper>
+
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    size="large"
+                    label={messages?.signUp?.signUpButton}
+                  />
+                <StyledTermsContainer
+                  control={
+                    <Checkbox
+                      checked={isChecked}
+                      onChange={(event) => setIsChecked(event.target.checked)}
+                      checkedIcon={<CustomCheckedIcon />}
+                      icon={<CustomUncheckedIcon />}
+                    />
+                  }
+                  label={
+                    <StyledRegularB1>
+                      {messages?.signUp?.read}{' '}
+                      <StyledTermsLink
+                        onClick={() => {
+                          window.open(
+                            "https://www.obiemoney.com/terms-of-use",
+                            "_blank"
+                          );
+                        }}
+                      >
+                        {messages?.signUp?.termsConditions}
+                      </StyledTermsLink>{' '}
+                      {messages?.signUp?.and}{' '}
+                      <StyledTermsLink
+                        onClick={() => {
+                          window.open(
+                            "https://www.obiemoney.com/privacy-policy",
+                            "_blank"
+                          );
+                        }}
+                      >
+                        {messages?.signUp?.privacyPolicy}
+                      </StyledTermsLink>
+                    </StyledRegularB1>
+                  }
+                />
+              </form>
 
               {/* Login link */}
-              <SignupFooterContainer
-                as={motion.div}
+              <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.8 }}
+                className="text-center mt-4 sm:mt-6 md:mt-6 lg:mt-6"
                 onClick={onSignIn}
               >
-                <SignupFooterText
-                  style={{ fontFamily: fontFamilies.secondary }}
-                >
-                  {messages?.signUp?.alreadyBuilding}{" "}
-                  <AuthNavLink type="button" onClick={onSignIn}>
+                <p className="text-[14px] text-brand-button" style={{fontFamily: fontFamilies.secondary}} >
+                  {messages?.signUp?.alreadyBuilding}{' '}
+                  <AuthNavLink
+                    type="button"
+                    onClick={onSignIn}
+                    className="font-bold text-[14px] underline hover:opacity-80 text-brand-accent"
+                  >
                     {messages?.signUp?.signInHere}
                   </AuthNavLink>
-                </SignupFooterText>
-              </SignupFooterContainer>
+                </p>
+              </motion.div>
             </FormContainer>
-          </CenteredContainer>
+          </div>
         </RightSection>
 
         {/* </div> */}

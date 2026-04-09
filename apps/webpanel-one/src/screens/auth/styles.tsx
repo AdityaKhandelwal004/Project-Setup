@@ -1,10 +1,10 @@
 import { Grid2, Link, Typography, Chip, FormControlLabel, Checkbox, colors, SvgIcon } from '@mui/material';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import { motion } from 'motion/react';
 import { respondTo } from '@mono/theme/style.layout';
-import { fontFamilies, fontSize, fontWeight } from '@mono/theme/style.typography';
+import { fontSize, fontWeight } from '@mono/theme/style.typography';
 import { authTheme } from '@mono/theme/modules/auth.theme';
-import { brand, greyScaleColour, primitiveColors } from '@mono/theme/style.palette';
+import { brand, greyScaleColour } from '@mono/theme/style.palette';
 import { spacing, borderRadius } from '@mono/theme';
 import { MaterialTextInput, PasswordInput, MaterialDateInput } from '@mono/components';
 
@@ -378,25 +378,6 @@ export const StyledMaterialInput = styled(MaterialTextInput)(() => ({
   },
 }));
 
-export const DatePickerGlobalStyles = createGlobalStyle`
-  .MuiPickersDay-root.Mui-disabled {
-    color: ${greyScaleColour.grey60} !important;
-    opacity: 1 !important;
-    background-color: transparent !important;
-  }
-
-  .MuiPickersDay-root.Mui-disabled.MuiPickersDay-dayOutsideMonth {
-    color: ${greyScaleColour.grey40} !important;
-    opacity: 1 !important;
-  }
-
-  /* Disabled navigation or other disabled controls in picker */
-  .MuiPickersCalendarHeader-iconButton.Mui-disabled {
-    color: ${greyScaleColour.grey40} !important;
-    opacity: 1 !important;
-  }
-`;
-
 export const StyledPasswordInput = styled(PasswordInput)(() => ({
   width: '100%',
   '& .MuiOutlinedInput-root': {
@@ -481,12 +462,15 @@ export const StyledDateInput = styled(MaterialDateInput)(() => ({
   },
 }));
 
+// =============================================================================
 // SIGNIN COMPONENT STYLED COMPONENTS
+// =============================================================================
+
 export const MainContainer = styled.div`
   min-height: 100vh;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, ${brand.commonBackground} 0%, ${brand.paleGray} 50%, ${brand.paleGray} 100%);
+  // background: linear-gradient(135deg, ${brand.commonBackground} 0%, ${brand.paleGray} 50%, ${brand.paleGray} 100%);
 `;
 
 export const FloatingShapeContainer = styled.div`
@@ -519,8 +503,6 @@ export const ContentWrapper = styled.div`
   min-height: 100vh;
   position: relative;
   z-index: 10;
-  justify-content: center;
-  align-items: center;
 
   ${respondTo.mdDown} {
     flex-direction: column;
@@ -534,7 +516,7 @@ export const ContentWrapper = styled.div`
 
 export const LeftSection = styled.div`
   flex: 1;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -544,18 +526,17 @@ export const LeftSection = styled.div`
   order: 2;
   background: linear-gradient(135deg, ${brand.commonBackground} 0%, rgba(255, 237, 230, 0.8) 100%);
 
-  ${respondTo.mdUp} {
-    display: flex;
-    order: 1;
-    padding: ${spacing[6]};
-  }
-
   ${respondTo.lgUp} {
+    order: 1;
     padding: ${spacing[8]};
   }
 
-  ${respondTo.mdDown} {
-    display: none;
+  ${respondTo.mdUp} {
+    padding: ${spacing[6]};
+  }
+
+  ${respondTo.smOnly} {
+    padding: ${spacing[4]} !important;
   }
 `;
 
@@ -566,31 +547,39 @@ export const RightSection = styled.div`
   justify-content: center;
   padding: ${spacing[4]};
   order: 1;
-  background: linear-gradient(135deg, ${brand.paleGray} 0%, rgba(240, 234, 253, 0.8) 100%);
+  background-color: ${brand.commonBackground};
+  flex-direction: column;
 
   ${respondTo.lgUp} {
     order: 2;
-    padding: ${spacing[28]};
+    padding: ${spacing[6]};transition
   }
-  ${respondTo.lgDown} {
-      order: 2;
-      padding: 16px 48px !important;
-    }
 
-  ${respondTo.mdDown} {
-    background: ${brand.white};
+  ${respondTo.mdUp} {
+    padding: ${spacing[6]};
   }
 
   ${respondTo.smOnly} {
-    padding: 0px !important;
+    padding: ${spacing[4]} !important;
   }
 `;
 
 export const WelcomeTitle = styled.h1`
-  font-size: 32px;
-  font-family: ${fontFamilies.primary};
-  color: ${primitiveColors.orange500};
+  font-size: 36px;
+  font-weight: bold;
+  color: ${brand.secondaryMain};
+
+  ${respondTo.mdUp} {
+    font-size: 32px;
+    color:${brand.primaryMain};
+    font-family: 'Nohemi', sans-serif;
   font-weight: ${fontWeight.semiBold} !important;
+    
+  }
+
+  ${respondTo.smOnly} {
+    font-size: 28px;
+  }
 `;
 
 export const WelcomeSubtitle = styled.span`
@@ -753,27 +742,29 @@ export const MessageDecoration = styled.div`
 
 export const FormContainer = styled.div`
   width: 100%;
-  // max-width: 500px;
+  max-width: 600px;
   background-color: rgba(255, 255, 255, 0.95);
-  border: none;
+  border: 2px solid ${brand.primaryMain}20;
   border-radius: ${borderRadius.xl};
   padding: ${spacing[6]};
 
   ${respondTo.mdUp} {
+    max-width: 600px;
     padding: ${spacing[8]};
   }
 
   ${respondTo.lgUp} {
+    max-width: 600px;
     padding: ${spacing[10]};
-    border: 2px solid ${brand.primaryMain}20;
   }
 
   ${respondTo.screenUp(1400)} {
+    max-width: 600px;
     padding: ${spacing[12]};
   }
 
   ${respondTo.smOnly} {
-    // max-width: 350px !important;
+    max-width: 350px !important;
     padding: ${spacing[4]} !important;
   }
 
@@ -784,23 +775,14 @@ export const FormContainer = styled.div`
 
 export const FormTitle = styled.h1`
   font-family: ${authTheme.textStyles.heading.fontFamily};
-  font-size: 22px;
-  font-weight: 500;
-  line-height: 28px;
-  letter-spacing: -0.02em;
+  font-size: ${authTheme.textStyles.heading.fontSize};
+  font-weight: ${authTheme.textStyles.heading.fontWeight};
+  line-height: ${authTheme.textStyles.heading.lineHeight};
+  letter-spacing: ${authTheme.textStyles.heading.letterSpacing};
   text-align: center;
+  margin-top: 20px;
   color: ${authTheme.colors.heading};
   margin-bottom: ${spacing[3]};
-
-  @media only screen and (min-width: 400px) {
-    font-size: 24px;
-    letter-spacing: ${authTheme.textStyles.heading.letterSpacing};
-  }
-
-  ${respondTo.smUp} {
-    font-size: ${authTheme.textStyles.heading.fontSize};
-    font-weight: ${authTheme.textStyles.heading.fontWeight};
-  }
 `;
 
 export const FormSubtitle = styled.p`
@@ -841,49 +823,25 @@ export const RememberMeText = styled.span`
   color: ${brand.secondaryMain};
 `;
 
-// export const ForgotPasswordLink = styled.button`
-//   display: flex;
-//   justify-content: end;
-//   font-family: ${authTheme.textStyles.link.fontFamily};
-//   font-size: ${authTheme.textStyles.link.fontSize};
-//   font-weight: ${authTheme.textStyles.link.fontWeight};
-//   line-height: ${authTheme.textStyles.link.lineHeight};
-//   letter-spacing: ${authTheme.textStyles.link.letterSpacing};
-//   color: ${authTheme.colors.link};
-//   background: none;
-//   border: none;
-//   cursor: pointer;
-//   text-decoration: none;
-//   width: 100%;
-
-//   &:hover {
-//     text-decoration: underline;
-//   }
-// `;
-
-
-// styles.ts
 export const ForgotPasswordLink = styled.button`
-  display: inline;       
-  width: auto;
-  background: none;
-  border: none;
-  padding: 0;
+  display: flex;
+  justify-content: end;
   font-family: ${authTheme.textStyles.link.fontFamily};
   font-size: ${authTheme.textStyles.link.fontSize};
   font-weight: ${authTheme.textStyles.link.fontWeight};
   line-height: ${authTheme.textStyles.link.lineHeight};
   letter-spacing: ${authTheme.textStyles.link.letterSpacing};
   color: ${authTheme.colors.link};
+  background: none;
+  border: none;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
+  width: 100%;
 
   &:hover {
     text-decoration: underline;
-    opacity: 0.8;
   }
 `;
-
 
 
 export const SubmitButton = styled.button<{ $isValid: boolean }>`
@@ -910,7 +868,6 @@ export const SignUpContainer = styled.div`
 export const SignUpText = styled.p`
   font-family: ${authTheme.textStyles.link.fontFamily};
   font-size: 14px;
-  color: ${brand.buttonColor};
 `;
 
 
@@ -1083,7 +1040,10 @@ export const Logo = styled.img`
   }
 `;
 
+// =============================================================================
 // TERMS AND CONDITIONS CHECKBOX COMPONENTS
+// =============================================================================
+
 export const StyledAuthCheckbox = styled(Checkbox)`
   && {
     width: 20px;
@@ -1145,34 +1105,21 @@ export const TermsContainer = styled.div`
 
 // Styled Terms Container using FormControlLabel
 export const StyledTermsContainer = styled(FormControlLabel)`
-  align-items: center !important;
+  align-items: flex-start !important;
   margin: 16px 0 20px 0 !important;
-  // gap: 8px !important;
+  gap: 8px !important;
 
-  /* existing rules... */
+  .MuiCheckbox-root {
+    padding: 0 !important;
+    margin-top: 2px !important;
+    align-self: flex-start !important;
+  }
 
   .MuiFormControlLabel-label {
     margin-left: 0 !important;
-    margin-top: 0 !important;
-    align-self: center !important;
     line-height: 1.5 !important;
-    cursor: default !important; 
-  }
-  pointer-events: none; /* Block all pointer events for the container */
-
-  .MuiCheckbox-root {
-    pointer-events: auto; /* Allow checkbox interaction */
-  }
-
-  .MuiFormControlLabel-label {
-    pointer-events: none; /* Make label non-interactive */
-  }
-
-  a {
-    pointer-events: auto; /* Re-enable interactions specifically for links */
   }
 `;
-
 
 // Styled Regular Text for Terms
 export const StyledRegularB1 = styled(Typography)`
@@ -1192,19 +1139,7 @@ export const StyledRegularB1 = styled(Typography)`
   }
 `;
 
-// // Styled Link for Terms
-// export const StyledTermsLink = styled.span`
-//   color: ${authTheme.colors.link};
-//   cursor: pointer;
-//   font-weight: ${fontWeight.semiBold};
-//   text-decoration: underline;
-
-//   &:hover {
-//     opacity: 0.8;
-//   }
-// `;
-
-
+// Styled Link for Terms
 export const StyledTermsLink = styled.span`
   color: ${authTheme.colors.link};
   cursor: pointer;
@@ -1215,8 +1150,6 @@ export const StyledTermsLink = styled.span`
     opacity: 0.8;
   }
 `;
-
-
 
 export const AuthFieldContainer = styled.div`
   display: flex;
@@ -1229,10 +1162,12 @@ export const CenteredContainer = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
-  max-width: 700px;
 `;
 
 export const HeaderContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
   margin-bottom: ${spacing[8]};
 `;
@@ -1260,16 +1195,7 @@ export const ErrorContainer = styled.div`
   border-radius: ${borderRadius.lg};
   background-color: #fef2f2;
   border: 1px solid #fecaca;
-  width: 100%;
 `;
-
-export const ForgotPasswordRow = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  cursor: default;
-`;
-
 
 export const ErrorContent = styled.div`
   display: flex;
@@ -1284,97 +1210,6 @@ export const ErrorIcon = styled.div`
 export const ErrorText = styled.span`
   font-size: ${fontSize.textSm};
   color: #b91c1c;
-`;
-
-// SIGNUP FORM STYLED COMPONENTS
-export const SignupFormWrapper = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: ${spacing[3]};
-
-  ${respondTo.smUp} {
-    gap: ${spacing[4]};
-  }
-
-  ${respondTo.mdUp} {
-    gap: ${spacing[4]};
-  }
-`;
-
-export const SignupFieldsGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-   ${respondTo.smOnly} {
-       grid-template-columns: 1fr;
-    gap: 12px;
-   }
-`;
-
-export const SignupFieldContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-export const SignupHeaderContainer = styled.div`
-  text-align: center;
-  margin-bottom: ${spacing[4]};
-
-  ${respondTo.smUp} {
-    margin-bottom: ${spacing[6]};
-  }
-
-  ${respondTo.mdUp} {
-    margin-bottom: ${spacing[6]};
-  }
-
-  ${respondTo.lgUp} {
-    margin-bottom: ${spacing[6]};
-  }
-`;
-
-export const MobileLogo = styled.img`
-  height: 33px;
-  width: 140px;
-  display: block;
-  margin: 20px auto 36px auto;
-
-  ${respondTo.smUp} {
-    height: 32px;
-    width: auto;
-  }
-
-  ${respondTo.mdUp} {
-    display: none;
-  }
-`;
-
-export const SignupHeaderInner = styled.div`
-  text-align: center;
-  margin-bottom: ${spacing[8]};
-`;
-
-export const SignupFooterContainer = styled.div`
-  text-align: center;
-  margin-top: ${spacing[4]};
-
-  ${respondTo.smUp} {
-    margin-top: ${spacing[6]};
-  }
-
-  ${respondTo.mdUp} {
-    margin-top: ${spacing[6]};
-  }
-
-  ${respondTo.lgUp} {
-    margin-top: ${spacing[6]};
-  }
-`;
-
-export const SignupFooterText = styled.p`
-  font-family: ${authTheme.textStyles.link.fontFamily};
-  font-size: 14px;
-  color: ${brand.buttonColor};
-  margin: 0;
+  margin-top: 5px;
 `;
 

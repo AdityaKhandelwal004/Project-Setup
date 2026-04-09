@@ -21,15 +21,15 @@ import { toast } from "react-toastify";
 import { VERIFY_USER_TWO_FA_AUTHENTICATION } from "../../../api";
 import { ErrorContainer, ErrorContent, ErrorIcon, ErrorText } from "../../auth/styles";
 import { AlertCircle } from "lucide-react";
-import ModalButtonWrapper from "../../../myComponents/ModalButtonWrapper/ModalButtonWrapper";
-import StepCompletionToast, { successToastConfig, toastSuccessMessages, ToastVariants } from "../../../myComponents/stepCompletionToast";
 
 interface Props {
   onSuccess: () => void;
   onCancel: () => void;
-  method?: Id;
-  value?: string;
-  actionType?: VerificationActionType;
+  method: Id;
+  value: string;
+  actionType: VerificationActionType;
+  showRecoveryCodeForm: (metaData?: Partial<unknown>) => void;
+  resendOTP?: () => void;
 }
 
 const validators = {};
@@ -40,6 +40,8 @@ const VerifySecureCodeForm: React.FC<Props> = ({
   method,
   value,
   actionType,
+  showRecoveryCodeForm,
+  resendOTP,
 }) => {
   const reduxDispatch = useDispatch();
 
@@ -73,15 +75,22 @@ const VerifySecureCodeForm: React.FC<Props> = ({
       .then((res) => {
         if (onSuccess) onSuccess();
 
-       toast(
-        <StepCompletionToast
-          variant={ToastVariants.PURPLE}
-          title={toastSuccessMessages.mfa?.[actionType === 'ENABLE' ? 'enabledTitle' : 'disabledTitle']}
-          message={toastSuccessMessages.mfa?.[actionType === 'ENABLE' ? 'enableMessage' : 'disableMessage']}
-
-        />,
-        successToastConfig as any
-      );
+        toast(
+          ({ closeToast }) => (
+            <Toast
+              text={messages?.general?.verified?.replace(
+                "action",
+                actionType === VerificationActionType.DISABLE
+                  ? "disabled"
+                  : "enabled"
+              )}
+              type={ToastType.SUCCESS}
+            />
+          ),
+          {
+            closeButton: false,
+          }
+        );
       })
       .catch((error) => {
         setSubmitError(
@@ -92,13 +101,13 @@ const VerifySecureCodeForm: React.FC<Props> = ({
     setSubmitError("");
   }, [otpValues]);
 
-
+  const handleResendOTP = () => {
+    setOtpValues(Array(6).fill(""));
+    if (resendOTP) resendOTP();
+  };
 
   return (
-    <Form
-      onSubmit={handleSubmit(onSubmit)}
-      hasPadding
-    >
+    <Form onSubmit={handleSubmit(onSubmit)} hasPadding hasGap>
       <FormRow>
         <FormRowItem>
           <StyledUpdateMultiFactorAuthenticationNote
@@ -120,27 +129,34 @@ const VerifySecureCodeForm: React.FC<Props> = ({
           <OtpInput otpValues={otpValues} setOtpValues={setOtpValues} />
         </FormRowItem>
       </FormRow>
-      <>
-        {submitError && (
-          <ErrorContainer>
-            <ErrorContent>
-              <ErrorIcon>
-                <AlertCircle size={16} />
-              </ErrorIcon>
-              <ErrorText>{submitError}</ErrorText>
-            </ErrorContent>
-          </ErrorContainer>
-        )}
-      </>
-      <ModalButtonWrapper
-        onCancel={onCancel || (() => { })}
-        onSubmit={handleSubmit(onSubmit)}
-        submitLabel={messages?.profile?.verifySecureCode?.verify}
-        cancelLabel="Cancel"
-        submitVariant="contained"
-        cancelVariant="outlined"
-        isSubmitting={submitting}
-      />
+      {submitError && (
+        <ErrorContainer>
+          <ErrorContent>
+            <ErrorIcon>
+              <AlertCircle size={16} />
+            </ErrorIcon>
+            <ErrorText>{submitError}</ErrorText>
+          </ErrorContent>
+        </ErrorContainer>
+      )}
+      <FormRow justifySelf="end" width="fit-content" mb={0}>
+        <Button
+          variant="outlined"
+          onClick={onCancel}
+          style={{ width: "auto" }}
+          label={messages?.profile?.verifySecureCode?.cancel}
+        />
+        <Button
+          variant="contained"
+          type="submit"
+          disabled={submitting}
+          style={{ width: "auto" }}
+          label={messages?.profile?.verifySecureCode?.verify}
+        />
+      </FormRow>
+      {/* <StyledResendContainer>
+        {messages?.twoFactorAuthentication?.resendText}<StyledResendText onClick={handleResendOTP} >{messages?.twoFactorAuthentication?.resend}</StyledResendText>
+      </StyledResendContainer> */}
     </Form>
   );
 };

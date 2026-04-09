@@ -1,25 +1,48 @@
-import type { MetaData, LoaderState } from "@mono/models";
-import { HttpMethods } from "@mono/utils";
+import type { MetaData, LoaderState } from '@mono/models';
+import { HttpMethods } from '@mono/utils';
 
-export const APICALL = "APICALL";
-export const PAGINATED_APICALL = "PAGINATED_APICALL";
-export const PING = "PING";
+export const APICALL = 'APICALL';
+export const PAGINATED_APICALL = 'PAGINATED_APICALL';
+export const PING = 'PING';
 
-export const TOKEN_UPDATE = "TOKEN_UPDATE";
-export const TOKEN_REMOVE = "TOKEN_REMOVE";
+export const TOKEN_UPDATE = 'TOKEN_UPDATE';
+export const TOKEN_REMOVE = 'TOKEN_REMOVE';
 
-export const LOGIN = "LOGIN";
-export const SIGNUP = "SIGNUP";
-export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
-export const LOGOUT = "LOGOUT";
-export const POST_LOGIN = "POST_LOGIN";
+export const LOGIN = 'LOGIN';
+export const SIGNUP = 'SIGNUP';
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const LOGOUT = 'LOGOUT';
 
-export const FETCH_BASE_DATA = "FETCH_BASE_DATA";
+export const FETCH_BASE_DATA = 'FETCH_BASE_DATA';
 
-export const USER_PROFILE = "USER_PROFILE";
-export const SYSTEM_LOADER = "SYSTEM_LOADER";
+export const USER_PROFILE = 'USER_PROFILE';
+export const SYSTEM_LOADER = 'SYSTEM_LOADER';
 
-import type { Action as AnyAction, UnknownAction } from "redux";
+export const STEP_FORM_DATA_SET = 'STEP_FORM_DATA_SET';
+export const STEP_FORM_VALIDATION_ERROR_SET = 'STEP_FORM_VALIDATION_ERROR_SET';
+export const STEP_FORM_VALIDATION_ERRORS_CLEAR = 'STEP_FORM_VALIDATION_ERRORS_CLEAR';
+export const SET_STEP_NUMBER = 'SET_STEP_NUMBER';
+export const STEP_FORM = 'STEP_FORM';
+
+
+
+export const LEARN_RESOURCE_LISTING = "LEARN_RESOURCE_LISTING"
+export const TYPE_LISTING = "TYPE_LISTING"
+export const TAGS_LISTING = "TAGS_LISTING"
+export const PARTNERS_LISTING = "PARTNERS_LISTING"
+export const PARTNERS__CATEGORY_LISTING = "PARTNERS__CATEGORY_LISTING"
+export const RECENT_ACTIVITIES_LISTING = "RECENT_ACTIVITIES_LISTING"
+export const CUSTOMERS_LISTING = "CUSTOMERS_LISTING"
+export const CUSTOMER_PAYMENTS_LISTING = "CUSTOMER_PAYMENTS_LISTING"
+export const ACTIVE_TWO_FACTOR_AUTHENTICATION = "TWO_FACTOR_AUTHENTICATION"
+export const POST_LOGIN = "POST_LOGIN"
+
+
+
+
+
+
+import type { Action as AnyAction, UnknownAction } from 'redux';
 
 // export interface AnyAction {
 //   type: string;
@@ -29,6 +52,7 @@ import type { Action as AnyAction, UnknownAction } from "redux";
 export type EmptyAction = AnyAction;
 
 export const emptyAction = (type: string): EmptyAction => ({ type });
+
 
 export interface RequestOptions {
   isFormData?: boolean;
@@ -80,13 +104,11 @@ export interface PaginatedCRUDApi<R, P> {
   remove: ApiCall<R, void, DefaultErrorType>;
 }
 
-export const action = <T extends string, P>(
-  type: T,
-  payload: P,
-): { type: T; payload: P } => ({
+export const action = <T extends string, P>(type: T, payload: P): { type: T; payload: P } => ({
   type,
   payload,
 });
+
 
 export const makeApiRequestObject = <T, P>(
   endpoint: string,
@@ -94,33 +116,33 @@ export const makeApiRequestObject = <T, P>(
   payload?: T,
   options?: RequestOptions,
 ): RequestProps<T> => ({
-  endpoint,
-  method,
-  payload,
-  options,
-});
+    endpoint,
+    method,
+    payload,
+    options,
+  });
 
 export const setResolveFunction = <R, P, S, F>(
   api: ApiCall<R, S, F>,
   resolve: (param: S) => PromiseActions,
 ): ApiCall<R, S, F> => ({
-  ...api,
-  success: {
-    ...api.success,
-    resolve,
-  },
-});
+    ...api,
+    success: {
+      ...api.success,
+      resolve,
+    },
+  });
 
 export const setRejectFunction = <R, S, F>(
   api: ApiCall<R, S, F>,
   reject: (error: F) => PromiseActions,
 ): ApiCall<R, S, F> => ({
-  ...api,
-  failure: {
-    ...api.failure,
-    reject,
-  },
-});
+    ...api,
+    failure: {
+      ...api.failure,
+      reject,
+    },
+  });
 
 export function apiRequest<R, T, V>(
   api: ApiCall<R, T, V>,
@@ -147,13 +169,13 @@ export const makeApiCall = <R, T, V>(
   resolve?: (payload: T) => PromiseActions,
   reject?: (payload: V) => PromiseActions,
 ): ApiCall<R, T, V> => ({
-  request: {
-    key: `${name}_REQUEST`,
-    requestProps,
-  },
-  success: { resolve },
-  failure: { reject },
-});
+    request: {
+      key: `${name}_REQUEST`,
+      requestProps,
+    },
+    success: { resolve },
+    failure: { reject },
+  });
 
 export const apiCall = (
   endPoint: string,
@@ -177,28 +199,28 @@ export const apiCall = (
 
 export function paginatedApiRequest<T>(
   paginatedApi: PagedApiCall<T>,
-): Action<typeof PAGINATED_APICALL, PagedApiCall<T>> {
+): Action<typeof PAGINATED_APICALL, PagedApiCall<T>>{
   return action(PAGINATED_APICALL, { ...paginatedApi });
 }
 
-export const makePaginatedApiCall = <T,>(
+export const makePaginatedApiCall = <T, >(
   name: string,
   endpoint: string,
   filter: MetaData<T>,
   loadMore?: boolean,
 ): PagedApiCall<T> => ({
-  request: {
-    key: `${name}_PAGINATED_REQUEST`,
-    endpoint,
-    filter,
-    loadMore: loadMore ?? false,
-  },
-  update: { action: `${name}_PAGINATION_UPDATE` },
-  loadMore: { action: `${name}_PAGINATION_LOAD_MORE` },
-  reset: { action: `${name}_PAGINATION_RESET` },
-});
+    request: {
+      key: `${name}_PAGINATED_REQUEST`,
+      endpoint,
+      filter,
+      loadMore: loadMore ?? false,
+    },
+    update: { action: `${name}_PAGINATION_UPDATE` },
+    loadMore: { action: `${name}_PAGINATION_LOAD_MORE` },
+    reset: { action: `${name}_PAGINATION_RESET` },
+  });
 
-export const paginatedApiCall = <T,>(
+export const paginatedApiCall = <T, >(
   name: string,
   endPoint: string,
   filter: MetaData<T>,
@@ -213,7 +235,7 @@ export const paginatedApiCall = <T,>(
   return paginatedApiRequest(paginatedApi);
 };
 
-export const createBasicActions = <T,>(key: string) => ({
+export const createBasicActions = <T, >(key: string) => ({
   update: (payload: T) => action(`${key}_UPDATE`, payload),
   reset: () => emptyAction(`${key}_RESET`),
 });
@@ -225,7 +247,7 @@ export const removeToken = (): EmptyAction => emptyAction(TOKEN_REMOVE);
 export const login = (
   formData: { email: string; password: string },
   resolve: () => void,
-  reject: (error: any) => void,
+  reject: (error: any) => void
 ) => action(LOGIN, { formData, resolve, reject });
 
 export const signup = (
@@ -236,13 +258,13 @@ export const signup = (
     password: string;
   },
   resolve: (data: any) => void,
-  reject: (error: any) => void,
+  reject: (error: any) => void
 ) => action(SIGNUP, { formData, resolve, reject });
 
 export const forgotPassword = (
   formData: { email: string },
   resolve: (data: any) => void,
-  reject: (error: any) => void,
+  reject: (error: any) => void
 ) => action(FORGOT_PASSWORD, { formData, resolve, reject });
 
 export const logout = (): EmptyAction => emptyAction(LOGOUT);
@@ -252,3 +274,32 @@ export const fetchBaseData = (): EmptyAction => emptyAction(FETCH_BASE_DATA);
 const loaderActions = createBasicActions<LoaderState>(SYSTEM_LOADER);
 export const showLoader = () => loaderActions.update({ visibility: true });
 export const hideLoader = () => loaderActions.update({ visibility: false });
+// STEP FORM
+export const setStepFormData = (stepNumber: number, data: any) => ({
+  type: STEP_FORM_DATA_SET,
+  payload: { stepNumber, data },
+});
+export const setStepValidationError = (
+  stepNumber: number,
+  errors: Record<string, string>,
+) => ({
+  type: STEP_FORM_VALIDATION_ERROR_SET,
+  payload: { stepNumber, errors },
+});
+export const clearStepValidationErrors = (stepNumber: number) => ({
+  type: STEP_FORM_VALIDATION_ERRORS_CLEAR,
+  payload: stepNumber,
+});
+export const setCurrentStep = (stepNumber: number) => ({
+  type: SET_STEP_NUMBER,
+  payload: { stepNumber },
+});
+
+export const postLogin = (token: string): EmptyAction =>
+  action(POST_LOGIN, { token });
+
+export const twoFactorAuthentication = (
+  formData: { email: string; password: string, actionType:string, token: string },
+  resolve: any,
+  reject: any
+) => action(ACTIVE_TWO_FACTOR_AUTHENTICATION, { formData, resolve, reject });

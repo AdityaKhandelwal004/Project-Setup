@@ -19,13 +19,13 @@ import {
   required,
 } from "@mono/utils";
 import messages from "../../messages";
+// import { CHANGE_PASSWORD } from "../../api";
 import { apiCall } from "@mono/redux-global/src/actions";
 import { CHANGE_PASSWORD } from "../../api";
 import { ErrorContainer, ErrorContent, ErrorIcon, ErrorText } from "../auth/styles";
 import { AlertCircle } from "lucide-react";
-import { ToastType } from "@mono/models";
-import ModalButtonWrapper from "../../myComponents/ModalButtonWrapper/ModalButtonWrapper";
-import StepCompletionToast, { successToastConfig, toastSuccessMessages, ToastVariants } from "../../myComponents/stepCompletionToast";
+import { ToastType } from "../../models/genericEntities";
+// import { ToastType } from "@mono/models";
 
 interface Props {
   onSuccess: () => void;
@@ -57,9 +57,8 @@ const ChangePasswordForm: React.FC<Props> = ({ onSuccess, onCancel }) => {
     setSubmitError,
   } = useFormReducer(validators);
 
-  const onSubmit = async (data: any) =>{
-    if(submitting) return;
-    await   new Promise<any>((resolve, reject) => {
+  const onSubmit = async (data: any) =>
+    new Promise<any>((resolve, reject) => {
       const sanitizedBody: any = {
         oldPassword: md5(data?.oldPassword),
         newPassword: md5(data?.newPassword),
@@ -78,26 +77,26 @@ const ChangePasswordForm: React.FC<Props> = ({ onSuccess, onCancel }) => {
       .then(() => {
         if (onSuccess) onSuccess();
 
-       toast(
-        <StepCompletionToast
-          variant={ToastVariants.PURPLE}
-          title={toastSuccessMessages.passwordUpdated?.title}
-          message={toastSuccessMessages.passwordUpdated.message}
-
-        />,
-        successToastConfig as any
-      );
+        toast(
+          ({ closeToast }) => (
+            <Toast
+              text={messages?.profile?.changePasswordForm?.success}
+              type={ToastType.SUCCESS}
+            />
+          ),
+          {
+            closeButton: false,
+          }
+        );
       })
       .catch((error) => {
-        setSubmitError(messages?.profile?.errors?.[error?.message] || messages?.general?.generalError);
+         setSubmitError(messages?.profile?.errors?.[error?.message] || messages?.general?.generalError);
       });
-  }
-  
 
   return (
-    <Form
-      onSubmit={handleSubmit(onSubmit)}
-      hasPadding
+    <Form 
+    onSubmit={handleSubmit(onSubmit)}
+    hasPadding
       maxWidth="500px">
       <FormRow>
         <FormRowItem>
@@ -126,27 +125,35 @@ const ChangePasswordForm: React.FC<Props> = ({ onSuccess, onCancel }) => {
           })(PasswordInput)}
         </FormRowItem>
       </FormRow>
-      <>
-      {submitError && (
-        <ErrorContainer>
-          <ErrorContent>
-            <ErrorIcon>
-              <AlertCircle size={16} />
-            </ErrorIcon>
-            <ErrorText>{submitError}</ErrorText>
-          </ErrorContent>
-        </ErrorContainer>
-      )}
-      </>
-      <ModalButtonWrapper
-        onCancel={onCancel}
-        onSubmit={() => {
-          handleSubmit(onSubmit)();
-        }}
-        submitLabel={messages?.profile?.changePasswordForm?.buttonText}
-        cancelLabel="Cancel"
-        isSubmitting={submitting}
-      />
+       {submitError && (
+            <ErrorContainer>
+              <ErrorContent>
+                <ErrorIcon>
+                  <AlertCircle size={16} />
+                </ErrorIcon>
+                <ErrorText>{submitError}</ErrorText>
+              </ErrorContent>
+            </ErrorContainer>
+          )}
+      <FormRow marginTop="20px" justifySelf="end" width="fit-content">
+        <FormRowItem>
+          <Button
+            variant="outlined"
+            fullWidth
+            label={messages?.profile?.changePasswordForm?.cancel}
+            onClick={onCancel}
+          />
+        </FormRowItem>
+        <FormRowItem>
+          <Button
+            variant="contained"
+            type="submit"
+            fullWidth
+            label={messages?.profile?.changePasswordForm?.buttonText}
+            disabled={submitting}
+          />
+        </FormRowItem>
+      </FormRow>
     </Form>
   );
 };

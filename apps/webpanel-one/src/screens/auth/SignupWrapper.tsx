@@ -6,7 +6,8 @@ export function SignupWrapper() {
   const history = useHistory();
 
   const handleComplete = () => {
-    history.push(routes.onboardingIntro);
+    // Navigate to onboarding after successful signup
+    history.push(routes.onboarding);
   };
 
   const handleSignIn = () => {

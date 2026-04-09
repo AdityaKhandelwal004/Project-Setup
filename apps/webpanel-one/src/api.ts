@@ -1,45 +1,89 @@
-// API endpoints go here
+import { HttpMethods } from '@mono/utils';
+import { config } from './config';
+import { getToken } from './redux/reducers/auth';
 
-import { HttpMethods } from "@mono/utils";
-import { getToken } from "./redux/reducers/auth";
-import { config } from "./config";
 
-const LOGIN = '/api/login';
 const PING = '/api/ping';
+const LOGIN = '/api/admin-login';
 const SIGNUP = '/api/signup';
-const FORGOT_PASSWORD = '/api/forgot-password';
+export const FORGOT_PASSWORD = '/api/change-password';
 export const RESET_PASSWORD = '/api/reset-password';
 
-//Profile Management API
+
+//Profile Section
+
 export const UPDATE_PROFILE = '/api/user/profile';
 export const GET_PROFILE = '/api/user/profile';
 export const UPLOAD_IMAGE = '/api/user/profile/upload';
 export const REMOVE_IMAGE = '/api/user/profile/remove';
 export const CHANGE_PASSWORD = '/api/change-password';
-export const SEND_EMAIL_LINK = '/api/send';
-export const VERIFY_EMAIL = '/api/verify-email';
+
 
 //MFA
+
 export const TWO_FACTOR_AUTHENTICATION = "/api/verify-token";
 export const TWO_FA_AUTHENTICATION_METHOD = "/api/two-factor-authentication-methods";
 export const USER_TWO_FA_AUTENTICATION = "/api/user/two-factor-authentication";
 export const VERIFY_USER_TWO_FA_AUTHENTICATION = "/api/user/two-factor-authentication/verify";
 
+//Learn Resource
 
-// Learn Resources API
-export const GET_STAGE_PROGRESS = '/api/user/stage/progress';
+export const GET_RESOURCE_LIST = '/api/learn-resources/filter'
+export const CREATE_RESOURCE = '/api/learn-resource'
+export const UPLOAD_RESOURCE_THUMBNAIL = '/api/learn-resource/:id/upload'
+export const UPDATE_RESOURCE = '/api/learn-resource/:id'
+export const DELETE_RESOURCE = '/api/learn-resource/:id'
+export const GET_RESOURCE_BY_ID = '/api/learn-resource/:id'
+export const REMOVE_RESOURCE_THUMBNAIL = '/api/learn-resource/:id/remove'
 
-//Dashbaord API
-export const BUDGETS_MONTHLY_INSIGHTS = '/api/user/dashboard/budget-plan/monthly-insights';
-export const BUDGETS_YEARLY_INSIGHTS = '/api/user/dashboard/budget-plan/spending-overview?year=:yearDate';
-export const SAFETY_NET_INSIGHTS = '/api/user/dashboard/safety-net/insights';
-export const DEBT_INSIGHTS = '/api/user/dashboard/debt/insights';
-export const SAVINGS_INSIGHTS = '/api/user/dashboard/savings-plan/insights';
-export const OVERVIEW_INSIGHTS = '/api/user/dashboard/budget-plan-overview';
-export const USER_EXPENSE = '/api/user/user-expense';
-export const GET_EXPENSE_ALLOCATIONS = '/api/user/user-expense/allocations';
-export const ALLOCATE_FUNDS = '/api/user/allocate-funds';
-export const AVAILABLE_SURPLUS_AMOUNT = '/api/user/income-savings';
+export const GET_RESOURCE_CATEGORY_LIST = '/api/learn-resource/categories/filter'
+export const GET_TYPE_LIST = '/api/learn-resource/types/filter'
+export const CREATE_TYPE ='/api/learn-resource/type'
+export const UPDATE_TYPE = '/api/learn-resource/type/:id'
+export const DELETE_TYPE = '/api/learn-resource/type/:id'
+export const GET_Type_BY_ID  = '/api/learn-resource/type/:id'
+
+export const GET_TAGS_LIST = '/api/learn-resource/tags/filter'
+export const CREATE_TAGS ='/api/learn-resource/tag'
+export const UPDATE_TAGS = '/api/learn-resource/tag/:id'
+export const DELETE_TAGS = '/api/learn-resource/tag/:id'
+export const GET_Tags_BY_ID = '/api/learn-resource/tag/:id'
+
+
+//Analytics
+export const GET_ANALYTICS_SUMMARY = '/api/analytic/summary'
+export const GET_RECENT_ACTIVITIES = '/api/analytic/recent-activities/filter'
+
+//Users/Customers
+export const GET_CUSTOMERS_LIST = '/api/customer/filter'
+export const GET_CUSTOMER_DETAILS = '/api/customer/:id'
+export const UPDATE_CUSTOMER_STATUS = '/api/customer/:id'
+export const GET_CUSTOMER_PAYMENTS = '/api/customer/:id/payments/filter'
+export const GET_TRANSACTION_HISTORY = '/api/user/subscription/payments/filter';
+export const DOWNLOAD_INVOICE = '/api/user/subscription/invoice/:id/download';
+
+//Partner
+
+export const GET_PARTNER_LIST = '/api/partners/filter'
+export const CREATE_PARTNER = '/api/partner'
+export const UPLOAD_PARTNER_THUMBNAIL = '/api/partner/:id/upload'
+export const UPDATE_PARTNER = '/api/partner/:id'
+export const DELETE_PARTNER = '/api/partner/:id'
+export const GET_PARTNER_BY_ID = '/api/partner/:id'
+export const REMOVE_PARTNER_THUMBNAIL = '/api/partner/:id/remove'
+
+export const GET_PARTNER_CATEGORY_LIST = '/api/partner/categories/filter'
+export const CREATE_CATEGORY = '/api/partner/category'
+export const UPDATE_CATEGORY = '/api/partner/category/:id'
+export const DELETE_CATEGORY = '/api/partner/category/:id'
+export const GET_CATEGORY_BY_ID = '//api/partner/catagory/:id'
+
+
+
+
+
+
+
 
 
 export const apiCall = (
@@ -87,12 +131,7 @@ export const signup = (formData: {
   lastName: string;
   email: string;
   password: string;
-  dateOfBirth?: string;
-  termAccepted?: boolean;
-  privacyPolicyAccepted?: boolean;
-}): Promise<string> => {
-  return apiCall(SIGNUP, HttpMethods.POST, formData);
-};
+}): Promise<string> => apiCall(SIGNUP, HttpMethods.POST, formData);
 
 export const forgotPassword = (formData: {
   email: string;

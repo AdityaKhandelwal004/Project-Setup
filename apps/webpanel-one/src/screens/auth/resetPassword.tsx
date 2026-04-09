@@ -1,15 +1,20 @@
-import { motion } from "motion/react";
-import { useEffect, useState } from "react";
-import { AlertCircle } from "lucide-react";
-import { useDispatch } from "react-redux";
-import { ModuleThemeProvider } from "@mono/theme/providers/ModuleThemeProvider";
+import { motion } from 'motion/react';
+import {
+  AlertCircle,
+} from 'lucide-react';
+import { ModuleThemeProvider } from '@mono/theme/providers/ModuleThemeProvider';
 
-import { Button, PasswordInput } from "@mono/components";
-import { useFormReducer } from "@mono/hooks/src/form";
-import { required, passwordValidator } from "@mono/utils/src/validators";
-import messages from "../../messages";
-import packageMessages from "@mono/messages";
-import logo from "../../assets/logo.png";
+import { TextInput, Button } from '@mono/components';
+import { useFormReducer } from '@mono/hooks/src/form';
+import {
+  required,
+  emailValidator,
+  passwordValidator,
+  confirmPassword,
+} from '@mono/utils/src/validators';
+import messages from '../../messages';
+import packageMessages from '@mono/messages';
+import { AuthLeftSection } from './AuthLeftSection';
 import {
   MainContainer,
   ContentWrapper,
@@ -17,92 +22,93 @@ import {
   FormContainer,
   FormTitle,
   FormSubtitle,
+  BackToLoginContainer,
+  BackToLoginText,
+  AuthNavLink,
   CenteredContainer,
+  HeaderContainer,
   FormWrapper,
   ErrorContainer,
   ErrorContent,
   ErrorIcon,
   ErrorText,
-  MobileLogo,
-  SignupHeaderContainer,
-  SignupHeaderInner,
-} from "./styles";
-import { confirmPassword } from "@mono/utils/src/validators";
-import { apiCall } from "@mono/redux-global/src/actions";
-import { RESET_PASSWORD } from "../../api";
-import { HttpMethods } from "@mono/utils";
-import { toast } from "react-toastify";
-import { useParams, useHistory } from "react-router-dom";
-import md5 from "md5";
-import { routes } from "../../myUtils";
-import { trackScreen } from "../../utils/mixpanel/trackScreens";
+  Logo
+} from './styles';
+import logo from '../../assets/logo.png';
+import { useDispatch } from 'react-redux';
+import { apiCall } from '../../redux/actions';
+import { HttpMethods } from '@mono/utils';
+import { RESET_PASSWORD } from '../../api';
+import md5 from 'md5';
+
 
 const validators = {
-  password: [
-    required(packageMessages?.signUp?.errors?.password?.required),
-    passwordValidator,
-  ],
-  confirmPassword: [
-    required(packageMessages?.signUp?.errors?.confirmPassword?.required),
-    confirmPassword("password"),
-  ],
+  password: [required(messages?.general?.requiredField), passwordValidator],
+  confirmPassword: [required(messages?.general?.requiredField),confirmPassword('password')],
 };
 
-function ResetPasswordContent() {
-  const reduxDispatch: any = useDispatch();
-  const { token } = useParams<{ token: string }>();
-  const history = useHistory();
-  const [isSubmitting, setIsSubmitting] = useState(false);
+function ResetPasswordContent({ onSignIn }: { onSignIn: () => void }) {
   const {
     connectField,
-    handleSubmit: formHandleSubmit,
+    handleSubmit,
     formValues,
+    submitting,
     submitError,
     setSubmitError,
   } = useFormReducer(validators);
 
-  const handleFormSubmit = async () =>
-    new Promise<any>((resolve, reject) => {
-      setIsSubmitting(true);
-      const payload = {
-        password: md5(formValues?.password?.value),
-        confirmPassword: md5(formValues?.confirmPassword?.value),
-        token: token || "",
-      };
+  const reduxDispatch = useDispatch();
 
+
+const onSubmit = async (data: any) =>{
+  
+   return new Promise<any>((resolve, reject) => {
+        const sanitizedBody: any = {
+          password: md5(data?.oldPassword),
+          confirmPassword: md5(data?.confirmPassword),
+        };
       reduxDispatch(
-        apiCall(RESET_PASSWORD, resolve, reject, HttpMethods.POST, payload),
+        apiCall(
+          RESET_PASSWORD,
+          resolve,
+          reject,
+          HttpMethods.POST,
+          sanitizedBody
+        )
       );
     })
       .then(() => {
-        setIsSubmitting(false);
-        setTimeout(() => {
-          history.push(routes.login);
-        }, 3000);
+          //  toast(({ closeToast }) => (
+          //   <Toast
+          //     text={messages?.forgotPassword?.form?.success}
+          //     type={ToastType.SUCCESS}
+          //     closeToast={closeToast}
+          //   />
+     // ), {
+          //   closeButton: false
+          // });
+
+
       })
-      .catch(() => {
-        setIsSubmitting(false);
-        setSubmitError("The password reset link is invalid or has expired.");
+      .catch((error) => {
+          setSubmitError(messages?.login?.form?.errors?.[error?.message] || messages?.general?.generalError)
       });
+    }
 
-  // Get the form submit handler from the hook
-  const handleSubmit = formHandleSubmit(handleFormSubmit);
+ 
 
-  useEffect(() => {
-    trackScreen("Reset Password");
-  }, []);
   return (
     <MainContainer>
       <ContentWrapper>
-        {/* Left side */}
-        {/* <AuthLeftSection showExtraFloatingButton showEmpoweringMessage /> */}
-
         <RightSection
           as={motion.div}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
+        <div className="flex justify-center items-center mb-[25px]">
+          <Logo src={logo} alt="Logo" />
+        </div>
           <CenteredContainer>
             <FormContainer
               as={motion.div}
@@ -111,33 +117,32 @@ function ResetPasswordContent() {
               transition={{ delay: 0.4 }}
             >
               {/* Header */}
-              <SignupHeaderContainer>
-                <MobileLogo src={logo} alt="Obie Money Logo" />
-                <SignupHeaderInner>
-                  <FormTitle>{messages?.changePassword?.title}</FormTitle>
-                  <FormSubtitle>
-                    {messages?.changePassword?.subTitle}
-                  </FormSubtitle>
-                </SignupHeaderInner>
-              </SignupHeaderContainer>
+              <HeaderContainer>
+                <FormTitle>
+                 {messages?.resetPassword?.heading}
+                </FormTitle>
+                <FormSubtitle>
+                 {messages?.resetPassword?.resetInstruction}
+                </FormSubtitle>
+              </HeaderContainer>
 
               {/* Form */}
-              <FormWrapper onSubmit={handleSubmit}>
-                {connectField("password", {
-                  title: messages?.changePassword?.currentPassword,
+              <FormWrapper onSubmit={handleSubmit(onSubmit)}>
+                {connectField('password', {
+                  title: messages?.general?.password,
                   placeholder: messages?.changePassword?.newPassword,
                   useTouchedValidation: false,
-                  inputSize: "full",
-                  isAuth: true,
-                })(PasswordInput)}
-
-                {connectField("confirmPassword", {
-                  title: messages?.changePassword?.confirmPassword,
-                  placeholder: messages?.changePassword?.retypePassword,
-                  useTouchedValidation: true,
-                  inputSize: "full",
-                  isAuth: true,
-                })(PasswordInput)}
+                  inputSize: 'full',
+                  isAuth: true
+                })(TextInput)}
+                
+                {connectField('confirmPassword', {
+                  title: messages?.general?.confirmPassword,
+                  placeholder: messages?.general?.confirmPassword,
+                  useTouchedValidation: false,
+                  inputSize: 'full',
+                  isAuth: true
+                })(TextInput)}
 
                 {/* Submit Error Display */}
                 {submitError && (
@@ -152,21 +157,14 @@ function ResetPasswordContent() {
                 )}
 
                 {/* Submit button */}
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  size="large"
-                  isJsxRight={isSubmitting}
-                  JsxImg={() => (
-                    <div
-                      className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent ml-2"
-                      style={{ display: "inline-block" }}
-                    />
-                  )}
-                  label="Update password"
-                />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    size="large"
+                    label={messages?.resetPassword?.updatepassword}
+                  />
               </FormWrapper>
             </FormContainer>
           </CenteredContainer>

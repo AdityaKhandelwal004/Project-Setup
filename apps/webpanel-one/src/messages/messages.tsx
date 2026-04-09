@@ -30,6 +30,11 @@ export function getMessages(lang: string): LocalMessages {
   const parsedMessages: LocalMessages = {};
   parseMessages(parsedMessages, '', (messages as any)[lang]);
 
+  /** @note Uncomment if want to add all locale messages in store */
+  // getLanguages().forEach(langId => {
+  //   parseMessages(parsedMessages, langId, (messages as any)[langId]);
+  // });
+
   return parsedMessages;
 }
 

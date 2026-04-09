@@ -12,6 +12,7 @@ import store, { history } from './redux/store';
 import 'react-toastify/dist/ReactToastify.css';
 import Screen from './screens';
 import { suppressResizeObserverErrors } from './utils/resizeObserverErrorHandler';
+import { fetchBaseData } from './redux/actions';
 import CustomLoader from './myComponents/CustomLoader';
 
 function App() {
@@ -19,6 +20,10 @@ function App() {
   useEffect(() => {
     const cleanup = suppressResizeObserverErrors();
     return cleanup;
+  }, []);
+
+  useEffect(() => {
+    store.dispatch(fetchBaseData());
   }, []);
 
   return (

@@ -1,16 +1,18 @@
-import { motion } from "motion/react";
-import { AlertCircle } from "lucide-react";
-import { useDispatch } from "react-redux";
-import { ModuleThemeProvider } from "@mono/theme/providers/ModuleThemeProvider";
+import { motion } from 'motion/react';
+import {
+  AlertCircle,
+} from 'lucide-react';
+import { ModuleThemeProvider } from '@mono/theme/providers/ModuleThemeProvider';
 
-import { TextInput, Button } from "@mono/components";
-import { useFormReducer } from "@mono/hooks/src/form";
-import { required, emailValidator } from "@mono/utils/src/validators";
-import messages from "../../messages";
-import packageMessages from "@mono/messages";
-// import { AuthLeftSection } from "./AuthLeftSection";
-import { forgotPassword as forgotPasswordAction } from "@mono/redux-global/src/actions";
-import logo from "../../assets/logo.png";
+import { TextInput, Button } from '@mono/components';
+import { useFormReducer } from '@mono/hooks/src/form';
+import {
+  required,
+  emailValidator,
+} from '@mono/utils/src/validators';
+import messages from '../../messages';
+import packageMessages from '@mono/messages';
+import logo from '../../assets/logo.png';
 import {
   MainContainer,
   ContentWrapper,
@@ -22,91 +24,84 @@ import {
   BackToLoginText,
   AuthNavLink,
   CenteredContainer,
+  HeaderContainer,
   FormWrapper,
   ErrorContainer,
   ErrorContent,
   ErrorIcon,
   ErrorText,
-  MobileLogo,
-  SignupHeaderContainer,
-  SignupHeaderInner,
-} from "./styles";
-import { sanitizeServerError } from "../../myUtils/commonFunctions";
-import React, { useEffect } from "react";
-import { toast } from "react-toastify";
-import { useHistory } from "react-router-dom";
-import { routes } from "../../myUtils";
-import { trackScreen } from "../../utils/mixpanel/trackScreens";
+  Logo
+} from './styles';
+import { apiCall } from '@mono/redux-global/src/actions';
+import { HttpMethods } from '@mono/utils';
+import { push } from 'connected-react-router';
+import { routes } from '../../myUtils';
+import { useDispatch } from 'react-redux';
+import { FORGOT_PASSWORD } from '../../api';
+
 
 const validators = {
-  email: [
-    required(packageMessages?.forgotPassword?.errors?.email?.required),
-    emailValidator,
-  ],
+  email: [required(packageMessages?.forgotPassword?.errors?.email?.required), emailValidator],
 };
 
 function ForgotPasswordContent({ onSignIn }: { onSignIn: () => void }) {
-  const reduxDispatch: any = useDispatch();
+
+    const reduxDispatch = useDispatch() as any;
+
   const {
     connectField,
-    handleSubmit: formHandleSubmit,
+    handleSubmit,
+    formValues,
+    submitting,
     submitError,
     setSubmitError,
   } = useFormReducer(validators);
 
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const history = useHistory();
-  const handleFormSubmit = async (data: any) =>
-    new Promise<any>((resolve, reject) => {
-      if (isSubmitting) {
-        return;
-      }
-
-      setIsSubmitting(true);
+  const onSubmit = async (data: any) =>{
+  
+   return new Promise<any>((resolve, reject) => {
       reduxDispatch(
-        forgotPasswordAction(
-          {
-            email: data?.email?.trim()?.toLowerCase(),
-          },
-          (response: any) => resolve(response),
+        apiCall(
+          FORGOT_PASSWORD,
+          resolve,
           reject,
-        ),
+          HttpMethods.POST,
+          { email: data?.email?.toLowerCase() }
+        )
       );
     })
       .then(() => {
-        setIsSubmitting(false);
+          //  toast(({ closeToast }) => (
+          //   <Toast
+          //     text={messages?.forgotPassword?.form?.success}
+          //     type={ToastType.SUCCESS}
+          //     closeToast={closeToast}
+          //   />
+          // ), {
+          //   closeButton: false
+          // });
+
         setTimeout(() => {
-          history.push(routes.login);
-        }, 3000);
+          reduxDispatch(push(routes.login));
+        }, 2000);
       })
       .catch((error) => {
-        const code = error?.message;
-        const errorMessage = sanitizeServerError(
-          (messages as any)?.forgotPassword?.[code],
-        );
-        setSubmitError(errorMessage);
-        setIsSubmitting(false);
+          setSubmitError(messages?.login?.form?.errors?.[error?.message] || messages?.general?.generalError)
       });
-
-  // Get the form submit handler from the hook
-  const handleSubmit = formHandleSubmit(handleFormSubmit);
-
-  useEffect(() => {
-    trackScreen("Forgot Password");
-  }, []);
+    }
 
   return (
     <MainContainer>
       <ContentWrapper>
-        {/* Left side */}
-        {/* <AuthLeftSection showExtraFloatingButton showEmpoweringMessage /> */}
-
         <RightSection
           as={motion.div}
           initial={{ opacity: 0, x: 50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
+        <div className="flex justify-center items-center mb-[25px]">
+          <Logo src={logo} alt="Logo" />
+        </div>
           <CenteredContainer>
             <FormContainer
               as={motion.div}
@@ -115,26 +110,23 @@ function ForgotPasswordContent({ onSignIn }: { onSignIn: () => void }) {
               transition={{ delay: 0.4 }}
             >
               {/* Header */}
-              <SignupHeaderContainer>
-                <MobileLogo src={logo} alt="Obie Money Logo" />
-                <SignupHeaderInner>
-                  <FormTitle>
-                    {messages?.forgotPassword?.resetPassword}
-                  </FormTitle>
-                  <FormSubtitle>
-                    {messages?.forgotPassword?.resetInstruction}
-                  </FormSubtitle>
-                </SignupHeaderInner>
-              </SignupHeaderContainer>
+              <HeaderContainer>
+                <FormTitle>
+                 {messages?.forgotPassword?.resetPassword}
+                </FormTitle>
+                <FormSubtitle>
+                 {messages?.forgotPassword?.resetInstruction}
+                </FormSubtitle>
+              </HeaderContainer>
 
               {/* Form */}
-              <FormWrapper onSubmit={handleSubmit}>
-                {connectField("email", {
+              <FormWrapper  onSubmit={handleSubmit(onSubmit)}>
+                {connectField('email', {
                   title: messages?.forgotPassword?.email?.label,
                   placeholder: messages?.forgotPassword?.email?.placeholder,
                   useTouchedValidation: false,
-                  inputSize: "full",
-                  isAuth: true,
+                  inputSize: 'full',
+                  isAuth: true
                 })(TextInput)}
 
                 {/* Submit Error Display */}
@@ -150,27 +142,24 @@ function ForgotPasswordContent({ onSignIn }: { onSignIn: () => void }) {
                 )}
 
                 {/* Submit button */}
-                <Button
-                  type="submit"
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                  size="large"
-                  isJsxRight={isSubmitting}
-                  JsxImg={() => (
-                    <div
-                      className="animate-spin rounded-full h-6 w-6 border-2 border-white border-t-transparent ml-2"
-                      style={{ display: "inline-block" }}
-                    />
-                  )}
-                  label={messages?.forgotPassword?.sendResetLink}
-                />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    color="primary"
+                    fullWidth
+                    size="large"
+                    label={messages?.forgotPassword?.sendResetLink}
+                  />
 
                 {/* Back to login link */}
                 <BackToLoginContainer>
                   <BackToLoginText>
-                    <AuthNavLink type="button" onClick={onSignIn}>
-                      {messages?.forgotPassword?.goBack}
+                   
+                    <AuthNavLink
+                      type="button"
+                      onClick={onSignIn}
+                    >
+                    {messages?.forgotPassword?.goBack}
                     </AuthNavLink>
                   </BackToLoginText>
                 </BackToLoginContainer>

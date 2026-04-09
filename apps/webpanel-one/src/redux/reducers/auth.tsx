@@ -108,6 +108,7 @@ export default (
   action: Action<string>,
 ): AuthState => {
   token = localStorage.getItem('token') || undefined;
+
   switch (action.type) {
     case TOKEN_UPDATE:
       token = action.payload;

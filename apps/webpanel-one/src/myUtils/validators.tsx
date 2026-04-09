@@ -63,15 +63,6 @@ export const numberValidator =
   (value?: string): ErrorMessage =>
     value && !/^[0-9]+$/i.test(value) ? message : undefined;
 
-export const greaterThanZero =
-  (errMessage: string): Validator =>
-  (value: any): ErrorMessage => {
-    const numValue = typeof value === 'object' && value !== null && value.value !== undefined
-      ? Number(value.value)
-      : Number(value);
-    return isNaN(numValue) || numValue <= 0 ? errMessage : undefined;
-  };
-
 export const decimalValidator =
   (message: string) =>
   (value?: string): ErrorMessage =>
