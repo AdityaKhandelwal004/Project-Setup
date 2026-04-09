@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import md5 from 'md5';
 import { AlertCircle } from 'lucide-react';
 import { ModuleThemeProvider } from '@mono/theme/providers/ModuleThemeProvider';
@@ -7,8 +7,6 @@ import { useFormReducer } from '@mono/hooks/src/form';
 import { required, emailValidator } from '@mono/utils/src/validators';
 import messages from '../../messages';
 import packageMessages from '@mono/messages';
-
-
 import {
   MainContainer,
   ContentWrapper,
@@ -17,9 +15,6 @@ import {
   FormTitle,
   FormSubtitle,
   ForgotPasswordLink,
-  SignUpContainer,
-  SignUpText,
-  AuthNavLink,
   CenteredContainer,
   HeaderContainer,
   FormWrapper,
@@ -27,7 +22,6 @@ import {
   ErrorContent,
   ErrorIcon,
   ErrorText,
-  Logo
 } from './styles';
 import { otherColour, primitiveColors } from '@mono/theme';
 import { ChipSize } from '@mono/components/src/customChip/styles';
