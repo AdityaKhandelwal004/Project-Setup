@@ -1,4 +1,4 @@
-import allMessages from './messages.json' with { type: 'json' };
+import allMessages from './messages.json';
 
 const messages = allMessages.en;
 

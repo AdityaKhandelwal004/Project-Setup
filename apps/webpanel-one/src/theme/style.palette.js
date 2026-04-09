@@ -1,0 +1,46 @@
+export const adminColor = {
+  background: '#FDFDFD',
+  calendarSchedule1: '#DBE9B3',
+  calendarSchedule2: '#E9DAB3',
+  calendarSchedule3: '#B3D9E9',
+  calendarSchedule4: '#B3E9B8',
+};
+
+export const colors = {
+  black: '#000000',
+  white: '#FFFFFF',
+  danger: '#DC3545',
+  grey30: '#EEEEEE',
+  orange100: '#E4A428',
+  information: '#007BFF',
+  lightGrey: '#F8F8F8',
+  success: '#28A745',
+  warning: '#FFC107',
+  orange: '#F27935',
+  red100: '#E43030',
+  grey100: '#787880',
+  grey50: '#BBBBBF',
+  grey25: '#DDDDDF',
+  grey10: '#F2F2F3',
+  bgColor: '#FCFCFC',
+  tableBorder: '#E9E7FD',
+  orange100: '#E4A428',
+  yellow100: '#F2CF13',
+  unreadMessage: '#D34141',
+  successMessage: '#339900',
+  red20: '#FAD6D6',
+  orange20: '#FAEDD4',
+  yellow20: '#F9F8D0',
+  green: '#D4F8D3',
+  darkNavy: '#1c2025',
+  royalBlue: '#4967ff',
+  softBlueGray: 'rgba(163, 169, 195, 0.15)',
+};
+
+export const brand = {
+  primaryMain: '#6063EA',
+  secondaryMain: '#242E4A',
+  textColour: '#1A1A1A',
+  black: '#000000',
+  white: '#FFFFFF',
+};

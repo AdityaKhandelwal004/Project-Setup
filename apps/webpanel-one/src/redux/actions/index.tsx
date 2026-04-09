@@ -1,57 +1,50 @@
-import type { MetaData, LoaderState } from "@mono/models";
-import { HttpMethods } from "@mono/utils";
+import { MetaData } from '../../models';
+import { LoaderState } from '../../models/genericEntities';
+import { HttpMethods } from '../../utils';
 
-export const APICALL = "APICALL";
-export const PAGINATED_APICALL = "PAGINATED_APICALL";
-export const PING = "PING";
+export const APICALL = 'APICALL';
+export const PAGINATED_APICALL = 'PAGINATED_APICALL';
+export const PING = 'PING';
 
-export const TOKEN_UPDATE = "TOKEN_UPDATE";
-export const TOKEN_REMOVE = "TOKEN_REMOVE";
+export const TOKEN_UPDATE = 'TOKEN_UPDATE';
+export const TOKEN_REMOVE = 'TOKEN_REMOVE';
 
-export const LOGIN = "LOGIN";
-export const SIGNUP = "SIGNUP";
-export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
-export const LOGOUT = "LOGOUT";
-export const POST_LOGIN = "POST_LOGIN";
+export const LOGIN = 'LOGIN';
+export const LOGOUT = 'LOGOUT';
 
-export const FETCH_BASE_DATA = "FETCH_BASE_DATA";
+export const FETCH_BASE_DATA = 'FETCH_BASE_DATA';
 
-export const USER_PROFILE = "USER_PROFILE";
-export const SYSTEM_LOADER = "SYSTEM_LOADER";
+export const USER_PROFILE = 'USER_PROFILE';
+export const SYSTEM_LOADER = 'SYSTEM_LOADER';
 
-import type { Action as AnyAction, UnknownAction } from "redux";
-
-// export interface AnyAction {
-//   type: string;
-//   [key: string]: unknown;
-// }
-
-export type EmptyAction = AnyAction;
-
-export const emptyAction = (type: string): EmptyAction => ({ type });
-
-export interface RequestOptions {
-  isFormData?: boolean;
-  ignoreStatus?: boolean;
-}
-
-export interface RequestProps<R> {
-  endpoint: string;
-  method: HttpMethods;
-  payload?: R;
-  options?: RequestOptions;
-}
+export const STEP_FORM_DATA_SET = 'STEP_FORM_DATA_SET';
+export const STEP_FORM_VALIDATION_ERROR_SET = 'STEP_FORM_VALIDATION_ERROR_SET';
+export const STEP_FORM_VALIDATION_ERRORS_CLEAR = 'STEP_FORM_VALIDATION_ERRORS_CLEAR';
+export const SET_STEP_NUMBER ='SET_STEP_NUMBER';
+export const STEP_FORM = 'STEP_FORM';
 
 // Add Actions Here
 export const fetchUserProfile = (): EmptyAction => emptyAction(USER_PROFILE);
 /** @Note Action types for pages entities */
 
-export interface Action<T extends string, P> extends UnknownAction {
-  type: T;
-  payload: P;
+export interface AnyAction {
+  type: string;
 }
 
-type PromiseActions = Action<string, any> | Action<string, any>[] | void;
+export type EmptyAction = AnyAction
+
+export interface Action<T> extends AnyAction {
+  type: string;
+  payload: T;
+}
+
+type PromiseActions = Action<any> | Action<any>[] | void;
+export interface RequestProps<R> {
+  endpoint: string;
+  method: HttpMethods;
+  payload?: R;
+  isFormData?: boolean;
+}
 
 export interface ApiCall<R = void, T = void, V = void> {
   request: { key: string; requestProps: RequestProps<R> };
@@ -64,7 +57,7 @@ export interface PagedApiCall<T> {
     key: string;
     endpoint: string;
     filter: MetaData<T>;
-    loadMore: boolean;
+    loadMore: boolean
   };
   update: { action: string };
   loadMore: { action: string };
@@ -73,6 +66,7 @@ export interface PagedApiCall<T> {
 export interface DefaultErrorType {
   message: string;
 }
+
 export interface PaginatedCRUDApi<R, P> {
   create: ApiCall<R, P>;
   read: ApiCall<any, any, R[]>;
@@ -80,29 +74,20 @@ export interface PaginatedCRUDApi<R, P> {
   remove: ApiCall<R, void, DefaultErrorType>;
 }
 
-export const action = <T extends string, P>(
-  type: T,
-  payload: P,
-): { type: T; payload: P } => ({
-  type,
-  payload,
-});
+export const emptyAction = (type: string): EmptyAction => ({ type });
 
-export const makeApiRequestObject = <T, P>(
-  endpoint: string,
-  method = HttpMethods.GET,
-  payload?: T,
-  options?: RequestOptions,
-): RequestProps<T> => ({
-  endpoint,
-  method,
-  payload,
-  options,
-});
+export const action = <T extends unknown>(type: string, payload: T): Action<T> => (
+  { type, payload });
+
+export const makeApiRequestObject = <T, P>(endpoint: string,
+  method = HttpMethods.GET, payload?: T, isFormData?: boolean):
+  RequestProps<T> => ({
+    endpoint, method, payload, isFormData,
+  });
 
 export const setResolveFunction = <R, P, S, F>(
-  api: ApiCall<R, S, F>,
-  resolve: (param: S) => PromiseActions,
+  api: ApiCall<R, S, F>, resolve: (param: S) => PromiseActions,
+
 ): ApiCall<R, S, F> => ({
   ...api,
   success: {
@@ -112,8 +97,7 @@ export const setResolveFunction = <R, P, S, F>(
 });
 
 export const setRejectFunction = <R, S, F>(
-  api: ApiCall<R, S, F>,
-  reject: (error: F) => PromiseActions,
+  api: ApiCall<R, S, F>, reject: (error: F) => PromiseActions,
 ): ApiCall<R, S, F> => ({
   ...api,
   failure: {
@@ -125,8 +109,8 @@ export const setRejectFunction = <R, S, F>(
 export function apiRequest<R, T, V>(
   api: ApiCall<R, T, V>,
   payload?: R,
-  options?: RequestOptions,
-): Action<typeof APICALL, ApiCall<R, T, V>> {
+  isFormData?: boolean,
+): Action<ApiCall<R, T, V>> {
   const upadtedApi: ApiCall<R, T, V> = {
     ...api,
     request: {
@@ -134,7 +118,7 @@ export function apiRequest<R, T, V>(
       requestProps: {
         ...api.request.requestProps,
         payload: payload ?? api.request.requestProps.payload,
-        options: options ?? api.request.requestProps.options,
+        isFormData: isFormData ?? api.request.requestProps.isFormData,
       },
     },
   };
@@ -145,15 +129,14 @@ export const makeApiCall = <R, T, V>(
   name: string,
   requestProps: RequestProps<R>,
   resolve?: (payload: T) => PromiseActions,
-  reject?: (payload: V) => PromiseActions,
-): ApiCall<R, T, V> => ({
-  request: {
-    key: `${name}_REQUEST`,
-    requestProps,
-  },
-  success: { resolve },
-  failure: { reject },
-});
+  reject?: (payload: V) => PromiseActions): ApiCall<R, T, V> => ({
+    request: {
+      key: `${name}_REQUEST`,
+      requestProps,
+    },
+    success: { resolve },
+    failure: { reject },
+  });
 
 export const apiCall = (
   endPoint: string,
@@ -161,27 +144,24 @@ export const apiCall = (
   reject: (param: any) => PromiseActions,
   method = HttpMethods.GET,
   data?: any,
-  options?: RequestOptions,
+  isFormData?: boolean,
 ) => {
-  const api = makeApiCall<any, any, any>(
-    `APICALL_${endPoint}`,
-    makeApiRequestObject<any, any>(endPoint, method),
-  );
+  const api = makeApiCall<any, any, any>(`APICALL_${endPoint}`, makeApiRequestObject<any, any>(endPoint, method));
 
   return apiRequest(
     setRejectFunction(setResolveFunction(api, resolve), reject),
     data,
-    options,
+    isFormData,
   );
 };
 
 export function paginatedApiRequest<T>(
   paginatedApi: PagedApiCall<T>,
-): Action<typeof PAGINATED_APICALL, PagedApiCall<T>> {
+): Action<PagedApiCall<T>> {
   return action(PAGINATED_APICALL, { ...paginatedApi });
 }
 
-export const makePaginatedApiCall = <T,>(
+export const makePaginatedApiCall = <T extends unknown>(
   name: string,
   endpoint: string,
   filter: MetaData<T>,
@@ -198,22 +178,19 @@ export const makePaginatedApiCall = <T,>(
   reset: { action: `${name}_PAGINATION_RESET` },
 });
 
-export const paginatedApiCall = <T,>(
+export const paginatedApiCall = <T extends unknown>(
   name: string,
   endPoint: string,
   filter: MetaData<T>,
   loadMore?: boolean,
 ) => {
-  const paginatedApi = makePaginatedApiCall<T>(
-    name,
-    endPoint,
-    filter,
-    loadMore,
-  );
+  const paginatedApi = makePaginatedApiCall<T>(name, endPoint, filter, loadMore);
   return paginatedApiRequest(paginatedApi);
 };
 
-export const createBasicActions = <T,>(key: string) => ({
+export const createBasicActions = <T extends unknown>(
+  key: string,
+) => ({
   update: (payload: T) => action(`${key}_UPDATE`, payload),
   reset: () => emptyAction(`${key}_RESET`),
 });
@@ -224,27 +201,9 @@ export const removeToken = (): EmptyAction => emptyAction(TOKEN_REMOVE);
 
 export const login = (
   formData: { email: string; password: string },
-  resolve: () => void,
-  reject: (error: any) => void,
+  resolve: any,
+  reject: any,
 ) => action(LOGIN, { formData, resolve, reject });
-
-export const signup = (
-  formData: {
-    firstName: string;
-    lastName: string;
-    email: string;
-    password: string;
-  },
-  resolve: (data: any) => void,
-  reject: (error: any) => void,
-) => action(SIGNUP, { formData, resolve, reject });
-
-export const forgotPassword = (
-  formData: { email: string },
-  resolve: (data: any) => void,
-  reject: (error: any) => void,
-) => action(FORGOT_PASSWORD, { formData, resolve, reject });
-
 export const logout = (): EmptyAction => emptyAction(LOGOUT);
 
 export const fetchBaseData = (): EmptyAction => emptyAction(FETCH_BASE_DATA);
@@ -252,3 +211,23 @@ export const fetchBaseData = (): EmptyAction => emptyAction(FETCH_BASE_DATA);
 const loaderActions = createBasicActions<LoaderState>(SYSTEM_LOADER);
 export const showLoader = () => loaderActions.update({ visibility: true });
 export const hideLoader = () => loaderActions.update({ visibility: false });
+//STEP FORM
+export const setStepFormData = (stepNumber: number, data: any) => ({
+  type: STEP_FORM_DATA_SET,
+  payload: { stepNumber, data },
+});
+export const setStepValidationError = (
+  stepNumber: number,
+  errors: Record<string, string>
+) => ({
+  type: STEP_FORM_VALIDATION_ERROR_SET,
+  payload: { stepNumber, errors },
+});
+export const clearStepValidationErrors = (stepNumber: number) => ({
+  type: STEP_FORM_VALIDATION_ERRORS_CLEAR,
+  payload: stepNumber,
+});
+export const setCurrentStep = (stepNumber: number) => ({
+  type: SET_STEP_NUMBER,
+  payload: { stepNumber }
+});

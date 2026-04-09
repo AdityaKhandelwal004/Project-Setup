@@ -1,28 +1,29 @@
-import type { Reducer } from 'redux';
-import { getDefaultMetaData } from '@mono/models';
-import type { PagedEntity, StepFormState } from '@mono/models';
+import { Action,SET_STEP_NUMBER, STEP_FORM_DATA_SET} from '../actions';
+import { PagedEntity, getDefaultMetaData } from '../../models';
+import { StepFormState } from '../../models/genericEntities';
+import { Reducer } from 'redux';
 
-  export const createBasicReducer = <T extends unknown>(
-    key: string, 
-    initialState: T
-  ) => (state: T = initialState, action: Action<T>): T => {
-    switch (action.type) {
-      case `${key}_UPDATE`: {
-        const { payload } = action;
-        if (typeof payload === 'object') {
-          if (Array.isArray(payload)) {
-            return [...payload as any] as T;
-          }
-          return { ...payload as any };
+export const createBasicReducer = <T extends unknown>(
+  key: string, initialState: T,
+) => (state: T = initialState, action: Action<T>): T => {
+  switch (action.type) {
+    case `${key}_UPDATE`: {
+      const { payload } = action;
+      if (typeof payload === 'object') {
+        if (Array.isArray(payload)) {
+          return [...payload as any] as T;
         }
-        return payload;
+        return { ...payload as any };
       }
-      case `${key}_RESET`:
-        return initialState;
-      default:
-        return state;
+      return payload;
     }
-  };
+    case `${key}_RESET`:
+      return initialState;
+    default:
+      return state;
+  }
+};
+
 export const createPagedReducer = <T extends unknown>(
   key: string, initialEntity: T[],
 ): any => {
@@ -53,6 +54,31 @@ export const createPagedReducer = <T extends unknown>(
       }
       case `${key}_PAGINATION_RESET`:
         return initialState;
+      default:
+        return state;
+    }
+  };
+};
+export const createStepFormReducer = (
+  key: string,
+  initialState: StepFormState 
+): Reducer<StepFormState> => {
+  return (state: StepFormState = initialState, action: any): StepFormState => {
+    switch (action.type) {
+      case SET_STEP_NUMBER:
+        return {
+          ...state,
+          currentPage: action.payload.stepNumber,
+        };
+      case STEP_FORM_DATA_SET:
+        const { stepNumber, data } = action.payload;
+        return {
+          ...state,
+          forms: {
+            ...state.forms,
+            [stepNumber]: data,
+          },
+        };
       default:
         return state;
     }

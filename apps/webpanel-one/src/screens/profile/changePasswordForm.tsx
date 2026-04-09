@@ -1,7 +1,7 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import md5 from "md5";
-import { toast } from "react-toastify";
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import md5 from 'md5';
+import { toast } from 'react-toastify';
 import {
   Button,
   Form,
@@ -10,43 +10,39 @@ import {
   FormRowItem,
   PasswordInput,
   Toast,
-} from "@mono/components";
-import { useFormReducer } from "@mono//hooks";
+} from '../../components';
+import { useFormReducer } from '../../hooks';
 import {
   HttpMethods,
   confirmPassword,
   passwordValidator,
   required,
-} from "@mono/utils";
-import messages from "../../messages";
-import { apiCall } from "@mono/redux-global/src/actions";
-import { CHANGE_PASSWORD } from "../../api";
-import { ErrorContainer, ErrorContent, ErrorIcon, ErrorText } from "../auth/styles";
-import { AlertCircle } from "lucide-react";
-import { ToastType } from "@mono/models";
-import ModalButtonWrapper from "../../myComponents/ModalButtonWrapper/ModalButtonWrapper";
-import StepCompletionToast, { successToastConfig, toastSuccessMessages, ToastVariants } from "../../myComponents/stepCompletionToast";
+} from '../../utils';
+import { apiCall } from '../../redux/actions';
+import messages from '../../messages';
+import { CHANGE_PASSWORD } from '../../api';
 
 interface Props {
   onSuccess: () => void;
-  onCancel: () => void;
 }
 
 const validators = {
   oldPassword: [
     required(messages?.profile?.changePasswordForm?.required?.oldPassword),
   ],
-  newPassword: [
+  password: [
     required(messages?.profile?.changePasswordForm?.required?.password),
     passwordValidator,
   ],
   confirmPassword: [
     required(messages?.profile?.changePasswordForm?.required?.confirmPassword),
-    confirmPassword('newPassword'),
+    confirmPassword(
+      messages?.profile?.changePasswordForm?.required?.passwordNotMatched,
+    ),
   ],
 };
 
-const ChangePasswordForm: React.FC<Props> = ({ onSuccess, onCancel }) => {
+const ChangePasswordForm: React.FC<Props> = ({ onSuccess }) => {
   const reduxDispatch = useDispatch();
 
   const {
@@ -57,96 +53,83 @@ const ChangePasswordForm: React.FC<Props> = ({ onSuccess, onCancel }) => {
     setSubmitError,
   } = useFormReducer(validators);
 
-  const onSubmit = async (data: any) =>{
-    if(submitting) return;
-    await   new Promise<any>((resolve, reject) => {
-      const sanitizedBody: any = {
-        oldPassword: md5(data?.oldPassword),
-        newPassword: md5(data?.newPassword),
-        confirmPassword: md5(data?.confirmPassword),
-      };
-      reduxDispatch(
-        apiCall(
-          CHANGE_PASSWORD,
-          resolve,
-          reject,
-          HttpMethods.POST,
-          sanitizedBody
-        )
-      );
+  const onSubmit = async (data: any) => new Promise<any>((resolve, reject) => {
+    const sanitizedBody: any = {
+      currentPassword: md5(data?.oldPassword),
+      newPassword: md5(data?.password),
+    };
+    reduxDispatch(
+      apiCall(
+        CHANGE_PASSWORD,
+        resolve,
+        reject,
+        HttpMethods.PUT,
+        sanitizedBody,
+      ),
+    );
+  })
+    .then(() => {
+      onSuccess();
+      toast(() => (
+        <Toast subText={messages?.profile?.changePasswordForm?.success} />
+      ));
     })
-      .then(() => {
-        if (onSuccess) onSuccess();
-
-       toast(
-        <StepCompletionToast
-          variant={ToastVariants.PURPLE}
-          title={toastSuccessMessages.passwordUpdated?.title}
-          message={toastSuccessMessages.passwordUpdated.message}
-
-        />,
-        successToastConfig as any
-      );
-      })
-      .catch((error) => {
-        setSubmitError(messages?.profile?.errors?.[error?.message] || messages?.general?.generalError);
-      });
-  }
-  
+    .catch((error) => {
+      console.log('error', error); // eslint-disable-line no-console
+      setSubmitError(error?.message);
+    });
 
   return (
-    <Form
-      onSubmit={handleSubmit(onSubmit)}
-      hasPadding
-      maxWidth="500px">
-      <FormRow>
+    <Form style={{ maxWidth: '350px' }} onSubmit={handleSubmit(onSubmit)}>
+      <FormRow marginTop="24px" marginBottom="16px">
         <FormRowItem>
-          {connectField("oldPassword", {
+          {connectField('oldPassword', {
             label: messages?.profile?.changePasswordForm?.oldPassword,
-            // required: true,
-            maxWidth: "350px",
+            required: true,
+            maxWidth: '350px',
           })(PasswordInput)}
         </FormRowItem>
       </FormRow>
-      <FormRow>
+      <FormRow marginBottom="16px">
         <FormRowItem>
-          {connectField("newPassword", {
+          {connectField('password', {
             label: messages?.profile?.changePasswordForm?.newPassword,
-            // required: true,
-            maxWidth: "350px",
+            required: true,
+            maxWidth: '350px',
           })(PasswordInput)}
         </FormRowItem>
       </FormRow>
-      <FormRow >
+      <FormRow marginBottom="24px">
         <FormRowItem>
-          {connectField("confirmPassword", {
+          {connectField('confirmPassword', {
             label: messages?.profile?.changePasswordForm?.confirmNewPassword,
-            // required: true,
-            maxWidth: "350px",
+            required: true,
+            maxWidth: '350px',
           })(PasswordInput)}
         </FormRowItem>
       </FormRow>
-      <>
       {submitError && (
-        <ErrorContainer>
-          <ErrorContent>
-            <ErrorIcon>
-              <AlertCircle size={16} />
-            </ErrorIcon>
-            <ErrorText>{submitError}</ErrorText>
-          </ErrorContent>
-        </ErrorContainer>
+        <FormRow>
+          <FormRowItem>
+            <FormError
+              message={
+                messages?.changePassword?.errors?.serverErrors?.[submitError]
+              }
+            />
+          </FormRowItem>
+        </FormRow>
       )}
-      </>
-      <ModalButtonWrapper
-        onCancel={onCancel}
-        onSubmit={() => {
-          handleSubmit(onSubmit)();
-        }}
-        submitLabel={messages?.profile?.changePasswordForm?.buttonText}
-        cancelLabel="Cancel"
-        isSubmitting={submitting}
-      />
+      <FormRow marginBottom="0px">
+        <FormRowItem>
+          <Button
+            variant="contained"
+            type="submit"
+            fullWidth
+            label={messages?.profile?.changePasswordForm?.buttonText}
+            disabled={submitting}
+          />
+        </FormRowItem>
+      </FormRow>
     </Form>
   );
 };

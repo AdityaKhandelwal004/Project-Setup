@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const config = {
-  entry: path.resolve('src', 'main.tsx'),
+  entry: path.resolve('src', 'index.tsx'),
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
   },

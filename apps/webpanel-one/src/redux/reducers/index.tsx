@@ -1,88 +1,48 @@
-import { combineReducers } from "redux";
-import { connectRouter } from "connected-react-router";
-import type { RouterState } from "connected-react-router";
-import type { History } from "history";
-import type {
-  LoaderState,
-} from "@mono/models";
-// import auth from '@mono/redux-global/src/reducers/auth';
-import auth, { type AuthState } from "./auth";
-// import { createBasicReducer, createPagedReducer } from
-import {
-  SYSTEM_LOADER,
-  USER_PROFILE,
+import { combineReducers, Reducer } from 'redux';
+import { connectRouter, RouterState } from 'connected-react-router';
+import { History } from 'history';
+import auth, { AuthState } from './auth';
+import { createBasicReducer ,createPagedReducer,createStepFormReducer} from './utils';
+import { SYSTEM_LOADER, USER_PROFILE, APICALL,STEP_FORM,
+
   // Add more Action types here
-} from "../actions";
-import { createBasicReducer } from "./utils";
-
-export interface UserProfile {
-  id: number;
-  firstName: string;
-  lastName: string;
-  name: string;
-  email: string;
-  phoneNumber: string;
-  dialCode: string;
-  dateOfBirth?: string;
-  role: { id: string };
-  profilePicturePath?: string;
-  consents?: {
-    termsAcceptedAt?: string;
-    privacyPolicyAcceptedAt?: string;
-    emailVerifiedAt?: string;
-  };
-}
-
-export interface SubscriptionModalState {
-  isOpen: boolean;
-  mode?: "purchase" | "renew" | "update";
-}
-
-export interface AvailableSavingsState {
-  availableInvestmentSavings: number;
-  frequency: string;
-  lastUpdated?: number;
-}
-
-export interface IncomeSavingsState {
-  availableIncomeSavings: number;
-  frequency: string;
-  lastUpdated?: number;
-}
+} from '../actions';
+import { MetaData , PagedEntity, getDefaultMetaData } from '../../models';
+import { LoaderState,StepFormState } from '../../models/genericEntities';
 
 export interface ReduxState {
-  router: RouterState<unknown>;
-  auth: AuthState;
-  loader: LoaderState;
-  profile?: UserProfile;
-
-}
-
-export interface StoreStates {
   router: RouterState;
   auth: AuthState;
+  profile: any;
   loader: LoaderState;
+  stepForm ?: StepFormState
+  // Add more State here
 }
-const loaderReducer = createBasicReducer<LoaderState>(SYSTEM_LOADER, {
-  visibility: false,
+
+const createRootReducer = (history: History): Reducer => combineReducers<ReduxState>({
+  /* Start Third party reducers */
+  router: connectRouter(history),
+  /* End Third party reducers */
+  auth,
+  profile: createBasicReducer<any>(USER_PROFILE, {
+    id: 0,
+    name: '',
+    email: '',
+    phoneNumber: '',
+    dialCode: '',
+    role: {
+      id: '',
+    },
+    profilePhoto: '',
+  }),
+  loader: createBasicReducer<LoaderState>(SYSTEM_LOADER, {
+    visibility: false,
+  }),
+  stepForm: createStepFormReducer(STEP_FORM, {
+    currentPage: 0,
+    forms: {},
+    validationErrors: {},
+  }),
+    // Add more Reducers here
 });
-
-const createRootReducer = (history: History) =>
-  combineReducers({
-    router: connectRouter(history),
-    auth,
-    profile: createBasicReducer<UserProfile>(USER_PROFILE, {
-      id: 0,
-      firstName: "",
-      lastName: "",
-      name: "",
-      email: "",
-      phoneNumber: "",
-      dialCode: "",
-      dateOfBirth: "",
-      role: { id: "" },
-    }),
-    loader: loaderReducer,
-  });
-
 export default createRootReducer;

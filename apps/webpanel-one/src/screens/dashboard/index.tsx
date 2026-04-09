@@ -1,10 +1,14 @@
-import type { JSX } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { routes } from '../../utils';
+import Dashboard from "./dashboard";
 
-
-const Dashboard = (): JSX.Element => {
- return (
- <div>DASHBOARD</div>
+export default (): JSX.Element => (
+    <Switch>
+        <Route
+            exact
+            key="dashboard"
+            path={routes.dashboard.root}
+            component={Dashboard}
+        />
+    </Switch>
 );
-};
-
-export default Dashboard;

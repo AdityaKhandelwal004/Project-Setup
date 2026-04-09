@@ -1,58 +1,34 @@
-import React, { useEffect } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
-import OnlyWith from "../onlyWith";
-import { AuthenticationStatus } from "@mono/redux-global/src/reducers";
-import { ForgotPassword } from "./auth";
-import { ResetPassword } from "./auth/resetPassword";
-import { routes } from "../myUtils";
-import { Helmet } from "react-helmet-async";
-import { LoginWrapper } from "./auth/LoginWrapper";
-import { AuthenticatedRoutes } from "./AuthenticatedRoutes";
-import { useSelector } from "react-redux";
-import {
-  endSession,
-  startSession,
-  updateAuthState,
-} from "../utils/mixpanel/sessionManager";
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
-const redirectToLogin = () => <Redirect to={routes.login} />;
+import { AuthenticationStatus } from '../redux/reducers/auth';
+import { OnlyWith } from '../components';
+import { ForgotPassword, Login, ResetPassword } from './auth';
+import { routes } from '../utils';
+import Profile from './profile';
+import Dashboard from "./dashboard";
 
-const Screens: React.FC = () => {
-  const authState = useSelector((state: any) => state?.auth);
+const redirectToRoot = () => <Redirect to={routes.dashboard.root} />
+const redirectToLogin = () => <Redirect to={routes.login} />
 
-  useEffect(() => {
-    const isLoggedIn =
-      authState?.status === AuthenticationStatus.AUTHENTICATED &&
-      !!authState?.token;
-
-    updateAuthState(isLoggedIn);
-
-    if (isLoggedIn) {
-      startSession("login_or_token_available");
-    } else {
-      endSession();
-    }
-  }, [authState?.status, authState?.token]);
-
-  return (
-    <>
-      {/* <OnlyWith
-        status={AuthenticationStatus.AUTHENTICATED}
-      >
-        <AuthenticatedRoutes />
-      </OnlyWith> */}
-      <OnlyWith status={AuthenticationStatus.NOT_AUTHENTICATED}>
-        <Switch>
-          
-          <Route path={routes.login} component={LoginWrapper} />
-          <Route path={routes.forgotPassword} component={ForgotPassword} />
-          <Route path={routes.resetPassword} component={ResetPassword} />
-          <AuthenticatedRoutes />
-          <Route component={redirectToLogin} />
-        </Switch>
-      </OnlyWith>
-    </>
-  );
-};
+const Screens: React.FC = () => (
+  <>
+    <OnlyWith status={AuthenticationStatus.AUTHENTICATED}>
+      <Switch>
+        <Route component={redirectToRoot} />
+      </Switch>
+    </OnlyWith>
+    <OnlyWith status={AuthenticationStatus.NOT_AUTHENTICATED}>
+      <Switch>
+        <Route path={routes.login} component={Login} />
+        <Route path={routes.forgotPassword} component={ForgotPassword} />
+        <Route path={routes.resetPassword} component={ResetPassword} />
+        <Route path={routes.profile} component={Profile} />
+        <Route path={routes.dashboard.root} component={Dashboard} />
+        <Route component={redirectToLogin} />
+      </Switch>
+    </OnlyWith>
+  </>
+);
 
 export default Screens;

@@ -1,10 +1,8 @@
-import type { JSX } from 'react';
-
 export type Status = 'ACTIVE' | 'INACTIVE';
 
 export type BasicObject = Record<string, unknown>;
 
-export type Id = string | number | undefined | null;
+export type Id = (string | number | undefined | null);
 
 export interface MetaData<T> {
   order: keyof T | '';
@@ -17,20 +15,15 @@ export interface MetaData<T> {
 }
 
 export interface PagedEntity<T> {
-  metadata: MetaData<T>;
-  records: T[];
-  requestDate?: Date;
+  metadata:MetaData<T>;
+  records:T[];
+  requestDate?:Date;
 }
 
 export interface PaginatedEntity {
-  key: string;
-  name: string;
-  api: string;
-}
-
-export interface Option {
-  id: number | string;
-  label: string;
+  key:string;
+  name:string;
+  api:string;
 }
 
 export const getDefaultMetaData = <T,>(): MetaData<T> => ({
@@ -43,26 +36,16 @@ export const getDefaultMetaData = <T,>(): MetaData<T> => ({
   allowedFilters: [],
 });
 
-export const getDefaultOptionMetaData = <T,>(): MetaData<T> => ({
-  order: '',
-  direction: 'asc',
-  total: 0,
-  page: 1,
-  limit: 50,
-  filters: {},
-  allowedFilters: [],
-});
-
 export interface ModalActionProps {
   title: string;
   body: string | ((closePopup: () => void) => JSX.Element);
   resolveText?: string;
-  resolveMessage?: string;
+  resolveMessage?:string;
   rejectText?: string;
-  data?: { [id: string]: string };
+  data?: { [id: string]: any };
   className?: string;
   resolveDisabled?: boolean;
-  rejectDisabled?: boolean;
+  rejectDisabled?:boolean;
 
   resolve?(): void;
 
@@ -71,6 +54,7 @@ export interface ModalActionProps {
   reject?(): void;
 
   rejectWithPromise?(): Promise<void>;
+
 }
 
 export interface ModalState {
@@ -79,13 +63,13 @@ export interface ModalState {
   body: string | ((closePopup: () => void) => JSX.Element);
   className: string;
   resolveText?: string;
-  resolveMessage?: string;
+  resolveMessage?:string;
   rejectText?: string;
-  data: { [id: string]: string };
+  data: { [id: string]: any };
   resolveDisabled: boolean;
-  resolveWithPromise: () => Promise<void>;
-  rejectDisabled: boolean;
-  rejectWithPromise: () => Promise<void>;
+  resolveWithPromise: any;
+  rejectDisabled:boolean;
+  rejectWithPromise: any;
 
   resolve(): Promise<void>;
 
@@ -102,26 +86,14 @@ export const getDefaultModalState = (): ModalState => ({
   rejectText: '',
   data: {},
   resolveDisabled: false,
-  resolveWithPromise: () => Promise.resolve(),
+  resolveWithPromise: undefined,
   rejectDisabled: false,
-  rejectWithPromise: () => Promise.resolve(),
+  rejectWithPromise: undefined,
   reject: () => Promise.reject(),
   resolve: () => Promise.resolve(),
 });
 
-export interface ModalProps {
-  onCancel: () => void;
-  onSuccess: () => void;
-}
-
-
-export enum TabModule {
-  OPTIMISE = 'OPTIMISE',
-  PROTECT = 'PROTECT',
-  MAXIMISE = 'MAXIMISE'
-}
-
-
-export enum MethodValue {
-  OTP = "OTP",
+export interface Option {
+  id : (number | string);
+  label : string;
 }
