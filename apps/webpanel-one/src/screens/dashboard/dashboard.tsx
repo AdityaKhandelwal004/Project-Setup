@@ -5,7 +5,7 @@ const Dashboard = () => {
 
     return (
         <Container
-            heading={messages?.dashboard?.heading}
+            heading={"Dashboard"}
         >
             <p>Dashboard</p>
         </Container>

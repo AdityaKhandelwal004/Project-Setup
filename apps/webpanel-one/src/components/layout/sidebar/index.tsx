@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import ArrowIcon from '../../../assets/images/arrowIcon.svg';
 import {
   StyledSidebarContainer,
   StyledIcon,
@@ -15,9 +14,15 @@ import {
 } from './styles';
 import messages from '../../../messages';
 import { routes } from '../../../utils';
-import ArrowOpenIcon from '../../../assets/images/arrowOpenIcon.svg';
 import { push } from 'connected-react-router';
-import LogoutIcon from '../../../assets/images/logout.svg';
+import {
+  arrowIcon,
+  arrowOpenIcon,
+  logoutIcon,
+  smallLogo,
+  logo,
+  dashboardIcon,
+} from '../../../assets/images';
 
 interface Props {
   onClose?: () => void;
@@ -29,7 +34,7 @@ const menuItems = [
   {
     key: 'dashboard',
     label: messages?.sidebar?.menuItems?.dashboard,
-    icon: 'dashboard',
+    icon: dashboardIcon,
     path: routes.dashboard.root,
   },
   // Add sidebar menu items here
@@ -45,7 +50,7 @@ export const Sidebar: React.FC<Props> = () => {
   return (
     <StyledSidebarContainer sidebarOpen={sidebarOpen}>
       <StyledSidebarToggleIcon
-        src={sidebarOpen ? ArrowOpenIcon : ArrowIcon}
+        src={sidebarOpen ? arrowOpenIcon : arrowIcon}
         alt="arrow"
         position="absolute"
         right="-11px"
@@ -55,7 +60,7 @@ export const Sidebar: React.FC<Props> = () => {
       <StyledSidebarInnerContainer>
         <StyledHeadingIconContainer>
           <StyledIcon
-            src={!sidebarOpen ? "/assets/images/smallLogo.png" : "/assets/images/logo.png"}
+            src={!sidebarOpen ? smallLogo : logo}
             alt="logoicon"
           />
         </StyledHeadingIconContainer>
@@ -70,7 +75,7 @@ export const Sidebar: React.FC<Props> = () => {
                   key={menuItem.key}
                 >
                   <StyledIcon
-                    src={`/assets/images/${menuItem.icon}.svg`}
+                    src={menuItem.icon}
                     alt={menuItem.key}
                   />
                   {!sidebarOpen && (
@@ -90,7 +95,7 @@ export const Sidebar: React.FC<Props> = () => {
               reduxDispatch(push(routes?.login))
             }}
           >
-            <StyledIcon src={LogoutIcon} alt="logout" />
+            <StyledIcon src={logoutIcon} alt="logout" />
             {!sidebarOpen && (
               <StyledMenuItemText>
                 {messages?.sidebar?.logout}

@@ -6,6 +6,7 @@ import {
   StyledToastInfoSubText,
   StyledToastInfoText,
 } from './styles';
+import { notAllowedIcon, successIcon } from '../../assets/images';
 
 interface Props {
   text?: string;
@@ -13,14 +14,11 @@ interface Props {
   type?: string;
 }
 
+
 const Toast: React.FC<Props> = ({ text, subText, type }) => (
   <StyledToastContainer type={type}>
     <StyledToastIcon
-      src={
-        type === 'error'
-          ? '/assets/images/notAllowed.svg'
-          : '/assets/images/success.svg'
-      }
+      src={type === 'error' ? notAllowedIcon : successIcon}
     />
     <StyledToastInfoContainer>
       {text && <StyledToastInfoText>{text}</StyledToastInfoText>}

@@ -10,7 +10,7 @@ import {
 import { StyledIcon } from '../sidebar/styles';
 import Header from '../header';
 import Sidebar from '../sidebar';
-import GoBack from "../../../assets/images/backIcon.svg"
+import { backIcon } from '../../../assets/images';
 import { useDispatch } from 'react-redux';
 import { goBack } from 'connected-react-router';
 
@@ -53,7 +53,7 @@ const Container: React.FC<Props> = ({
               <StyledIcon
                 height="31px"
                 width="31px"
-                src={GoBack}
+                src={backIcon}
                 alt="icon"
                 onClick={() => {
                   reduxDispatch(goBack())

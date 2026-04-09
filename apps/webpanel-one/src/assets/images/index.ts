@@ -1,0 +1,12 @@
+export const arrowIcon = '/assets/images/arrowIcon.svg';
+export const arrowOpenIcon = '/assets/images/arrowOpenIcon.svg';
+export const logoutIcon = '/assets/images/logout.svg';
+export const smallLogo = '/assets/images/smallLogo.svg';
+export const logo = '/assets/images/logo.png';
+export const dashboardIcon = '/assets/images/dashboard.svg';
+export const backIcon = '/assets/images/backIcon.svg';
+export const crossIcon = '/assets/images/crossIcon.svg';
+export const writeIcon = '/assets/images/write.svg';
+export const sidenavLogo = '/assets/images/sidenavlogo.svg';
+export const successIcon = '/assets/images/success.svg';
+export const notAllowedIcon = '/assets/images/notAllowed.svg';

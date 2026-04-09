@@ -23,6 +23,7 @@ import EditForm from './editForm';
 import { ReduxState } from '../../redux/reducers';
 import { fetchUserProfile } from '../../redux/actions';
 import { baseImageUrl } from '../../config';
+import { writeIcon } from '../../assets/images';
 
 const ProfileSection: React.FC = () => {
   const userProfile = useSelector((state: ReduxState) => state.profile);
@@ -59,7 +60,7 @@ const ProfileSection: React.FC = () => {
               </Grid>
               <Grid item>
                 <StyledImageContainer onClick={showEditForm}>
-                  <StyledImage src="/assets/images/write.svg" alt="Edit" />
+                  <StyledImage src={writeIcon} alt="Edit" />
                 </StyledImageContainer>
               </Grid>
             </Grid>

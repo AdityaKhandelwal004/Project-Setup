@@ -13,7 +13,7 @@ import {
   StyledHeading,
 } from './styles';
 import { StyledIcon } from '../layout/sidebar/styles';
-import CloseIconSvg from '../../assets/images/crossIcon.svg';
+import { crossIcon } from '../../assets/images';
 
 interface ModalCustomProps {
   children?: JSX.Element | JSX.Element[];
@@ -64,7 +64,7 @@ const Modal = ({
             {hasCloseIcon && (
               <StyledCloseContainer onClick={onClose}>
                 <StyledIcon
-                  src={CloseIconSvg}
+                  src={crossIcon}
                   alt="close"
                   height="16px"
                   width="16px"
