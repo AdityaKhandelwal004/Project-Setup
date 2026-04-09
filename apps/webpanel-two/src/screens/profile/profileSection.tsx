@@ -173,63 +173,6 @@ const  ProfileSection = () => {
             </Grid2>
         </ProfileHeader>
 
-        <Section>
-          <SectionTitle>{messages?.profile?.basicInformation}</SectionTitle>
-          <InfoGrid>
-            <InfoItem>
-              <Label>{messages?.general?.firstName}</Label>
-              <Value>{userProfile?.firstName || '--'}</Value>
-            </InfoItem>
-            <InfoItem>
-              <Label>{messages?.general?.lastName}</Label>
-              <Value>{userProfile?.lastName || '--'}</Value>
-            </InfoItem>
-            <InfoItem>
-              <Label>{messages?.general?.email}</Label>
-              <Value>
-                {userProfile?.email || '--'} 
-              </Value>
-            </InfoItem>
-          </InfoGrid>
-            <StyledDashDivider/>
-          <InfoGrid>
-            <InfoItem>
-              <Label>{messages?.general?.dob}</Label>
-              <Value>{userProfile?.dateOfBirth || '--'}</Value>
-            </InfoItem>
-          </InfoGrid>
-        </Section>
-
-        <Divider sx={{marginBottom: '24px'}}/>
-
-        <Section>
-          <SectionTitle>{messages?.profile?.security}</SectionTitle>
-          {/* <SecurityRow>
-            <SecurityInfo>
-              <Label>{messages?.general?.password}</Label>
-              <Value>--</Value>
-            </SecurityInfo>
-         <Grid2>
-          <Button
-            label={'Change password'}
-            variant="outlined"
-            onClick={showForm}
-            />
-            </Grid2>
-          </SecurityRow> */}
-
-          <MFARow>
-            <SecurityInfo>
-              <LabelWithIcon>
-                <Label>{messages?.profile?.multiFactorAuthentication}</Label>
-                <InfoIcon src={mfaIcon} alt='mfa-icon' />
-              </LabelWithIcon>
-
-             {renderStatus()}
-            </SecurityInfo>
-             {renderContent()}
-          </MFARow>
-        </Section>
       </ProfileCard>
     </PageContainer>
         <Modal
