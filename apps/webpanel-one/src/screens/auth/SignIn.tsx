@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import md5 from 'md5';
 import { AlertCircle } from 'lucide-react';
 import { ModuleThemeProvider } from '@mono/theme/providers/ModuleThemeProvider';
@@ -17,9 +17,6 @@ import {
   FormTitle,
   FormSubtitle,
   ForgotPasswordLink,
-  SignUpContainer,
-  SignUpText,
-  AuthNavLink,
   CenteredContainer,
   HeaderContainer,
   FormWrapper,
@@ -32,8 +29,6 @@ import {
 import { otherColour, primitiveColors } from '@mono/theme';
 import { ChipSize } from '@mono/components/src/customChip/styles';
 // import { login } from '@mono/redux-global/src/actions';
-import { push } from 'connected-react-router';
-import { routes } from '../../myUtils';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions';
 
@@ -79,24 +74,18 @@ function SignInContent({
     }).then((res) => {        
         if(res?.data) {
         reduxDispatch(
-          push(routes.twoFactorAuthentication, {
-            email: data?.email,
-            password: data?.password,
-            method: res?.data?.method?.name,
-            senderDetail: res?.data?.senderDetail,
-          }),
+          // push(routes.twoFactorAuthentication, {
+          //   email: data?.email,
+          //   password: data?.password,
+          //   method: res?.data?.method?.name,
+          //   senderDetail: res?.data?.senderDetail,
+          // }),
         );
         } 
       })
       .catch((error) => {
-        setSubmitError(messages?.login?.form?.errors?.[error?.message] || messages?.general?.generalError);
+        setSubmitError((messages?.login?.form?.errors as any)?.[error?.message] || messages?.general?.generalError);
       });
-
-
-
-  const handleSignUpClick = () => {
-    onSignUp();
-  };
 
   return (
     <MainContainer>

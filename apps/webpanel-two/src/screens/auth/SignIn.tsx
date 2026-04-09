@@ -26,8 +26,6 @@ import {
 import { otherColour, primitiveColors } from '@mono/theme';
 import { ChipSize } from '@mono/components/src/customChip/styles';
 // import { login } from '@mono/redux-global/src/actions';
-import { push } from 'connected-react-router';
-import { routes } from '../../myUtils';
 import { useDispatch } from 'react-redux';
 import { login } from '../../redux/actions';
 
@@ -72,18 +70,18 @@ function SignInContent({
       );
     }).then((res) => {        
         if(res?.data) {
-        reduxDispatch(
-          push(routes.twoFactorAuthentication, {
-            email: data?.email,
-            password: data?.password,
-            method: res?.data?.method?.name,
-            senderDetail: res?.data?.senderDetail,
-          }),
-        );
+        // reduxDispatch(
+        //   push(routes.twoFactorAuthentication, {
+        //     email: data?.email,
+        //     password: data?.password,
+        //     method: res?.data?.method?.name,
+        //     senderDetail: res?.data?.senderDetail,
+        //   }),
+        // );
         } 
       })
       .catch((error) => {
-        setSubmitError(messages?.login?.form?.errors?.[error?.message] || messages?.general?.generalError);
+        setSubmitError((messages?.login?.form?.errors as any)?.[error?.message] || messages?.general?.generalError);
       });
 
 

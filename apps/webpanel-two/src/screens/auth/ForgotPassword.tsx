@@ -84,8 +84,8 @@ function ForgotPasswordContent({ onSignIn }: { onSignIn: () => void }) {
           reduxDispatch(push(routes.login));
         }, 2000);
       })
-      .catch((error) => {
-          setSubmitError(messages?.login?.form?.errors?.[error?.message] || messages?.general?.generalError)
+      .catch((error: any) => {
+          setSubmitError((messages?.login?.form?.errors as any)?.[error?.message] || messages?.general?.generalError)
       });
     }
 
