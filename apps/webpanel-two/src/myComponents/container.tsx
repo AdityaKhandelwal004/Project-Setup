@@ -61,7 +61,8 @@ const Container:React.FC<Props> = ({
           id: 'logout',
           text: messages?.general?.logout,
           onClick: () => {
-            reduxDispatch(logout());
+            // reduxDispatch(logout());
+            reduxDispatch(push(routes.login));
           },
           icon: <StyledLogoutMenuIcon />,
         },

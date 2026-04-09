@@ -43,6 +43,13 @@ import messages from "../messages/index.tsx";
 // Placeholder user icon - in a real app this would come from assets
 const userIcon = '';
 
+// Generate initials from user name
+const getInitials = (firstName?: string, lastName?: string): string => {
+  const first = firstName?.charAt(0)?.toUpperCase() || '';
+  const last = lastName?.charAt(0)?.toUpperCase() || '';
+  return (first + last) || 'U';
+};
+
 
 
 interface HeaderCustomProps {
@@ -195,7 +202,9 @@ const Header = (props: HeaderCustomProps) => {
       <Typography color={primitiveColors.grey400} fontFamily={fontFamilies.secondary}>Admin</Typography>
     </Grid2>
     <StyledProfileBox>
-      <img src={userIcon} alt="userIcon" />
+      <Typography fontFamily={fontFamilies.secondary} sx={{ fontSize: '14px', fontWeight: 600 }}>
+        {getInitials(props?.userProfile?.firstName, props?.userProfile?.lastName)}
+      </Typography>
     </StyledProfileBox>
   </StyledInnerRightContainer>
 {/* // )} */}
