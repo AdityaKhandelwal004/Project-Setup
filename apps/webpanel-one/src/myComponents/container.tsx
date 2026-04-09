@@ -4,7 +4,6 @@ import { StyledChildrenContainer, StyledContainer, StyledContentWrapper, StyledL
 import { Header, Sidebar } from '@mono/components';
 import { useDispatch, useSelector } from 'react-redux';
 import messages from '../messages';
-import { logout } from '@mono/redux-global/src/actions';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import { routes } from '../myUtils';
 import { push } from 'connected-react-router';

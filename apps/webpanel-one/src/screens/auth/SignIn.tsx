@@ -29,7 +29,8 @@ import { otherColour, primitiveColors } from '@mono/theme';
 import { ChipSize } from '@mono/components/src/customChip/styles';
 // import { login } from '@mono/redux-global/src/actions';
 import { useDispatch } from 'react-redux';
-import { login } from '../../redux/actions';
+import { push } from 'connected-react-router';
+import { routes } from '../../myUtils';
 
 const validators = {
   email: [required(packageMessages?.signIn?.errors?.email?.required), emailValidator],
@@ -55,33 +56,25 @@ function SignInContent({
 
 
 
-  const onSubmit = async (data: any) =>
-    new Promise<any>((resolve, reject) => {
-      reduxDispatch(
-        login(
-          {
-            email: data?.email?.toLowerCase(),
-            password: md5(data?.password),
-          },
-          (value?: any) => resolve(value),
-          (error?: any) => reject(error),
-        ),
-      );
-    }).then((res) => {
-      if (res?.data) {
-        reduxDispatch(
-          // push(routes.twoFactorAuthentication, {
-          //   email: data?.email,
-          //   password: data?.password,
-          //   method: res?.data?.method?.name,
-          //   senderDetail: res?.data?.senderDetail,
-          // }),
-        );
-      }
-    })
-      .catch((error) => {
-        setSubmitError((messages?.login?.form?.errors as any)?.[error?.message] || messages?.general?.generalError);
-      });
+  const onSubmit = async (data: any) => {
+    // Check if email and password are provided
+    if (data?.email && data?.password) {
+      // Comment out login validation - just redirect to dashboard for any valid input
+      // reduxDispatch(
+      //   login(
+      //     {
+      //       email: data?.email?.toLowerCase(),
+      //       password: md5(data?.password),
+      //     },
+      //     (value?: any) => resolve(value),
+      //     (error?: any) => reject(error),
+      //   ),
+      // );
+      reduxDispatch(push(routes.dashboard.root));
+    } else {
+      setSubmitError('Please enter both email and password');
+    }
+  };
 
   return (
     <MainContainer>
