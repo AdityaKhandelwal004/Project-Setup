@@ -35,8 +35,6 @@ const validators = {
 };
 
 function SignInContent({
-  onComplete,
-  onSignUp,
   onForgotPassword,
 }: {
   onComplete: () => void;
@@ -46,7 +44,6 @@ function SignInContent({
   const {
     connectField,
     handleSubmit,
-    formValues,
     submitting,
     submitError,
     setSubmitError,
@@ -64,8 +61,8 @@ function SignInContent({
             email: data?.email?.toLowerCase(),
             password: md5(data?.password),
           },
-          resolve,
-          reject,
+          (value?: any) => resolve(value),
+          (error?: any) => reject(error),
         ),
       );
     }).then((res) => {        
@@ -83,12 +80,6 @@ function SignInContent({
       .catch((error) => {
         setSubmitError((messages?.login?.form?.errors as any)?.[error?.message] || messages?.general?.generalError);
       });
-
-
-
-  const handleSignUpClick = () => {
-    onSignUp();
-  };
 
   return (
     <MainContainer>

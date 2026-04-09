@@ -8,7 +8,6 @@ import { required, emailValidator } from '@mono/utils/src/validators';
 import messages from '../../messages';
 import packageMessages from '@mono/messages';
 
-
 import {
   MainContainer,
   ContentWrapper,
@@ -38,8 +37,6 @@ const validators = {
 };
 
 function SignInContent({
-  onComplete,
-  onSignUp,
   onForgotPassword,
 }: {
   onComplete: () => void;
@@ -49,30 +46,29 @@ function SignInContent({
   const {
     connectField,
     handleSubmit,
-    formValues,
     submitting,
     submitError,
     setSubmitError,
   } = useFormReducer(validators);
 
-    const reduxDispatch = useDispatch() as any;
+  const reduxDispatch = useDispatch() as any;
 
 
 
   const onSubmit = async (data: any) =>
-    new Promise<any>((resolve, reject) => {     
+    new Promise<any>((resolve, reject) => {
       reduxDispatch(
         login(
           {
             email: data?.email?.toLowerCase(),
             password: md5(data?.password),
           },
-          resolve,
-          reject,
+          (value?: any) => resolve(value),
+          (error?: any) => reject(error),
         ),
       );
-    }).then((res) => {        
-        if(res?.data) {
+    }).then((res) => {
+      if (res?.data) {
         reduxDispatch(
           // push(routes.twoFactorAuthentication, {
           //   email: data?.email,
@@ -81,8 +77,8 @@ function SignInContent({
           //   senderDetail: res?.data?.senderDetail,
           // }),
         );
-        } 
-      })
+      }
+    })
       .catch((error) => {
         setSubmitError((messages?.login?.form?.errors as any)?.[error?.message] || messages?.general?.generalError);
       });
@@ -106,12 +102,12 @@ function SignInContent({
               {/* Header */}
               <HeaderContainer>
                 <Chip
-                 bgColor={otherColour.greyChip}
-                 text={messages?.signIn?.chipText}
-                 radius='4px'
-                 textColor={primitiveColors.midNight}
-                 chipSize={ChipSize.Large}
-                
+                  bgColor={otherColour.greyChip}
+                  text={messages?.signIn?.chipText}
+                  radius='4px'
+                  textColor={primitiveColors.midNight}
+                  chipSize={ChipSize.Large}
+
                 />
                 <FormTitle>{messages?.signIn?.heading}</FormTitle>
                 <FormSubtitle>{messages?.signIn?.subHeading}</FormSubtitle>
@@ -120,28 +116,28 @@ function SignInContent({
               {/* Form */}
               <FormWrapper onSubmit={handleSubmit(onSubmit)}>
 
-                    {connectField('email', {
-                      title: messages?.signIn?.email?.label,
-                      placeholder:  messages?.signIn?.email?.placeholder,
-                      useTouchedValidation: false,
-                      inputSize: 'full',
-                      isAuth: true
-                    })(TextInput)}
+                {connectField('email', {
+                  title: messages?.signIn?.email?.label,
+                  placeholder: messages?.signIn?.email?.placeholder,
+                  useTouchedValidation: false,
+                  inputSize: 'full',
+                  isAuth: true
+                })(TextInput)}
 
-                    {connectField('password', {
-                      title: messages?.signIn?.password?.label,
-                      placeholder: messages?.signIn?.password?.placeHolder,
-                      useTouchedValidation: false,
-                      inputSize: 'full',
-                      isAuth: true
-                    })(PasswordInput)}
+                {connectField('password', {
+                  title: messages?.signIn?.password?.label,
+                  placeholder: messages?.signIn?.password?.placeHolder,
+                  useTouchedValidation: false,
+                  inputSize: 'full',
+                  isAuth: true
+                })(PasswordInput)}
 
-                  <ForgotPasswordLink
-                    type="button"
-                    onClick={onForgotPassword}
-                  >
-                    {messages?.signIn?.forgotPassword}
-                  </ForgotPasswordLink>
+                <ForgotPasswordLink
+                  type="button"
+                  onClick={onForgotPassword}
+                >
+                  {messages?.signIn?.forgotPassword}
+                </ForgotPasswordLink>
 
                 {/* Submit Error Display */}
                 {submitError && (
@@ -156,15 +152,15 @@ function SignInContent({
                 )}
 
                 {/* Submit button */}
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                    size="large"
-                    label={messages?.signIn?.heading}
-                    disabled={submitting}
-                  />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                  size="large"
+                  label={messages?.signIn?.heading}
+                  disabled={submitting}
+                />
               </FormWrapper>
             </FormContainer>
           </CenteredContainer>
