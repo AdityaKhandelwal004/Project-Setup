@@ -7,7 +7,6 @@ import { useFormReducer } from '@mono/hooks/src/form';
 import { required, emailValidator } from '@mono/utils/src/validators';
 import messages from '../../messages';
 import packageMessages from '@mono/messages';
-import logo from '../../assets/logo.png';
 
 
 import {
@@ -108,9 +107,6 @@ function SignInContent({
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-             <div className="flex justify-center items-center mb-[25px]">
-              <Logo src={logo} alt="Logo" />
-            </div>
           <CenteredContainer>
             <FormContainer
               as={motion.div}

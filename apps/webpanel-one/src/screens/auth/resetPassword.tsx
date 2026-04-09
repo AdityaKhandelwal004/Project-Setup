@@ -34,7 +34,6 @@ import {
   ErrorText,
   Logo
 } from './styles';
-import logo from '../../assets/logo.png';
 import { useDispatch } from 'react-redux';
 import { apiCall } from '../../redux/actions';
 import { HttpMethods } from '@mono/utils';
@@ -106,9 +105,6 @@ const onSubmit = async (data: any) =>{
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-        <div className="flex justify-center items-center mb-[25px]">
-          <Logo src={logo} alt="Logo" />
-        </div>
           <CenteredContainer>
             <FormContainer
               as={motion.div}

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { colors, fontSize, fontWeight, primitiveColors, spacing } from '@mono/theme';
-import logo from '../../assets/logo.png';
 import profile from '../../assets/profile.png';
 
 const HeaderContainer = styled.div`
@@ -51,10 +50,6 @@ interface HeaderProps {
 export function Header({ userName = "John", userAvatar }: HeaderProps) {
   return (
     <HeaderContainer>
-      <LogoContainer>
-        <LogoImage src={logo} alt="Logo" />
-      </LogoContainer>
-
       <UserContainer>
         <UserGreeting>Hi {userName}</UserGreeting>
         <UserAvatar

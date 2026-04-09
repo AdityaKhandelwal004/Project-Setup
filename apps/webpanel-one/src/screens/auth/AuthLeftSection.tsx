@@ -5,7 +5,6 @@ import { Sparkles, TrendingUp, Target } from 'lucide-react';
 import { brand, primitiveColors } from '@mono/theme/style.palette';
 
 import financialCollaboration from '../../assets/welcome.png';
-import logo from '../../assets/logo.png';
 import { achievementStats, empoweringMessages } from '../../constants/messages';
 import messages from '../../messages';
 
@@ -66,10 +65,6 @@ export const AuthLeftSection: React.FC<AuthLeftSectionProps> = ({
           transition={{ duration: 0.8, delay: 0.2 }}
           className="text-center"
         >
-          <div className="flex justify-center items-center mb-[25px]">
-            <Logo src={logo} alt="Logo" />
-          </div>
-
           <WelcomeTitle
             as={motion.h1}
             initial={{ opacity: 0, y: 20 }}
