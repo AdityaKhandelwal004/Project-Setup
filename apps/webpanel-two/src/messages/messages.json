@@ -1,0 +1,464 @@
+{
+  "en": {
+    "general": {
+      "change": "Change",
+      "update": "Update",
+      "show": "Show",
+      "edit": "Edit",
+      "view": "View",
+      "noData": "No data found",
+      "action": "Action",
+      "showMore": "Show more",
+      "showing": "Rows per page:",
+      "search": "Search...",
+      "reset": "Reset",
+      "add": "Add",
+      "submit": "Submit",
+      "saveChanges": "Save Changes",
+      "cancel": "Cancel",
+      "fieldRequired": "This field is required",
+      "logout":"Logout",
+      "profile": "Profile",
+      "emptyMessage": "No data found",
+      "active": "Active",
+      "inactive": "Inactive",
+      "addNew": "Add new",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "dob": "Date of birth",
+      "password": "Password",
+      "confirmPassword":"Confirm Password",
+      "status": "Status",
+      "delete": "Delete",
+      "create": "Create",
+      "createUserMessage": "User added successfully",
+      "editUserMessage": "User updated successfully",
+      "requiredField": "This field is required",
+      "generalError": "Something went wrong",
+      "deleteSuccess": "Deleted successfully",
+      "generalDeleteText": "Are you sure you want to delete this?",
+      "verified": "2FA action successfully",
+      "deleteError": "Unable to delete",
+      "errors": {
+        "serverError": "Something went wrong! please try again",
+        "invalidPassword": "Please enter a valid password",
+        "emptyValue": "Please enter a value",
+        "invalidEmail": "Hmm, that doesn't look quite right",
+        "invalidABN": "Please enter a valid ABN"
+      }
+    },
+     "login": {
+      "heading": "Login",
+      "subHeading": "Welcome back! Please log in to your account.",
+      "headingText": "Staff Management",
+      "subText": "Effortlessly manage user profiles and permissions <br/> across your platform",
+      "signUpText": "Don’t have an school account?",
+      "signUp": "Sign up",
+      "form": {
+        "email": "Email Address",
+        "password": "Password",
+        "logIn": "Login",
+        "forgotPassword": "Forgot password?",
+        "errors": {
+          "emailRequired": "Please enter an email address",
+          "passwordRequired": "Please enter a password",
+          "invalidDetails": "Your email address or password is invalid",
+          "error.login.invalidCredentials": "Your email address or password is invalid",
+          "error.login.accountBlocked": "Access blocked. Contact admin",
+          "error.login.invalidPortal": "Invalid portal",
+          "error.user.inactiveUser": "School is inactive. Please contact administrator.",
+          "invalidDetail": "Your email address is invalid",
+          "error.forgotPassword.notFound": "Email address not found. Please check and try again.",
+          "error.user.unauthorizedRole": "Access denied: your role isn’t authorized"
+
+        }
+      }
+    },
+    "sidebar": {
+      "menuItems": {
+        "mainMenu": {
+          "heading": "MAIN MENU",
+          "subMenuItems": {
+            "dashboard": "Dashboard"
+          }
+        }
+      },
+      "logout": "Logout"
+    },
+    "header": {
+      "generalInfo": "General information",
+      "welcomeback": "Welcome back!",
+      "wealthJourney": "Your wealth journey continues",
+      "wealthCreated": "Wealth created",
+      "simpleSteps": "Simple steps to success",
+      "userBuilding": "Users building wealth"
+    },
+    "signIn": {
+      "heading": "Sign In",
+      "subHeading": "Guide others on their wealth-building journey",
+      "chipText": "Super Admin",
+      "signing": "Signing you in...",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up now",
+      "forgotPassword": "Forgot password?",
+      "email": {
+        "label": "Email address",
+        "placeholder": "your@email.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeHolder": "Enter your password"
+      },
+      "form": {
+        "email": "Email address",
+        "password": "Password",
+        "logIn": "Login",
+        "forgotPassword": "Forgot password?",
+        "errors": {
+          "emailRequired": "Please enter an email address",
+          "passwordRequired": "Please enter a password",
+          "invalidDetails": "Your email address or password is invalid",
+          "invalidEmail": "Please enter a valid email address"
+        }
+      }
+    },
+    "signUp": {
+      "heading": "Your wealth story starts now!",
+      "subHeading": "Join the financial revolution.",
+      "firstName": {
+        "label": "First name",
+        "placeHolder": "Given name"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeHolder": "Family name"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "Your email address"
+      },
+      "dob": {
+        "label": "Date of birth",
+        "placeHolder": "DD/MM/YYYY"
+      },
+      "createPassword": {
+        "label": "Create password",
+        "placeHolder": "Strong password"
+      },
+      "confirmPassword": {
+        "label": "Confirm password",
+        "placeHolder": "Confirm password"
+      },
+      "signUpButton": "Start building wealth today!",
+      "read": "I have read, understand and agree to Obie's",
+      "termsConditions": " Terms & conditions",
+      "and": "and",
+      "privacyPolicy": " Privacy policy.",
+      "alreadyBuilding": "Already building wealth with us?",
+      "signInHere": "   Sign in here",
+      "form": {
+        "email": "Email address",
+        "password": "Password",
+        "logIn": "Login",
+        "forgotPassword": "Forgot password?",
+        "errors": {
+          "emailRequired": "Please enter an email address",
+          "passwordRequired": "Please enter a password",
+          "invalidDetails": "Your email address or password is invalid",
+          "invalidEmail": "Please enter a valid email address"
+        }
+      }
+    },
+    "forgotPassword": {
+      "resetPassword": " Reset Password",
+      "resetInstruction": " No worries! We'll send you reset instructions.",
+      "sendResetLink": "Send Reset Link",
+      "rememberPassword":" Remember your password?",
+      "goBack":"  Go back to login",
+      "email": {
+        "label": "Email address",
+        "placeholder": "Enter your email address"
+      }
+    },
+    "resetPassword": {
+      "heading": "Set New Password",
+      "resetInstruction": "Almost there! Set your new password below.",
+      "updatepassword": "Update password"
+    },
+    "changePassword": {
+      "currentPassword": "Current Password",
+      "confirmPassword": "Confirm Password",
+      "newPassword": "New Password",
+      "retypePassword": "Retype Password",
+      "validations": {
+        "passwordRequired": "Please enter a password",
+        "confirmPasswordRequired": "Please enter a confirm password",
+        "passwordMismatch": "Password and confirm password does not match"
+      },
+      "success": {
+        "passwordChanged": "Password changed successfully"
+      },
+      "errors": {},
+      "about": {
+        "heading": "General information",
+        "logo": "Company logo",
+        "contactEmail": "Contact email",
+        "status": "Status"
+      }
+    },
+    "maximise": {
+      "super": {
+        "healthCheck": "Super health check",
+        "startHere": "Start here"
+      }
+    },
+    "protect": {
+      "insurance": {
+        "healthCheck": "Super health check",
+        "startHere": "Start here",
+        "insurancePolicies": "No of Insurance Policies",
+        "monthlyPremium": "Monthly Premium",
+        "amountInsured": "Total Amount Insured",
+        "company": "Company",
+        "premium": "Premium",
+        "renewalDate": "Renewal date"
+      },
+      "assetProtection": {
+        "monthlyPremium": "Monthly Premium",
+        "type": "Type",
+        "liability": "Liabilities"
+        
+      },
+        "estatePlanning": {
+        "clickHere": "Click here"    
+      }
+    },
+    "deleteModal": {
+         "error": {
+           "error.deletePartner.unableToDelete": "Unable to delete partner.",
+            "error.deletePartnerCategory.unableToDelete": "Unable to delete partner category."
+         }
+    },
+    "dashboard": {
+      "heading": "Dashboard"
+    },
+    "customer": {
+       "heading": "Customers",
+       "userDetails": "User details",
+       "progress": "Progress",
+       "basicInformation": "Basic information",
+       "firstName":"First name",
+       "lastName":"Last name",
+       "email":"Email",
+       "dateOfBirth": "Date of birth",
+       "registeredOn": "Registered on",
+       "lastUpdated": "Last updated",
+       "payementDetail": "Subscription & payment details",
+       "plan": "Plan",
+       "billingCycle": "Billing cycle",
+       "nextDate": "Next payment date",
+       "extendValidity": "Extend validity",
+       "transactionHistory": "Transaction History",
+       "errors": {
+         "error.checkCustomerExist.notFound": "Customer not found.",
+         "error.updateUserAccount.unableToUpdate": "Unable to update customer account status."
+       }
+    },
+    "profile": {
+       "profilePicture": "Profile picture",
+       "changePhoto": "Change Photo",
+       "updatedSuccessfully": "Profile updated successfully",
+        "multiFactorAuthentication": "Multi Factor Authentication",
+        "basicInformation":"Basic information",
+        "security": "Security",
+       "form": {
+        "firstnameRequired": "First name is required",
+        "lastnameRequired": "Last name is required"
+       },
+        "changePasswordForm": {
+        "heading": "Change Password",
+        "buttonText": "Update",
+        "cancel": "Cancel",
+        "oldPassword": "Old password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
+        "success": "Password changed successfully",
+        "error": "Password could not be changed",
+        "required": {
+          "oldPassword": "Old password is required",
+          "password": "New password is required",
+          "confirmPassword": "Confirm password is required",
+          "passwordNotMatched": "Password not matched"
+        },
+        "serverError": {
+          "error.changePassword.unableToUpdate": "Unable to update password, please try again",
+          "error.changePassword.invalidOldPassword": "Invalid old password",
+          "error.changePassword.passwordsDoNotMatch": "Passwords not matched",
+          "error.changePassword.oldPasswordSameAsNew": "New password must be different from old password"
+         }
+      },
+      "errors": {
+      "error.profile.imageUnableToUpdate": "Unable to update profile image, please try again",
+      "error.upload.invalidFileType": "Invalid file type. Please upload a valid image file.",
+      "error.upload.exceededMaxNumberOfFiles": "You have exceeded the maximum number of files allowed.",
+      "error.upload.exceededMaxNumberOfFilesAllowed": "You have exceeded the maximum number of files allowed.",
+      "error.changePassword.unableToUpdate": "Unable to update password, please try again",
+      "error.changePassword.invalidOldPassword": "Invalid old password",
+      "error.changePassword.passwordsDoNotMatch": "Passwords not matched",
+      "error.changePassword.oldPasswordSameAsNew": "New password must be different from old password",
+      "error.verifyEmailToken.tokenMismatch": "Invalid token. Please try again."
+      },
+        "updateMultiFactorAuthentication": {
+        "heading": "Update/Change Multi Factor Authentication",
+        "enableHeading": "Enable Multi Factor Authentication",
+        "note": "Enter the email address on which you want to receive an OTP (One-Time Password)",
+        "mobileNumber": "Mobile number",
+        "email": "Email",
+        "emailAddress": "Email address"
+      },
+      "updateVerifyCode": {
+        "heading": "Enter Secure Code",
+        "note": "For updating the method you would need to provide secure codes received on both old and new devices.",
+        "deviceNote": "You must have received a 6 digit secure code on your ",
+        "success": "Two FA changed successfully",
+        "mobile": "mobile number ",
+        "email": "email address ",
+        "error": {
+          "serverError": {
+            "error.twoFactorAuthentication.unableToVerify": "Please enter the correct OTP in any of the fields above, as it may be incorrect.",
+            "error.invalidOtp": "Please enter an OTP"
+          }
+        }
+      },
+      "disableMFAForm": {
+        "heading": "Disable 2FA",
+        "note": "Are you sure you want to disable two factor authentication for your account?",
+        "cancel": "Cancel",
+        "disableMFA": "Disable 2FA"
+      },
+      "enableMFAForm": {
+        "heading": "Enable 2FA",
+        "note": "Are you sure you want to enable two factor authentication for your account?",
+        "cancel": "Cancel",
+        "enableMFA": "Enable 2FA"
+      },
+      "verifySecureCode": {
+        "heading": "Enter Secure Code",
+        "note": "Please enter the secure code received on \"email\" for disabling two factor authentication.",
+        "verify": "Verify",
+        "cancel": "Cancel",
+        "success": "Verification successful",
+        "mobile": "mobile number ",
+        "email": "email address "
+      }
+    },
+    "twoFactorAuthentication": {
+      "heading": "Enter Secure Code",
+      "subHeading": "Please enter the secure code received on  \"email\" ",
+      "resendText": "Didn't receive a code?",
+      "resend": "Resend",
+      "sentMessage": "OTP sent",
+      "blankOTPWarning": "incompleteOTP",
+      "recoveryCode": "Enter Recovery code",
+      "recoveryCodeMessage": "Please enter one of the recovery code you received while setting up the two factor authentication.",
+      "recoveryCodeLogin":"Use a Recovery Code",
+      "warningNote":"Your account may be at risk. Enable multi factor authentication (MFA) now for added protection.",
+      "enableMFA": "Enable 2FA",
+      "form": {
+        "submitCta": "Verify",
+        "success": "Link sent successfully. Redirecting to Login page",
+        "logIn": "Go back to login",
+        "validators": {
+          "email": "Email is required",
+          "phone": "Phone number is required"
+        },
+        "errors": {
+          "recoverCode": {
+            "error.verifyToken.invalidToken":"Please enter a valid recovery code",
+            "incompleteOTP":"Please fill in all OTP blocks"
+            },
+          "invalidDetails": "Your email address is invalid",
+          "enterOtp": "Please enter correct OTP.",
+          "error.verifyTwoFaToken.invalidToken": "Please enter a valid OTP",
+          "error.twoFactorAuthentication.unableToVerify": "Please enter a valid OTP",
+          "error.verifyToken.invalidCredentials": "Invalid credentials",
+          "incompleteOTP": "Please fill in all OTP blocks",
+          "error.twoFactorAuthentication.unableToSendOtp": "We were unable to send the OTP. Please try again.",
+          "error.twoFactorAuthentication.alreadyExists": "Two-factor authentication already enabled.",
+          "error.twoFactorAuthentication.unableToUpdate": "Unable to update two-factor authentication.",
+          "error.verifyToken.invalidToken":"Please enter a valid OTP.",
+          "error.verifyToken.token.invalid": "Please enter a valid OTP.",
+          "error.twoFactorAuthentication.unableToUpdateWithSameSenderDetails": "Unable to update, details already exist."
+
+          
+        }
+      }
+    },
+    "learnResouce": {
+      "heading": "Learning resources",
+      "manageMetadata": "Manage Metadata",
+      "types": "Types",
+      "tags": "Tags",
+      "addLearning": "Add learning resource",
+      "editLearning": "Edit learning resource",
+      "image": "Image",
+      "editTpye": "Edit type",
+      "editTag": "Edit tag",
+      "createType": "Create type",
+      "createTag": "Create tag",
+      "typeDeletion": "Type deleted successfully",
+      "typeDeleteText": "Are you sure you want to delete this type?",
+      "tagseDeletion": "Tag deleted successfully",
+      "tagDeleteText": "Are you sure you want to delete this tag?",
+      "editResource": "Edit resource",
+      "resourceDetails": "Resource details",
+      "form": {
+        "nameRequired": "Name is required",
+        "errors": {
+          "error.createLearnResourceType.unableToCreate": "Unable to create learning resource type.",
+          "error.findDuplicateLearnResourceTypeByName.duplicateType": "Type name already exists.",
+          "error.updateLearnResourceType.unableToUpdate": "Unable to update learning resource type.",
+          "error.deleteLearnResourceType.unableToDelete": "Unable to delete learning resource type.",
+          "error.createLearnResourceTag.unableToCreate": "Unable to create learning resource tag.",
+          "error.updateLearnResourceTag.unableToUpdate": "Unable to update learning resource tag.",
+          "error.findLearnResourceTag.notFound": "Resource tag not found.",
+          "error.deleteLearnResourceTag.unableToDelete": "Unable to delete resource tag.",
+          "error.createLearnResource.unableToCreate": "Unable to create resource.",
+          "error.createPartner.unableToCreate": "Unable to create partner.",
+          "error.updateLearnResource.unableToUpdate": "Unable to update resource.",
+          "error.findLearnResource.notFound": "Resource not found.",
+          "error.deleteLearnResource.unableToDelete": "Unable to delete resource.",
+          "error.findDuplicateLearnResourceTagByName.duplicateTag": "Tag name already exists.",
+          "error.findDuplicateLearnResourceByTitle.duplicateLearnResource": "Resource title already exists.",
+          "error.removeLearnResourceThumbnail.unableToRemove": "Unable to remove resource thumbnail."
+        }
+      }
+    },
+    "partners": {
+      "heading": "Partners management",
+      "manageCategory": "Manage Category",
+      "addPartners": "Add partner",
+      "editPartner": "Edit partner",
+      "logo": "Logo",
+      "editCategory": "Edit category",
+      "createCategory": "Create category",
+      "categoryToast": "Category deleted successfully",
+      "form": {
+        "errors": {
+          "error.createPartnerCategory.unableToCreate": "Unable to create partner category.",
+          "error.findDuplicatePartnerCategoryByName.duplicatePartnerCategory": "Partner category already exists.",
+          "error.updatePartnerCategoryById.unableToUpdate": "Unable to update partner category.",
+          "error.deletePartnerCategory.unableToDelete": "Unable to delete partner category.",
+          "error.createPartner.unableToCreate": "Unable to create partner.",
+          "error.findPartnerCategory.notFound": "Partner category not found.",
+          "error.findDuplicatePartnerByName.duplicatePartner": "Partner with these details already exists in the system.",
+          "error.updatePartner.unableToUpdate": "Unable to update partner.",
+          "error.deletePartner.unableToDelete": "Unable to delete partner.",
+          "error.removePartnerThumbnail.unableToRemove": "Unable to remove partner thumbnail.",
+          "error.findPartner.notFound": "Partner not found."
+        }
+      }
+    }
+  }
+}

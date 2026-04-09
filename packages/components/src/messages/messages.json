@@ -1,0 +1,72 @@
+{
+  "en": {
+    "general": {
+      "change": "Change",
+      "update": "Update",
+      "show": "Show",
+      "edit": "Edit",
+      "view": "View",
+      "noData": "No data found",
+      "action": "Action",
+      "showMore": "Show more",
+      "showing": "Rows per page:",
+      "search": "Search...",
+      "reset": "Reset",
+      "add": "Add",
+      "submit": "Submit",
+      "saveChanges": "Save Changes",
+      "noOptionsText":"No Data",
+      "cancel": "Cancel",
+      "save":"Save",
+      "userRoles":{
+        "admin":"Admin"
+      },
+      "errors": {
+        "invalidEmail": "Please enter a valid email address",
+        "serverError": "Something went wrong! please try again"
+      },
+      "error": {
+        "serverError": {
+        
+        }
+      },
+      "headings": {
+        "manageLocations": "Manage locations",
+        "manageUsers": "Manage users",
+        "about": "About"
+      }
+    },  
+    "header": {
+      "generalInfo": "General information",
+      "welcomeBack": "Welcome back",
+      "hideMenu": "Hide menu",
+      "showMenu": "Show menu"
+    },
+    "login": {
+      "heading": "Login",
+      "subHeading": "Please enter the email address & password",
+      "form": {
+        "email": "Email address",
+        "password": "Password",
+        "logIn": "Login",
+        "forgotPassword": "Forgot password?",
+        "errors": {
+          "emailRequired": "Please enter an email address",
+          "passwordRequired": "Please enter a password",
+          "invalidDetails": "Your email address or password is invalid"
+        }
+      }
+    },  
+    "about": {
+      "heading": "General information",
+      "logo": "Company logo",
+      "contactEmail": "Contact email",
+      "status": "Status",
+      "address": "Address",
+      "success": {
+        "deleted": "Company deleted successfully"
+      }
+    }
+
+  }
+}

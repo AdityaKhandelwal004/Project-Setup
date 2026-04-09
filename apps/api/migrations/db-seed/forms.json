@@ -1,0 +1,496 @@
+[
+  {
+    "name": "User Onboarding Form",
+    "code": "ONBOARDING_FORM",
+    "status": "ACTIVE",
+    "metadata": {
+      "version": "1.0"
+    },
+    "steps": [
+      {
+        "name": "Financial Motivation",
+        "code": "STEP_MOTIVATION",
+        "stepSequenceNumber": 1,
+        "presentationMetaData": {
+          "title": "Let's personalize your wealth journey!",
+          "stepSubTextLeft": "Your financial why",
+          "stepSubTextRight": "Ready to build wealth!",
+          "bg_image_url": "https://cdn.obiemoney.com/user-app-icons/oboarding/step1-your-financial-why.png"
+        },
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_FINANCIAL_MOTIVATION",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "What brings you to your financial future?",
+              "subtitle": "Let's understand what sparked this amazing decision!"
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "I want to get more from my money",
+                  "info": "Turn every dollar into multiple dollars",
+                  "value": "MORE_FROM_MONEY"
+                },
+                {
+                  "label": "I want to build my financial security",
+                  "info": "Sleep better knowing you're covered",
+                  "value": "FINANCIAL_SECURITY"
+                },
+                {
+                  "label": "I want to improve my financial knowledge and confidence",
+                  "info": "Become the financial guru you've always wanted to be",
+                  "value": "FINANCIAL_KNOWLEDGE"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select what motivates you financially."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Financial Experience Level",
+        "code": "STEP_EXPERIENCE",
+        "stepSequenceNumber": 2,
+        "presentationMetaData": {
+          "title": "Let's personalize your wealth journey!",
+          "stepSubTextLeft": "Where you are now",
+          "stepSubTextRight": "Ready to build wealth!",
+          "bg_image_url": "https://cdn.obiemoney.com/user-app-icons/oboarding/step-2-where-you-are-now.png"
+        },
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_FINANCIAL_EXPERIENCE",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "Where are you on your money journey?",
+              "subtitle": "No judgment here - we're all learning! Every expert was once a beginner"
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "I'm already managing well, let's optimize!",
+                  "info": "Ready to level up from good to great",
+                  "value": "MANAGING_WELL"
+                },
+                {
+                  "label": "I'm just starting and could use guidance",
+                  "info": "The best time to start is today. Perfect!",
+                  "value": "JUST_STARTING"
+                },
+                {
+                  "label": "I don't know where to start!",
+                  "info": "That's exactly why we're here - let's turn confusion into clarity",
+                  "value": "NEED_DIRECTION"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select your current financial experience level."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Household Type",
+        "code": "STEP_HOUSEHOLD",
+        "stepSequenceNumber": 3,
+        "presentationMetaData": {
+          "title": "Let's personalize your wealth journey!",
+          "stepSubTextLeft": "Your financial household",
+          "stepSubTextRight": "Ready to build wealth!",
+          "bg_image_url": "https://cdn.obiemoney.com/user-app-icons/oboarding/step-3-your-financial-household.png"
+        },
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_HOUSEHOLD_TYPE",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "What type of financial household are you?",
+              "subtitle": "Money feels different depending on who's in your world. Tell us a little about you and your household so we can tailor Obie to fit."
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "Flying solo",
+                  "info": "Independent and focused on your own financial goals",
+                  "value": "SINGLE_INDIVIDUAL"
+                },
+                {
+                  "label": "Building together",
+                  "info": "Sharing dreams and responsibilities as a couple",
+                  "value": "COUPLE_NO_KIDS"
+                },
+                {
+                  "label": "Young family crew",
+                  "info": "Little ones, big goals — setting up strong foundations",
+                  "value": "YOUNG_FAMILY"
+                },
+                {
+                  "label": "Growing family team",
+                  "info": "Navigating finances with teens and bigger plans ahead",
+                  "value": "GROWING_FAMILY"
+                },
+                {
+                  "label": "Single parent hero",
+                  "info": "Balancing it all with strength and focus",
+                  "value": "SINGLE_PARENT"
+                },
+                {
+                  "label": "Shared household",
+                  "info": "Pooling resources and living life together under one roof",
+                  "value": "SHARED_HOUSEHOLD"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select your household type."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Financial Goals",
+        "code": "STEP_GOALS",
+        "stepSequenceNumber": 4,
+        "presentationMetaData": {
+          "title": "Let's personalize your wealth journey!",
+          "stepSubTextLeft": "Your dreams & goals",
+          "stepSubTextRight": "Ready to build wealth!",
+          "bg_image_url": "https://cdn.obiemoney.com/user-app-icons/oboarding/step-4-your-dreams-&-goals.png"
+        },
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_PRIMARY_FINANCIAL_GOAL",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "What's your 'why'? What drives you financially?",
+              "subtitle": "Dream big! Whether it's a family, a Ferrari, or both - we're here for it"
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "Feeling financially secure",
+                  "info": "That peaceful sleep knowing you're covered",
+                  "value": "FINANCIAL_SECURITY"
+                },
+                {
+                  "label": "A dream lifestyle",
+                  "info": "Living life on your own terms",
+                  "value": "DREAM_LIFESTYLE"
+                },
+                {
+                  "label": "Work-life balance",
+                  "info": "Work to live, not live to work",
+                  "value": "WORK_LIFE_BALANCE"
+                },
+                {
+                  "label": "Buying a dream home",
+                  "info": "Your castle awaits",
+                  "value": "HOME_PURCHASE"
+                },
+                {
+                  "label": "Paying down debt",
+                  "info": "Freedom from financial stress",
+                  "value": "DEBT_PAYOFF"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select your primary financial goal."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Current Challenges",
+        "code": "STEP_CHALLENGES",
+        "stepSequenceNumber": 5,
+        "presentationMetaData": {
+          "title": "Let's personalize your wealth journey!",
+          "stepSubTextLeft": "Current challenges",
+          "stepSubTextRight": "Ready to build wealth!",
+          "bg_image_url": "https://cdn.obiemoney.com/user-app-icons/oboarding/step-5-current-challenges.png"
+        },
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_MONEY_CHALLENGES",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "What's your biggest money challenge right now?",
+              "subtitle": "Let's tackle this together - every challenge is just a solution waiting to happen!",
+              "motivationMessages": {
+                "type": "SELECTION_BASED",
+                "rules": [
+                  {
+                    "text": "Perfect choice!",
+                    "subtext": "The more we know, the better we can help you succeed!",
+                    "selectionCount": 1
+                  },
+                  {
+                    "text": "Great combination!",
+                    "subtext": "Feel free to add more or move to the next step",
+                    "selectionCount": 2
+                  },
+                  {
+                    "text": "You're really thinking this through!",
+                    "subtext": "We'll help you tackle these one by one, starting with the most impactful",
+                    "selectionCount": 3
+                  },
+                  {
+                    "text": "You're really thinking this through!",
+                    "subtext": "We'll help you tackle these one by one, starting with the most impactful",
+                    "selectionCount": 4
+                  },
+                  {
+                    "text": "You're really thinking this through!",
+                    "subtext": "We'll help you tackle these one by one, starting with the most impactful",
+                    "selectionCount": 5
+                  },
+                  {
+                    "text": "You're really thinking this through!",
+                    "subtext": "We'll help you tackle these one by one, starting with the most impactful",
+                    "selectionCount": 6
+                  }
+                ]
+              }
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "Spending more than I earn",
+                  "info": "Let's get that balance back on track",
+                  "value": "OVERSPENDING"
+                },
+                {
+                  "label": "Unexpected costs",
+                  "info": "Build that safety net",
+                  "value": "UNEXPECTED_EXPENSES"
+                },
+                {
+                  "label": "Getting out of debt",
+                  "info": "Your path to freedom starts here",
+                  "value": "DEBT_MANAGEMENT"
+                },
+                {
+                  "label": "Dipping into savings",
+                  "info": "Let's protect that nest egg",
+                  "value": "SAVINGS_DEPLETION"
+                },
+                {
+                  "label": "Not investing",
+                  "info": "Time to make your money work for you",
+                  "value": "NO_INVESTMENTS"
+                },
+                {
+                  "label": "Something else",
+                  "info": "We'll figure it out together",
+                  "value": "OTHER_CHALLENGE"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select at least one challenge."
+              },
+              "isMultipleAllowed": true,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Financial Skills",
+        "code": "STEP_SKILLS",
+        "stepSequenceNumber": 6,
+        "presentationMetaData": {
+          "title": "Let's personalize your wealth journey!",
+          "stepSubTextLeft": "Skills to master",
+          "stepSubTextRight": "Ready to build wealth!",
+          "bg_image_url": "https://cdn.obiemoney.com/user-app-icons/oboarding/step-6-skills-to-master.png"
+        },
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_FINANCIAL_SKILLS_INTEREST",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "What financial superpowers do you want to master?",
+              "subtitle": "Choose your adventure! We'll create your personalized roadmap to success",
+              "motivationMessages": {
+                "type": "SELECTION_BASED",
+                "rules": [
+                  {
+                    "text": "Perfect choice!",
+                    "subtext": "The more we know, the better we can help you succeed!",
+                    "selectionCount": 1
+                  },
+                  {
+                    "text": "Great combination!",
+                    "subtext": "Feel free to add more or move to the next step",
+                    "selectionCount": 2
+                  },
+                  {
+                    "text": "You're really thinking this through!",
+                    "subtext": "We'll help you tackle these one by one, starting with the most impactful",
+                    "selectionCount": 3
+                  },
+                  {
+                    "text": "You're really thinking this through!",
+                    "subtext": "We'll help you tackle these one by one, starting with the most impactful",
+                    "selectionCount": 4
+                  },
+                  {
+                    "text": "You're really thinking this through!",
+                    "subtext": "We'll help you tackle these one by one, starting with the most impactful",
+                    "selectionCount": 5
+                  },
+                  {
+                    "text": "You're really thinking this through!",
+                    "subtext": "We'll help you tackle these one by one, starting with the most impactful",
+                    "selectionCount": 6
+                  }
+                ]
+              }
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "Managing my pay to spend less",
+                  "info": "Master the art of conscious spending",
+                  "value": "SPENDING_MANAGEMENT"
+                },
+                {
+                  "label": "Building an emergency fund",
+                  "info": "Your financial safety net",
+                  "value": "EMERGENCY_FUND"
+                },
+                {
+                  "label": "Getting out of debt fast",
+                  "info": "Accelerate your path to freedom",
+                  "value": "DEBT_ACCELERATION"
+                },
+                {
+                  "label": "Saving more each pay",
+                  "info": "Watch your money grow automatically",
+                  "value": "AUTOMATED_SAVINGS"
+                },
+                {
+                  "label": "Starting or improving investments",
+                  "info": "Make your money work for you",
+                  "value": "INVESTMENT_SKILLS"
+                },
+                {
+                  "label": "Something specific to me",
+                  "info": "We'll create a custom plan just for you",
+                  "value": "CUSTOM_SKILL"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select at least one skill you'd like to develop."
+              },
+              "isMultipleAllowed": true,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Money Allocation",
+        "code": "STEP_MONEY_SPLIT",
+        "stepSequenceNumber": 7,
+        "presentationMetaData": {
+          "title": "Let's personalize your wealth journey!",
+          "stepSubTextLeft": "Your money mix",
+          "stepSubTextRight": "Ready to build wealth!",
+          "bg_image_url": "https://cdn.obiemoney.com/user-app-icons/oboarding/step-7-your-money-mix.png"
+        },
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_MONEY_ALLOCATION_PREFERENCE",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "Which money split feels most realistic for you right now?",
+              "subtitle": "Everyone's money mix looks different. To Save and Invest more, the goal is to split the money you earn, before you spend it, not afterwards. If you had to pick..."
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "info": "I can see myself spending around 70% and putting 30% toward saving & investing.",
+                  "label": "70 / 30",
+                  "value": "SPLIT_70_30",
+                  "icon": "MONEY_WINGS"
+                },
+                {
+                  "info": "More comfortable keeping it at 80% for living, 20% for growing.",
+                  "label": "80 / 20",
+                  "value": "SPLIT_80_20",
+                  "icon": "SHOPPING_CART"
+                },
+                {
+                  "info": "I need most of my income for living, but I can stretch to 10% for saving & investing.",
+                  "label": "90 / 10",
+                  "value": "SPLIT_90_10",
+                  "icon": "HOT_BEVERAGE"
+                },
+                {
+                  "info": "Right now it all goes to living costs — saving feels out of reach.",
+                  "label": "Just breaking even",
+                  "value": "SPLIT_50_50",
+                  "icon": "MAN_SHRUGGING"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select your preferred money allocation."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

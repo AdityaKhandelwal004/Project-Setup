@@ -1,0 +1,355 @@
+{
+  "en": {
+    "general": {
+      "change": "Change",
+      "update": "Update",
+      "show": "Show",
+      "edit": "Edit",
+      "view": "View",
+      "noData": "No data found",
+      "action": "Action",
+      "showMore": "Show more",
+      "showing": "Rows per page:",
+      "search": "Search...",
+      "reset": "Reset",
+      "add": "Add",
+      "submit": "Submit",
+      "saveChanges": "Save Changes",
+      "cancel": "Cancel",
+      "fieldRequired": "This field is required",
+      "fundsValidationError": "Fund name is required",
+      "currentBalanceValidationError": "Current balance is required",
+      "extraContributionValidationError": "Extra contribution is required",
+      "contributionFrequencyValidationError": "Contribution frequency is required",
+      "contributionTypeValidationError": "Contribution type is required",
+      "emptyMessage": "No data found",
+      "generalError": "Something went wrong",
+      "verified": "2FA action successfully",
+      "requiredField": "This field is required",
+      "logout": "Logout",
+      "errors": {
+        "serverError": "Something went wrong! please try again",
+        "invalidPassword": "Please enter a valid password",
+        "emptyValue": "Please enter a value",
+        "invalidEmail": "Hmm, that doesn't look quite right",
+        "invalidABN": "Please enter a valid ABN"
+      }
+    },
+    "apiErrors" : {
+      "error.debt.installmentAmountTooLow" : "Your monthly payment isn’t enough to cover this debt. Please increase the amount.",
+      "error.addDebt.remainingAmount.required" : "Insufficient Balance"
+    },
+    "sidebar": {
+      "menuItems": {
+        "mainMenu": {
+          "heading": "MAIN MENU",
+          "subMenuItems": {
+            "dashboard": "Dashboard"
+          }
+        }
+      },
+      "logout": "Logout"
+    },
+    "header": {
+      "generalInfo": "General information",
+      "welcomeback": "Welcome back!",
+      "wealthJourney": "Master Your Money With 9 Simple Steps",
+      "wealthCreated": "Wealth created",
+      "simpleSteps": "Simple steps to success",
+      "userBuilding": "Users building wealth"
+    },
+    "signIn": {
+      "heading": "Sign in",
+      "subHeading": "Continue your wealth-building journey",
+      "signing": "Signing you in...",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up now",
+      "forgotPassword": "Forgot password?",
+      "email": {
+        "label": "Email address",
+        "placeholder": "your@email.com"
+      },
+      "password": {
+        "label": "Password",
+        "placeHolder": "Enter your password"
+      },
+      "form": {
+        "email": "Email address",
+        "password": "Password",
+        "logIn": "Login",
+        "forgotPassword": "Forgot password?",
+        "errors": {
+          "emailRequired": "Please enter an email address",
+          "passwordRequired": "Please enter a password",
+          "invalidDetails": "Your email address or password is invalid",
+          "error.login.invalidCredentials": "Your email address or password is invalid",
+          "invalidEmail": "Please enter a valid email address"
+        }
+      }
+    },
+    "signUp": {
+      "heading": "Your wealth story starts now!",
+      "subHeading": "Join the financial revolution.",
+      "firstName": {
+        "label": "First name",
+        "placeHolder": "Given name"
+      },
+      "lastName": {
+        "label": "Last name",
+        "placeHolder": "Family name"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "Your email address"
+      },
+      "dob": {
+        "label": "Date of birth",
+        "placeHolder": "DD/MM/YYYY"
+      },
+      "createPassword": {
+        "label": "Create password",
+        "placeHolder": "Strong password"
+      },
+      "confirmPassword": {
+        "label": "Confirm password",
+        "placeHolder": "Confirm password"
+      },
+      "signUpButton": "Start building wealth today!",
+      "read": "By clicking Start building wealth today!, you agree to Obie's",
+      "termsConditions": "Terms & conditions",
+      "and": "and",
+      "privacyPolicy": " Privacy policy.",
+      "alreadyBuilding": "Already building wealth with us?",
+      "signInHere": "   Sign in here",
+      "form": {
+        "email": "Email address",
+        "password": "Password",
+        "logIn": "Login",
+        "forgotPassword": "Forgot password?",
+        "errors": {
+          "emailRequired": "Please enter an email address",
+          "passwordRequired": "Please enter a password",
+          "error.createUser.duplicateUser": "A user with this email already exists.",
+          "invalidDetails": "Your email address or password is invalid",
+          "invalidEmail": "Please enter a valid email address"
+        }
+      }
+    },
+    "forgotPassword": {
+      "resetPassword": " Reset Password",
+      "resetInstruction": " No worries! We'll send you reset instructions.",
+      "sendResetLink": "Send reset link",
+      "rememberPassword":" Remember your password?",
+      "goBack":"  Go back to login",
+      "email": {
+        "label": "Email address",
+        "placeholder": "Enter your email address"
+      }
+    },
+    "verifyEmail": {
+      "verifying": "Verifying Your Email...",
+      "verifyingSubtitle": "Please wait while we verify your email address.",
+      "successTitle": "Email Verified!",
+      "successSubtitle": "Your email has been successfully verified. Redirecting to dashboard...",
+      "success": "Your email is verified! You're all set to continue.",
+      "errorTitle": "Verification Failed",
+      "errorSubtitle": "We could not verify your email. Redirecting to login...",
+      "error": "We couldn’t verify your email. Please check the link and try again.",
+      "invalidToken": "Invalid verification token",
+      "errors": {
+        "error.verifyEmailToken.tokenMismatch": "Invalid or expired verification token. Please request a new verification email.",
+        "error.verifyEmailToken.alreadyVerified": "This email has already been verified.",
+        "error.verifyEmailToken.notFound": "Verification token not found. Please request a new verification email."
+      }
+    },
+    "changePassword": {
+      "currentPassword": "Password",
+      "confirmPassword": "Confirm Password",
+      "newPassword": "New Password",
+      "title": "Set New Password",
+      "subTitle": "Almost there! Set your new password below.",
+      "retypePassword": "Retype Password",
+      "validations": {
+        "passwordRequired": "Please enter a password",
+        "confirmPasswordRequired": "Please enter a confirm password",
+        "passwordMismatch": "Password and confirm password does not match"
+      },
+      "success": {
+        "passwordChanged": "Password changed successfully"
+      },
+      "errors": {},
+      "about": {
+        "heading": "General information",
+        "logo": "Company logo",
+        "contactEmail": "Contact email",
+        "status": "Status"
+      }
+    },
+     "profile": {
+       "subscriptionHeading": "Take it to next level with our plans!",
+       "subscriptionSubHeading": "You will get all premium features, including unlimited updates, future releases, and priority support.",
+       "subscription": "Subscription",
+       "profilePicture": "Profile picture",
+       "changePhoto": "Change Photo",
+       "updatedSuccessfully": "Profile updated successfully",
+        "multiFactorAuthentication": "Multi Factor Authentication",
+        "basicInformation":"Basic information",
+        "security": "Security",
+        "emailVerification": {
+          "heading": "Email Verification",
+          "title": "Verify Your Email",
+          "info": "We will send a verification link to your email address. Please check your email and click the link to verify your email.",
+          "sendLink": "Send Verification Link",
+          "success": "Verification link sent successfully! Please check your email.",
+          "error": "Failed to send verification link. Please try again."
+        },
+       "form": {
+        "firstnameRequired": "First name is required",
+        "lastnameRequired": "La8st name is required"
+       },
+        "changePasswordForm": {
+        "heading": "Change Password",
+        "buttonText": "Update",
+        "cancel": "Cancel",
+        "oldPassword": "Old password",
+        "newPassword": "New password",
+        "confirmNewPassword": "Confirm new password",
+        "success": "Password changed successfully",
+        "error": "Password could not be changed",
+        "required": {
+          "oldPassword": "Old password is required",
+          "password": "New password is required",
+          "confirmPassword": "Confirm password is required",
+          "passwordNotMatched": "Password not matched"
+        },
+        "serverError": {
+          "error.changePassword.unableToUpdate": "Unable to update password, please try again",
+          "error.changePassword.invalidOldPassword": "Invalid old password",
+          "error.changePassword.passwordsDoNotMatch": "Passwords not matched",
+          "error.changePassword.oldPasswordSameAsNew": "New password must be different from old password"
+         }
+      },
+      "errors": {
+      "error.profile.imageUnableToUpdate": "Unable to update profile image, please try again",
+      "error.upload.invalidFileType": "Invalid file type. Please upload a valid image file.",
+      "error.upload.exceededMaxNumberOfFiles": "You have exceeded the maximum number of files allowed.",
+      "error.upload.exceededMaxNumberOfFilesAllowed": "You have exceeded the maximum number of files allowed.",
+      "error.changePassword.unableToUpdate": "Unable to update password, please try again",
+      "error.changePassword.invalidOldPassword": "Invalid old password",
+      "error.changePassword.passwordsDoNotMatch": "Passwords not matched",
+      "error.changePassword.oldPasswordSameAsNew": "New password must be different from old password",
+      "error.verifyEmailToken.tokenMismatch": "Invalid token. Please try again.",
+      "error.updateUser.unableToUpdate": "A user with this email already exists",
+      "error.updateUser.duplicateUser": "A user with this email already exists."
+      },
+        "updateMultiFactorAuthentication": {
+        "heading": "Update/Change Multi Factor Authentication",
+        "enableHeading": "Enable Multi Factor Authentication",
+        "note": "Enter the email address on which you want to receive an OTP (One-Time Password)",
+        "mobileNumber": "Mobile number",
+        "email": "Email",
+        "emailAddress": "Email address"
+      },
+      "updateVerifyCode": {
+        "heading": "Enter Secure Code",
+        "note": "For updating the method you would need to provide secure codes received on both old and new devices.",
+        "deviceNote": "You must have received a 6 digit secure code on your ",
+        "success": "Two FA changed successfully",
+        "mobile": "mobile number ",
+        "email": "email address ",
+        "error": {
+          "serverError": {
+            "error.twoFactorAuthentication.unableToVerify": "Please enter the correct OTP in any of the fields above, as it may be incorrect.",
+            "error.invalidOtp": "Please enter an OTP"
+          }
+        }
+      },
+      "disableMFAForm": {
+        "heading": "Disable 2FA",
+        "note": "Are you sure you want to disable two factor authentication for your account?",
+        "cancel": "Cancel",
+        "disableMFA": "Disable 2FA"
+      },
+      "enableMFAForm": {
+        "heading": "Enable 2FA",
+        "note": "Are you sure you want to enable two factor authentication for your account?",
+        "cancel": "Cancel",
+        "enableMFA": "Enable 2FA"
+      },
+      "verifySecureCode": {
+        "heading": "Enter Secure Code",
+        "note": "Please enter the secure code received on \"email\" for disabling two factor authentication.",
+        "verify": "Verify",
+        "cancel": "Cancel",
+        "success": "Verification successful",
+        "mobile": "mobile number ",
+        "email": "email address "
+      }
+    },
+    "twoFactorAuthentication": {
+      "heading": "Enter Secure Code",
+      "subHeading": "Please enter the secure code received on  \"email\" ",
+      "resendText": "Didn't receive a code?",
+      "resend": "Resend",
+      "sentMessage": "OTP sent",
+      "blankOTPWarning": "incompleteOTP",
+      "recoveryCode": "Enter Recovery code",
+      "recoveryCodeMessage": "Please enter one of the recovery code you received while setting up the two factor authentication.",
+      "recoveryCodeLogin":"Use a Recovery Code",
+      "warningNote":"Your account may be at risk. Enable multi factor authentication (MFA) now for added protection.",
+      "enableMFA": "Enable 2FA",
+      "form": {
+        "submitCta": "Verify",
+        "success": "Link sent successfully. Redirecting to Login page",
+        "logIn": "Go back to login",
+        "validators": {
+          "email": "Email is required",
+          "phone": "Phone number is required"
+        },
+        "errors": {
+          "recoverCode": {
+            "error.verifyToken.invalidToken":"Please enter a valid recovery code",
+            "incompleteOTP":"Please a valid recovery code"
+            },
+          "invalidDetails": "Your email address is invalid",
+          "enterOtp": "Please enter correct OTP.",
+          "error.verifyTwoFaToken.invalidToken": "Please enter a valid OTP",
+          "error.twoFactorAuthentication.unableToVerify": "Please enter a valid OTP",
+          "error.verifyToken.invalidCredentials": "Invalid credentials",
+          "incompleteOTP": "Please a valid code",
+          "error.twoFactorAuthentication.unableToSendOtp": "We were unable to send the OTP. Please try again.",
+          "error.twoFactorAuthentication.alreadyExists": "Two-factor authentication already enabled.",
+          "error.twoFactorAuthentication.unableToUpdate": "Unable to update two-factor authentication.",
+          "error.verifyToken.invalidToken":"Please enter a valid OTP.",
+          "error.verifyToken.token.invalid": "Please enter a valid OTP.",
+          "error.twoFactorAuthentication.unableToUpdateWithSameSenderDetails": "Unable to update, details already exist.",
+          "error.verifyToken.actionType.required": "Action type is required",
+          "error.verifyToken.token.required": "Token is required",
+          "error.verifyToken.senderDetail.required": "Sender detail is required",
+          "error.verifyToken.email.required": "Email is required",
+          "error.verifyToken.password.required": "Password is required",
+          "error.login.invalidCredentials": "Invalid credentials",
+          "error.twoFa.methodId.invalid": "Invalid method type",
+          "error.verifyTwoFa.inValidToken": "Please enter a valid OTP"
+
+          
+        }
+      }
+    },
+   
+    "dashboard": {
+      "dashboard": "Dashboard",
+      "learn": "Learn",
+      "partners": "Partners",
+      "reward": "Rewards & Badges",
+      "digitalVault": "Digital Vault",
+      "headerText": "Ask Obie Assistant",
+      "insurance": "Insurance renewal due in 15 days",
+      "coverage": "Check coverage",
+      "challenge": "Today's Challenge",
+      "coffee": "Skip Coffee",
+      "netWorth": "Total Net Worth"
+
+    }
+  }
+}

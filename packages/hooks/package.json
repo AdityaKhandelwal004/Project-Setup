@@ -1,0 +1,25 @@
+{
+  "name": "@mono/hooks",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "^7.27.6",
+    "@mono/messages": "workspace:*",
+    "@mono/models": "workspace:*",
+    "@mono/redux-global": "workspace:*",
+    "@mono/utils": "workspace:*",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.47",
+    "react": "^19.1.0",
+    "react-redux": "^9.2.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.20",
+    "@types/react": "^19.1.8",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/styled-components": "^5.1.34",
+    "lodash": "^4.17.21"
+  }
+}

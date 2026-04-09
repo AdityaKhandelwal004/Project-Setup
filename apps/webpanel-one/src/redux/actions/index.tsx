@@ -1,0 +1,254 @@
+import type { MetaData, LoaderState } from "@mono/models";
+import { HttpMethods } from "@mono/utils";
+
+export const APICALL = "APICALL";
+export const PAGINATED_APICALL = "PAGINATED_APICALL";
+export const PING = "PING";
+
+export const TOKEN_UPDATE = "TOKEN_UPDATE";
+export const TOKEN_REMOVE = "TOKEN_REMOVE";
+
+export const LOGIN = "LOGIN";
+export const SIGNUP = "SIGNUP";
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const LOGOUT = "LOGOUT";
+export const POST_LOGIN = "POST_LOGIN";
+
+export const FETCH_BASE_DATA = "FETCH_BASE_DATA";
+
+export const USER_PROFILE = "USER_PROFILE";
+export const SYSTEM_LOADER = "SYSTEM_LOADER";
+
+import type { Action as AnyAction, UnknownAction } from "redux";
+
+// export interface AnyAction {
+//   type: string;
+//   [key: string]: unknown;
+// }
+
+export type EmptyAction = AnyAction;
+
+export const emptyAction = (type: string): EmptyAction => ({ type });
+
+export interface RequestOptions {
+  isFormData?: boolean;
+  ignoreStatus?: boolean;
+}
+
+export interface RequestProps<R> {
+  endpoint: string;
+  method: HttpMethods;
+  payload?: R;
+  options?: RequestOptions;
+}
+
+// Add Actions Here
+export const fetchUserProfile = (): EmptyAction => emptyAction(USER_PROFILE);
+/** @Note Action types for pages entities */
+
+export interface Action<T extends string, P> extends UnknownAction {
+  type: T;
+  payload: P;
+}
+
+type PromiseActions = Action<string, any> | Action<string, any>[] | void;
+
+export interface ApiCall<R = void, T = void, V = void> {
+  request: { key: string; requestProps: RequestProps<R> };
+  success: { resolve?(payload: T): PromiseActions };
+  failure: { reject?(payload: V): PromiseActions };
+}
+
+export interface PagedApiCall<T> {
+  request: {
+    key: string;
+    endpoint: string;
+    filter: MetaData<T>;
+    loadMore: boolean;
+  };
+  update: { action: string };
+  loadMore: { action: string };
+  reset: { action: string };
+}
+export interface DefaultErrorType {
+  message: string;
+}
+export interface PaginatedCRUDApi<R, P> {
+  create: ApiCall<R, P>;
+  read: ApiCall<any, any, R[]>;
+  update: ApiCall<Partial<R>, P>;
+  remove: ApiCall<R, void, DefaultErrorType>;
+}
+
+export const action = <T extends string, P>(
+  type: T,
+  payload: P,
+): { type: T; payload: P } => ({
+  type,
+  payload,
+});
+
+export const makeApiRequestObject = <T, P>(
+  endpoint: string,
+  method = HttpMethods.GET,
+  payload?: T,
+  options?: RequestOptions,
+): RequestProps<T> => ({
+  endpoint,
+  method,
+  payload,
+  options,
+});
+
+export const setResolveFunction = <R, P, S, F>(
+  api: ApiCall<R, S, F>,
+  resolve: (param: S) => PromiseActions,
+): ApiCall<R, S, F> => ({
+  ...api,
+  success: {
+    ...api.success,
+    resolve,
+  },
+});
+
+export const setRejectFunction = <R, S, F>(
+  api: ApiCall<R, S, F>,
+  reject: (error: F) => PromiseActions,
+): ApiCall<R, S, F> => ({
+  ...api,
+  failure: {
+    ...api.failure,
+    reject,
+  },
+});
+
+export function apiRequest<R, T, V>(
+  api: ApiCall<R, T, V>,
+  payload?: R,
+  options?: RequestOptions,
+): Action<typeof APICALL, ApiCall<R, T, V>> {
+  const upadtedApi: ApiCall<R, T, V> = {
+    ...api,
+    request: {
+      ...api.request,
+      requestProps: {
+        ...api.request.requestProps,
+        payload: payload ?? api.request.requestProps.payload,
+        options: options ?? api.request.requestProps.options,
+      },
+    },
+  };
+  return action(APICALL, upadtedApi);
+}
+
+export const makeApiCall = <R, T, V>(
+  name: string,
+  requestProps: RequestProps<R>,
+  resolve?: (payload: T) => PromiseActions,
+  reject?: (payload: V) => PromiseActions,
+): ApiCall<R, T, V> => ({
+  request: {
+    key: `${name}_REQUEST`,
+    requestProps,
+  },
+  success: { resolve },
+  failure: { reject },
+});
+
+export const apiCall = (
+  endPoint: string,
+  resolve: (param: any) => PromiseActions,
+  reject: (param: any) => PromiseActions,
+  method = HttpMethods.GET,
+  data?: any,
+  options?: RequestOptions,
+) => {
+  const api = makeApiCall<any, any, any>(
+    `APICALL_${endPoint}`,
+    makeApiRequestObject<any, any>(endPoint, method),
+  );
+
+  return apiRequest(
+    setRejectFunction(setResolveFunction(api, resolve), reject),
+    data,
+    options,
+  );
+};
+
+export function paginatedApiRequest<T>(
+  paginatedApi: PagedApiCall<T>,
+): Action<typeof PAGINATED_APICALL, PagedApiCall<T>> {
+  return action(PAGINATED_APICALL, { ...paginatedApi });
+}
+
+export const makePaginatedApiCall = <T,>(
+  name: string,
+  endpoint: string,
+  filter: MetaData<T>,
+  loadMore?: boolean,
+): PagedApiCall<T> => ({
+  request: {
+    key: `${name}_PAGINATED_REQUEST`,
+    endpoint,
+    filter,
+    loadMore: loadMore ?? false,
+  },
+  update: { action: `${name}_PAGINATION_UPDATE` },
+  loadMore: { action: `${name}_PAGINATION_LOAD_MORE` },
+  reset: { action: `${name}_PAGINATION_RESET` },
+});
+
+export const paginatedApiCall = <T,>(
+  name: string,
+  endPoint: string,
+  filter: MetaData<T>,
+  loadMore?: boolean,
+) => {
+  const paginatedApi = makePaginatedApiCall<T>(
+    name,
+    endPoint,
+    filter,
+    loadMore,
+  );
+  return paginatedApiRequest(paginatedApi);
+};
+
+export const createBasicActions = <T,>(key: string) => ({
+  update: (payload: T) => action(`${key}_UPDATE`, payload),
+  reset: () => emptyAction(`${key}_RESET`),
+});
+
+export const profileModuleActions = createBasicActions<any>(USER_PROFILE);
+export const updateToken = (token: string) => action(TOKEN_UPDATE, token);
+export const removeToken = (): EmptyAction => emptyAction(TOKEN_REMOVE);
+
+export const login = (
+  formData: { email: string; password: string },
+  resolve: () => void,
+  reject: (error: any) => void,
+) => action(LOGIN, { formData, resolve, reject });
+
+export const signup = (
+  formData: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+  },
+  resolve: (data: any) => void,
+  reject: (error: any) => void,
+) => action(SIGNUP, { formData, resolve, reject });
+
+export const forgotPassword = (
+  formData: { email: string },
+  resolve: (data: any) => void,
+  reject: (error: any) => void,
+) => action(FORGOT_PASSWORD, { formData, resolve, reject });
+
+export const logout = (): EmptyAction => emptyAction(LOGOUT);
+
+export const fetchBaseData = (): EmptyAction => emptyAction(FETCH_BASE_DATA);
+
+const loaderActions = createBasicActions<LoaderState>(SYSTEM_LOADER);
+export const showLoader = () => loaderActions.update({ visibility: true });
+export const hideLoader = () => loaderActions.update({ visibility: false });

@@ -1,0 +1,373 @@
+import { getEnumArrayFromObj } from "../utils/commonFunctions.ts";
+import type { PermissionName } from "./permission.ts";
+import Permission from "./permission.ts";
+type AllRights = typeof Right.general &
+  typeof Right.twoFa &
+  typeof Right.profile &
+  typeof Right.forms &
+  typeof Right.incomeManagement &
+  typeof Right.savingManagement &
+  typeof Right.expenseManagement &
+  typeof Right.budgetPlanManagement &
+  typeof Right.budgetEnum &
+  typeof Right.budgetAllocationManagement &
+  typeof Right.safetyNetManagement &
+  typeof Right.userStageManagement &
+  typeof Right.vaultCategoryManagement &
+  typeof Right.vaultFolderManagement &
+  typeof Right.vaultTagManagement &
+  typeof Right.vaultDocumentManagement &
+  typeof Right.auditLogManagement &
+  typeof Right.debtManagement &
+  typeof Right.assets &
+  typeof Right.investmentManagement &
+  typeof Right.estatePlanning &
+  typeof Right.superAnnuationManagement &
+  typeof Right.savingsPlanManagement &
+  typeof Right.partners &
+  typeof Right.partnerCategory &
+  typeof Right.learnResources &
+  typeof Right.subscriptionManagement &
+  typeof Right.insurancePolicy &
+  typeof Right.challenges &
+  typeof Right.rewards &
+  typeof Right.customerManagement &
+  typeof Right.dashboardManagement &
+  typeof Right.userExpensesManagement &
+  typeof Right.subscriptionManagementAdmin;
+
+export type RightName = AllRights[keyof AllRights];
+type RightMap = Record<string, RightName>;
+class Right {
+  static general = Object.freeze({
+    LOGIN: "LOGIN",
+    VERIFY_TOKEN: "VERIFY_TOKEN",
+    GET_ROLES: "GET_ROLES",
+    PING: "PING",
+    TEST_API: "TEST_API",
+  });
+  static twoFa = Object.freeze({
+    GET_TWO_FA_METHODS: "GET_TWO_FA_METHODS",
+    SET_UP_TWO_FA: "SET_UP_TWO_FA",
+    VERIFY_TWO_FA: "VERIFY_TWO_FA",
+    MODIFY_TWO_FA: "MODIFY_TWO_FA",
+    USER_TWO_FA_METHODS: "USER_TWO_FA_METHODS",
+  });
+  static profile = Object.freeze({
+    GET_PROFILE: "GET_PROFILE",
+    GET_USER_RIGHTS: "GET_USER_RIGHTS",
+    UPDATE_PROFILE: "UPDATE_PROFILE",
+    UPLOAD_PROFILE_PICTURE: "UPLOAD_PROFILE_PICTURE",
+    DELETE_PROFILE_PICTURE: "DELETE_PROFILE_PICTURE",
+    CHANGE_PASSWORD: "CHANGE_PASSWORD",
+    SEND_EMAIL_VERIFICATION_LINK: "SEND_EMAIL_VERIFICATION_LINK",
+    REQUEST_ACCOUNT_DELETION: "REQUEST_ACCOUNT_DELETION",
+    FORGOT_PASSWORD: "FORGOT_PASSWORD",
+    RESET_PASSWORD: "RESET_PASSWORD",
+  });
+  static incomeManagement = Object.freeze({
+    ADD_INCOME: "ADD_INCOME",
+    PATCH_INCOME_BY_ID: "PATCH_INCOME_BY_ID",
+    DELETE_INCOME_BY_ID: "DELETE_INCOME_BY_ID",
+    GET_USER_INCOME: "GET_USER_INCOME",
+  });
+  static budgetEnum = Object.freeze({
+    GET_FREQUENCY_TYPES: "GET_FREQUENCY_TYPES",
+    GET_INCOME_SOURCES: "GET_INCOME_SOURCES",
+  });
+  static savingManagement = Object.freeze({
+    ADD_SAVING: "ADD_SAVING",
+    PATCH_SAVING_BY_USER_ID: "PATCH_SAVING_BY_USER_ID",
+    DELETE_SAVING_BY_USER_ID: "DELETE_SAVING_BY_USER_ID",
+    GET_USER_SAVING: "GET_USER_SAVING",
+  });
+  static budgetPlanManagement = Object.freeze({
+    ADD_BUDGET_PLAN: "ADD_BUDGET_PLAN",
+    SUBMIT_USER_BUDGET_PLAN: "SUBMIT_USER_BUDGET_PLAN",
+    RECALCULATE_BUDGET_PLAN: "RECALCULATE_BUDGET_PLAN",
+    PATCH_BUDGET_PLAN: "PATCH_BUDGET_PLAN",
+    GET_BUDGET_PLAN: "GET_BUDGET_PLAN",
+    GET_IDEAL_BUDGET_PLAN: "GET_IDEAL_BUDGET_PLAN",
+  });
+  static expenseManagement = Object.freeze({
+    ADD_EXPENSE: "ADD_EXPENSE",
+    PATCH_EXPENSE_BY_ID: "PATCH_EXPENSE_BY_ID",
+    DELETE_EXPENSE_BY_ID: "DELETE_EXPENSE_BY_ID",
+    GET_USER_EXPENSE: "GET_USER_EXPENSE",
+  });
+  static budgetAllocationManagement = Object.freeze({
+    ALLOCATE_BUDGET: "ALLOCATE_BUDGET",
+    PATCH_BUDGET_ALLOCATION_BY_ID: "PATCH_BUDGET_ALLOCATION_BY_ID",
+    DELETE_BUDGET_ALLOCATION_BY_ID: "DELETE_BUDGET_ALLOCATION_BY_ID",
+    GET_BUDGET_ALLOCATION_BY_ID: "GET_BUDGET_ALLOCATION_BY_ID",
+    FETCH_FILTERED_BUDGET_ALLOCATIONS: "FETCH_FILTERED_BUDGET_ALLOCATIONS",
+    AVAILABLE_INCOME_SAVINGS: "AVAILABLE_INCOME_SAVINGS",
+    AVAILABLE_INVESTMENT_SAVINGS: "AVAILABLE_INVESTMENT_SAVINGS",
+  });
+  static safetyNetManagement = Object.freeze({
+    CREATE_SAFETY_NET: "CREATE_SAFETY_NET",
+    GET_SAFETY_NET: "GET_SAFETY_NET",
+    PATCH_SAFETY_NET: "PATCH_SAFETY_NET",
+    DELETE_SAFETY_NET: "DELETE_SAFETY_NET",
+    WITHDRAW_FUNDS: "WITHDRAW_FUNDS",
+    CONTRIBUTE_FUNDS: "CONTRIBUTE_FUNDS",
+  });
+  static userStageManagement = Object.freeze({
+    CLONE_STAGE_FOR_USER: "CLONE_STAGE_FOR_USER",
+    UPDATE_STAGE_STATUS: "UPDATE_STAGE_STATUS",
+    UPDATE_STEP_STATUS: "UPDATE_STEP_STATUS",
+    GET_USER_STAGES: "GET_USER_STAGES",
+    GET_USER_STEPS: "GET_USER_STEPS",
+  });
+  static forms = Object.freeze({
+    GET_USER_FORMS: "GET_USER_FORMS",
+    FETCH_FEEDBACK_FORM: "FETCH_FEEDBACK_FORM",
+    UPDATE_USER_FORM: "UPDATE_USER_FORM",
+  });
+  static partners = Object.freeze({
+    GET_PARTNER: "GET_PARTNER",
+    CREATE_PARTNER: "CREATE_PARTNER",
+    UPLOAD_PARTNER_THUMBNAIL: "UPLOAD_PARTNER_THUMBNAIL",
+    REMOVE_PARTNER_THUMBNAIL: "REMOVE_PARTNER_THUMBNAIL",
+    UPDATE_PARTNER: "UPDATE_PARTNER",
+    DELETE_PARTNER: "DELETE_PARTNER",
+  });
+  static partnerCategory = Object.freeze({
+    GET_PARTNER_CATEGORY: "GET_PARTNER_CATEGORY",
+    CREATE_PARTNER_CATEGORY: "CREATE_PARTNER_CATEGORY",
+    UPDATE_PARTNER_CATEGORY: "UPDATE_PARTNER_CATEGORY",
+    DELETE_PARTNER_CATEGORY: "DELETE_PARTNER_CATEGORY",
+  });
+  static learnResources = Object.freeze({
+    // Types
+    CREATE_LEARN_RESOURCE_TYPE: "CREATE_LEARN_RESOURCE_TYPE",
+    UPDATE_LEARN_RESOURCE_TYPE: "UPDATE_LEARN_RESOURCE_TYPE",
+    DELETE_LEARN_RESOURCE_TYPE: "DELETE_LEARN_RESOURCE_TYPE",
+    GET_LEARN_RESOURCE_TYPE: "GET_LEARN_RESOURCE_TYPE",
+    // Tags
+    CREATE_LEARN_RESOURCE_TAG: "CREATE_LEARN_RESOURCE_TAG",
+    UPDATE_LEARN_RESOURCE_TAG: "UPDATE_LEARN_RESOURCE_TAG",
+    DELETE_LEARN_RESOURCE_TAG: "DELETE_LEARN_RESOURCE_TAG",
+    GET_LEARN_RESOURCE_TAG: "GET_LEARN_RESOURCE_TAG",
+    // Categories
+    CREATE_LEARN_RESOURCE_CATEGORY: "CREATE_LEARN_RESOURCE_CATEGORY",
+    UPDATE_LEARN_RESOURCE_CATEGORY: "UPDATE_LEARN_RESOURCE_CATEGORY",
+    DELETE_LEARN_RESOURCE_CATEGORY: "DELETE_LEARN_RESOURCE_CATEGORY",
+    GET_LEARN_RESOURCE_CATEGORY: "GET_LEARN_RESOURCE_CATEGORY",
+    // Resources
+    CREATE_LEARN_RESOURCE: "CREATE_LEARN_RESOURCE",
+    UPLOAD_LEARN_RESOURCE_THUMBNAIL: "UPLOAD_LEARN_RESOURCE_THUMBNAIL",
+    REMOVE_LEARN_RESOURCE_THUMBNAIL: "REMOVE_LEARN_RESOURCE_THUMBNAIL",
+    UPDATE_LEARN_RESOURCE: "UPDATE_LEARN_RESOURCE",
+    DELETE_LEARN_RESOURCE: "DELETE_LEARN_RESOURCE",
+    GET_LEARN_RESOURCE: "GET_LEARN_RESOURCE",
+  });
+  static assets = Object.freeze({
+    CREATE_ASSET: "CREATE_ASSET",
+    UPDATE_ASSET: "UPDATE_ASSET",
+    UPLOAD_ASSET_IMAGE: "UPLOAD_ASSET_IMAGE",
+    DELETE_ASSET: "DELETE_ASSET",
+    GET_ASSET: "GET_ASSET",
+    // Asset Types
+    GET_ASSET_TYPE: "GET_ASSET_TYPE",
+    GET_OWNED_BY_LIST: "GET_OWNED_BY_LIST",
+  });
+  static investmentManagement = Object.freeze({
+    ADD_INVESTMENT: "ADD_INVESTMENT",
+    GET_INVESTMENTS: "GET_INVESTMENTS",
+    GET_INVESTMENTS_TYPES: "GET_INVESTMENTS_TYPES",
+    ALLOCATE_FUNDS_TO_INVESTMENT: "ALLOCATE_FUNDS_TO_INVESTMENT",
+    PATCH_INVESTMENT_BY_ID: "PATCH_INVESTMENT_BY_ID",
+    DELETE_INVESTMENT_BY_ID: "DELETE_INVESTMENT_BY_ID",
+  });
+  static superAnnuationManagement = Object.freeze({
+    CREATE_RETIREMENT_GOAL: "CREATE_RETIREMENT_GOAL",
+    PATCH_RETIREMENT_GOAL: "PATCH_RETIREMENT_GOAL",
+    DELETE_RETIREMENT_GOAL: "DELETE_RETIREMENT_GOAL",
+    GET_RETIREMENT_GOAL: "GET_RETIREMENT_GOAL",
+    ADD_SUPER_FUND: "ADD_SUPER_FUND",
+    ALLOCATE_FUNDS_TO_SUPER_FUND: "ALLOCATE_FUNDS_TO_SUPER_FUND",
+    GET_SUPER_FUNDS: "GET_SUPER_FUNDS",
+    PATCH_SUPER_FUND: "PATCH_SUPER_FUND",
+    DELETE_SUPER_FUND: "DELETE_SUPER_FUND",
+    CREATE_SUPER_HEALTH: "CREATE_SUPER_HEALTH",
+    FECTH_SUPER_HEALTH_DETAILS: "FECTH_SUPER_HEALTH_DETAILS",
+    PATCH_SUPER_HEALTH: "PATCH_SUPER_HEALTH",
+  });
+  static debtManagement = Object.freeze({
+    CREATE_DEBT: "CREATE_DEBT",
+    PATCH_DEBT: "PATCH_DEBT",
+    DELETE_DEBT: "DELETE_DEBT",
+    GET_USER_DEBTS: "GET_USER_DEBTS",
+    ADD_DEBT_PAYMENT: "ADD_DEBT_PAYMENT",
+    DELETE_DEBT_PAYMENT: "DELETE_DEBT_PAYMENT",
+    PATCH_DEBT_PAYMENT: "PATCH_DEBT_PAYMENT",
+    GET_DEBT_PAYMENTS: "GET_DEBT_PAYMENTS",
+    CREATE_DEBT_ACCELERATOR: "CREATE_DEBT_ACCELERATOR",
+    PATCH_DEBT_ACCELERATOR: "PATCH_DEBT_ACCELERATOR",
+  });
+  static vaultCategoryManagement = Object.freeze({
+    GET_VAULT_CATEGORY: "GET_VAULT_CATEGORY",
+    CREATE_VAULT_CATEGORY: "CREATE_VAULT_CATEGORY",
+    UPDATE_VAULT_CATEGORY: "UPDATE_VAULT_CATEGORY",
+    DELETE_VAULT_CATEGORY: "DELETE_VAULT_CATEGORY",
+  });
+  static vaultFolderManagement = Object.freeze({
+    GET_VAULT_FOLDER: "GET_VAULT_FOLDER",
+    CREATE_VAULT_FOLDER: "CREATE_VAULT_FOLDER",
+    UPDATE_VAULT_FOLDER: "UPDATE_VAULT_FOLDER",
+    DELETE_VAULT_FOLDER: "DELETE_VAULT_FOLDER",
+  });
+  static vaultTagManagement = Object.freeze({
+    GET_VAULT_TAG: "GET_VAULT_TAG",
+    CREATE_VAULT_TAG: "CREATE_VAULT_TAG",
+    UPDATE_VAULT_TAG: "UPDATE_VAULT_TAG",
+    DELETE_VAULT_TAG: "DELETE_VAULT_TAG",
+  });
+  static vaultDocumentManagement = Object.freeze({
+    GET_VAULT_DOCUMENT: "GET_VAULT_DOCUMENT",
+    CREATE_VAULT_DOCUMENT: "CREATE_VAULT_DOCUMENT",
+    UPDATE_VAULT_DOCUMENT: "UPDATE_VAULT_DOCUMENT",
+    DELETE_VAULT_DOCUMENT: "DELETE_VAULT_DOCUMENT",
+  });
+  static auditLogManagement = Object.freeze({
+    FETCH_AUDIT_LOGS: "FETCH_AUDIT_LOGS",
+  });
+  static savingsPlanManagement = Object.freeze({
+    CREATE_GOAL: "CREATE_GOAL",
+    GET_USER_GOALS: "GET_USER_GOALS",
+    PATCH_USER_GOAL: "PATCH_USER_GOAL",
+    DELETE_USER_GOAL: "DELETE_USER_GOAL",
+    ALLOCATE_FUNDS: "ALLOCATE_FUNDS",
+    UPLOAD_GOAL_IMAGES: "UPLOAD_GOAL_IMAGES",
+    REMOVE_GOAL_IMAGE: "REMOVE_GOAL_IMAGE",
+  });
+
+  static estatePlanning = Object.freeze({
+    GET_ESTATE_PLANNING: "GET_ESTATE_PLANNING",
+    UPDATE_ESTATE_PLANNING_CHECKPOINT: "UPDATE_ESTATE_PLANNING_CHECKPOINT",
+    UPLOAD_ESTATE_PLANNING_CHECKPOINT_DOCUMENT:
+      "UPLOAD_ESTATE_PLANNING_CHECKPOINT_DOCUMENT",
+    REMOVE_ESTATE_PLANNING_CHECKPOINT_DOCUMENT:
+      "REMOVE_ESTATE_PLANNING_CHECKPOINT_DOCUMENT",
+    // Template
+    UPDATE_ESTATE_PLANNING_TEMPLATE: "UPDATE_ESTATE_PLANNING_TEMPLATE",
+  });
+
+  static subscriptionManagement = Object.freeze({
+    GET_SUBSCRIPTION_PLANS: "GET_SUBSCRIPTION_PLANS",
+    PURCHASE_SUBSCRIPTION: "PURCHASE_SUBSCRIPTION",
+    UPDATE_CARD: "UPDATE_CARD",
+    RENEW_SUBSCRIPTION: "RENEW_SUBSCRIPTION",
+    MANUAL_PAYMENT: "MANUAL_PAYMENT",
+    CANCEL_SUBSCRIPTION: "CANCEL_SUBSCRIPTION",
+    FETCH_USER_SUBSCRIPTION_DETAILS: "FETCH_USER_SUBSCRIPTION_DETAILS",
+    FETCH_SUBSCRIPTION_PAYMENTS: "FETCH_SUBSCRIPTION_PAYMENTS",
+    FETCH_SUBSCRIPTION_BANNER: "FETCH_SUBSCRIPTION_BANNER",
+    DOWNLOAD_INVOICE: "DOWNLOAD_INVOICE",
+    REGENERATE_INVOICE: "REGENERATE_INVOICE",
+    GET_TRIAL_STATUS: "GET_TRIAL_STATUS",
+  });
+
+  static subscriptionManagementAdmin = Object.freeze({
+    EXTEND_TRIAL_PERIOD: "EXTEND_TRIAL_PERIOD",
+    EXTEND_SUBSCRIPTION_PERIOD: "EXTEND_SUBSCRIPTION_PERIOD",
+  });
+
+  static cronManagement = Object.freeze({
+    CRON_ALERTS: "CRON_ALERTS",
+    PROCESS_EXPIRING_SUBSCRIPTIONS: "PROCESS_EXPIRING_SUBSCRIPTIONS",
+    LOGIN: "LOGIN",
+  });
+
+  static insurancePolicy = Object.freeze({
+    GET_INSURANCE_POLICY: "GET_INSURANCE_POLICY",
+    CREATE_INSURANCE_POLICY: "CREATE_INSURANCE_POLICY",
+    UPDATE_INSURANCE_POLICY: "UPDATE_INSURANCE_POLICY",
+    DELETE_INSURANCE_POLICY: "DELETE_INSURANCE_POLICY",
+    GET_INSURANCE_POLICY_TYPE: "GET_INSURANCE_POLICY_TYPE",
+    REMOVE_INSURANCE_POLICY_DOCUMENT: "REMOVE_INSURANCE_POLICY_DOCUMENT",
+  });
+
+  static challenges = Object.freeze({
+    GET_SYSTEM_CHALLENGES: "GET_SYSTEM_CHALLENGES",
+    GET_CHALLENGE: "GET_CHALLENGE",
+    CREATE_CHALLENGE: "CREATE_CHALLENGE",
+    UPDATE_CHALLENGE: "UPDATE_CHALLENGE",
+  });
+
+  static rewards = Object.freeze({
+    GET_SYSTEM_BADGES: "GET_SYSTEM_BADGES",
+    GET_BADGE: "GET_BADGE",
+    CREATE_BADGE: "CREATE_BADGE",
+  });
+
+  static customerManagement = Object.freeze({
+    GET_CUSTOMER: "GET_CUSTOMER",
+    GET_FILTERED_CUSTOMER_PAYMENTS: "GET_FILTERED_CUSTOMER_PAYMENTS",
+    UPDATE_CUSTOMER: "UPDATE_CUSTOMER",
+  });
+
+  static dashboardManagement = Object.freeze({
+    GET_BUDGET_PLAN_INSIGHTS: "GET_BUDGET_PLAN_INSIGHTS",
+    GET_SAFETY_NET_INSIGHTS: "GET_SAFETY_NET_INSIGHTS",
+    GET_DEBT_INSIGHTS: "GET_DEBT_INSIGHTS",
+    GET_SAVINGS_PLAN_INSIGHTS: "GET_SAVINGS_PLAN_INSIGHTS",
+    GET_SUPER_INSIGHTS: "GET_SUPER_INSIGHTS",
+    GET_INVESTMENT_INSIGHTS: "GET_INVESTMENT_INSIGHTS",
+    GET_INSURANCE_INSIGHTS: "GET_INSURANCE_INSIGHTS",
+    GET_ASSETS_INSIGHTS: "GET_ASSETS_INSIGHTS",
+    GET_ESTATE_PLANNING_INSIGHTS: "GET_ESTATE_PLANNING_INSIGHTS",
+    GET_DASHBOARD_OVERVIEW: "GET_DASHBOARD_OVERVIEW",
+  });
+
+  static analytics = Object.freeze({
+    GET_SUMMARY: "GET_SUMMARY",
+    GET_RECENT_ACTIVITIES_LIST: "GET_RECENT_ACTIVITIES_LIST",
+  });
+
+  static userExpensesManagement = Object.freeze({
+    CREATE_USER_EXPENSE: "CREATE_USER_EXPENSE",
+    ALLOCATE_USER_FUNDS: "ALLOCATE_USER_FUNDS",
+    UPDATE_USER_EXPENSE: "UPDATE_USER_EXPENSE",
+    DELETE_USER_EXPENSE: "DELETE_USER_EXPENSE",
+    GET_USER_EXPENSE: "GET_USER_EXPENSE",
+    GET_USER_ALLOCATIONS: "GET_USER_ALLOCATIONS",
+  });
+
+  /**
+   * Returns rights applicable to user role
+   */
+  static userRights(): RightName[] {
+    return Right.getRightArray(this.general);
+  }
+  /**
+   * Extracts right values from an object
+   */
+  static getRightArray(rights: RightMap): RightName[] {
+    return Object.freeze(Object.values(rights)) as RightName[];
+  }
+  static getRights(modules: PermissionName[]): RightName[] {
+    const rights = [];
+    // eslint-disable-next-line no-restricted-syntax
+    for (const module of modules) {
+      const moduleRights =
+        getEnumArrayFromObj(Permission.getPermissionRights(module)) || [];
+      rights.push(...moduleRights);
+    }
+    return rights;
+  }
+  /**
+   * Checks if a user has a specific permission
+   */
+  static hasPermission(rights: RightName[], val: RightName): boolean {
+    return rights.includes(val);
+  }
+  /**
+   * Validates whether a right exists in the system
+   */
+  static exists(val: string): val is RightName {
+    return this.userRights().includes(val as RightName);
+  }
+}
+export default Right;

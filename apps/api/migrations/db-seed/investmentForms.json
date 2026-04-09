@@ -1,0 +1,246 @@
+[
+  {
+    "name": "User investment form",
+    "code": "INVESTMENT_FORM",
+    "status": "ACTIVE",
+    "metadata": {
+      "version": "1.0"
+    },
+    "steps": [
+      {
+        "name": "STEP 1",
+        "code": "STEP_1",
+        "stepSequenceNumber": 1,
+        "presentationMetaData": null,
+        "configurationMetaData": {
+          "allowSkip": false,
+          "skipNext" : true,
+          "skipCondition" : [
+            {
+              "stepCode": "STEP_1",
+              "condition": {
+                "questionCode": "Q_1",
+                "equality" : "EQUALS",
+                "answer": "YES"
+              }
+            }
+          ]
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_1",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "Do you consider yourself an investor?",
+              "subtitle": "How do you see yourself?"
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "Yes",
+                  "value": "YES"
+                },
+                {
+                  "label": "No",
+                  "value": "NO"
+                },
+                {
+                  "label": "Unsure",
+                  "value": "UNSURE"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select if you consider yourself an investor."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "STEP 2",
+        "code": "STEP_2",
+        "stepSequenceNumber": 2,
+        "presentationMetaData": null,
+        "configurationMetaData": {
+          "allowSkip": false,
+          "skipNext" : false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_2",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "When you think of investing, do you include you super?",
+              "subtitle": "Your retirement fund counts too!"
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "Yes",
+                  "value": "YES"
+                },
+                {
+                  "label": "No",
+                  "value": "NO"
+                },
+                {
+                  "label": "I've never thought about it",
+                  "value": "UNSURE"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select an option to continue."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Step 3",
+        "code": "STEP_3",
+        "stepSequenceNumber": 3,
+        "presentationMetaData": null,
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_3",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "Do you enjoy investing or does it stress you out?",
+              "subtitle": "Be honest with us!"
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "I like it",
+                  "value": "LIKE_IT"
+                },
+                {
+                  "label": "I want to invest but don't know where to start",
+                  "value": "UNSURE"
+                },
+                {
+                  "label": "It feels overwhelming",
+                  "value": "OVERWHELMING"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select an option to continue."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Step 4",
+        "code": "STEP_4",
+        "stepSequenceNumber": 4,
+        "presentationMetaData": null,
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_4",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "What's your style?",
+              "subtitle": "How do you like to approach things?"
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "Set & forget (keep it  simple)",
+                  "value": "SET_AND_FORGET"
+                },
+                {
+                  "label": "I want to learn as much as I can",
+                  "value": "LEARN_MORE"
+                },
+                {
+                  "label": "Somewhere in between",
+                  "value": "IN_BETWEEN"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select your investment style."
+              },
+              "isMultipleAllowed": false,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Step 5",
+        "code": "STEP_5",
+        "stepSequenceNumber": 5,
+        "presentationMetaData": null,
+        "configurationMetaData": {
+          "allowSkip": false
+        },
+        "status": "ACTIVE",
+        "questions": [
+          {
+            "code": "Q_5",
+            "questionSequenceNumber": 1,
+            "presentationMetaData": {
+              "title": "Which money moves interest you most?",
+              "subtitle": "Select all that apply"
+            },
+            "configurationMetaData": {
+              "options": [
+                {
+                  "label": "Simple Set-and-Forget ETF",
+                  "value": "ETF_INVESTING"
+                },
+                {
+                  "label": "Building up my super",
+                  "value": "SUPER_BOOST"
+                },
+                {
+                  "label": "Paying down my mortgage faster",
+                  "value": "DEBT_ACCELERATION"
+                },
+                {
+                  "label": "Buying an investment property",
+                  "value": "PROPERTY_INVESTING"
+                },
+                {
+                  "label": "Picking individual shares",
+                  "value": "SHARE_PICKING"
+                },
+                {
+                  "label": "Crypto & digital assets",
+                  "value": "CRYPTO_INVESTING"
+                }
+              ],
+              "validators": {
+                "isRequired": true,
+                "errorMessage": "Please select at least one investment strategy."
+              },
+              "isMultipleAllowed": true,
+              "questionType": "LIST_SELECT"
+            }
+          }
+        ]
+      }
+    ]
+  }
+]

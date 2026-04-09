@@ -1,0 +1,169 @@
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./assets/fonts/Nohemi-Light.woff2') format('woff2'),
+       url('./assets/fonts/Nohemi-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./assets/fonts/Nohemi-Regular.woff2') format('woff2'),
+       url('./assets/fonts/Nohemi-Regular.woff') format('woff'),
+       url('./assets/fonts/Nohemi-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./assets/fonts/Nohemi-Medium.woff2') format('woff2'),
+       url('./assets/fonts/Nohemi-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./assets/fonts/Nohemi-SemiBold.woff2') format('woff2'),
+       url('./assets/fonts/Nohemi-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./assets/fonts/Nohemi-ExtraBold.woff2') format('woff2'),
+       url('./assets/fonts/Nohemi-ExtraBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Nohemi';
+  src: url('./assets/fonts/Nohemi-Black.woff2') format('woff2'),
+       url('./assets/fonts/Nohemi-Black.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float 5s ease-in-out infinite;
+}
+
+
+/* Custom react-toastify styles */
+.custom-toast-container {
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  width: 438px !important;
+  min-height: 174px !important;
+}
+
+.custom-toast-body {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.Toastify__toast {
+  padding: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  min-height: auto !important;
+}
+
+.Toastify__toast-container {
+  width: auto !important;
+}
+
+/* Custom toast animations */
+@keyframes slideInDown {
+  from {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+  }
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+  to {
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+  }
+}
+
+.Toastify__toast--top-center {
+  animation: slideInDown 0.5s ease-out;
+}
+
+.Toastify__toast--top-center.Toastify__toast--close {
+  animation: slideOutUp 0.4s ease-in;
+}
+
+/* Bounce animation for icon */
+@keyframes iconBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-10px) scale(1.05);
+  }
+  50% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+.custom-toast-container [data-name="icon/78/success"] {
+  animation: iconBounce 0.6s ease-out 0.3s;
+}
+
+/* Bubble float animation */
+@keyframes bubbleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.custom-toast-container [data-name="green bubbles"] {
+  animation: bubbleFloat 3s ease-in-out infinite;
+}

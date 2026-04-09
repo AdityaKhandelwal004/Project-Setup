@@ -1,0 +1,12 @@
+{
+  "extends": "@mono/typescript-config/base.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.node.tsbuildinfo",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "verbatimModuleSyntax": true,
+    "noEmit": true
+  },
+  "include": ["webpack.config.ts", "webpack/**/*.ts", "src/**/*", "types/**/*"]
+}

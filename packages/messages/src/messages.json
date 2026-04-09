@@ -1,0 +1,190 @@
+{
+  "en": {
+    "general": {
+      "change": "Change",
+      "update": "Update",
+      "show": "Show",
+      "edit": "Edit",
+      "view": "View",
+      "noData": "No data found",
+      "action": "Action",
+      "showMore": "Show more",
+      "showing": "Rows per page:",
+      "search": "Search...",
+      "reset": "Reset",
+      "add": "Add",
+      "submit": "Submit",
+      "saveChanges": "Save Changes",
+      "cancel": "Cancel",
+      "deleteSuccess": "Deleted successfully",
+      "errors": {
+        "invalidDate" : "Please select valid date",
+        "invalidDob": "Hmm, that doesn't look quite right",
+        "serverError": "Something went wrong! please try again",
+        "invalidPassword": "Please enter a valid password",
+        "emptyValue": "Please enter a value",
+        "invalidEmail": "Hmm, that doesn't look quite right",
+        "invalidABN": "Please enter a valid ABN"
+      },
+      "error": {
+        "serverError": {}
+      }
+    },
+    "signIn": {
+      "errors": {
+        "email": {
+          "required": "Your email is your gateway to wealth building!",
+          "invalid": "Hmm, that doesn't look quite right"
+        },
+        "password": {
+          "required": "Please enter a password",
+          "empty": "A strong password protects your financial journey! 🔒",
+          "tooShort": "Make it at least 8 characters - future you will thank you!",
+          "weak": "Mix it up! Try uppercase, lowercase, and numbers",
+          "strong": "That's a fortress-level password!"
+        }
+      },
+      "success": {
+        "email": {
+          "valid": "Great! We'll send you wealth-building tips here"
+        },
+        "password": {
+          "valid": "Ready to continue your journey!"
+        }
+      }
+    },
+    "signUp": {
+      "errors": {
+        "firstName": {
+          "required": "We'd love to know your name"
+        },
+        "lastName": {
+          "required": "We'd love to know your name"
+        },
+        "email": {
+          "required": "Your email starts your path to wealth building",
+          "invalid": "Hmm, that doesn't look quite right"
+        },
+        "dateOfBirth": {
+          "required": "Your date of birth helps us guide you better"
+        },
+        "password": {
+          "required": "A strong password protects your financial journey",
+          "empty": "A strong password protects your financial journey",
+          "tooShort": "Make it at least 8 characters - future you will thank you!",
+          "weak": "Mix it up! Try uppercase, lowercase, and numbers",
+          "strong": "That's a fortress-level password!"
+        },
+        "confirmPassword": {
+          "required": "Please confirm your password",
+          "mismatch": "Passwords don't match - let's get them aligned!"
+        }
+      },
+      "success": {
+        "firstName": {
+          "valid": "Nice to meet you, {name}!"
+        },
+        "lastName": {
+          "valid": "Perfect!"
+        },
+        "email": {
+          "valid": "Great! We'll send you wealth-building tips here"
+        },
+        "dateOfBirth": {
+          "valid": "Perfect!"
+        },
+        "password": {
+          "valid": "That's a fortress-level password!"
+        },
+        "confirmPassword": {
+          "valid": "Perfect match! You're all set!"
+        }
+      }
+    },
+    "changePassword": {
+  "title": "Reset Your Password",
+  "subTitle": "Please enter and confirm your new password",
+  "errors": {
+    "confirmPassword": {
+      "mismatch": "Passwords don't match - let's sync them up!"
+    }
+  }
+    },
+    "forgotPassword": {
+      "errors": {
+        "email": {
+          "required": "Please enter your email address to reset your password",
+          "invalid": "Please enter a valid email address"
+        }
+      },
+      "success": {
+        "email": {
+          "valid": "We'll send the reset link here!"
+        }
+      }
+    },
+    "budget": {
+      "steps": {
+        "income": {
+          "title": "Tell us about your income and savings",
+          "subtitle": "This helps us create a budget that works for your situation"
+        },
+        "breakdown": {
+          "title": "Optimise Your Income",
+          "subtitle": "Utilise your income to save more and invest regularly.  Review your personalised 70/30 spending plan based on your income.  Spending 70% today and savig 30% for tomorrow."
+        },
+        "expenses": {
+          "title": "Current living expenses",
+          "subtitle": "Review your expenses and set up your new spending plan. With your money upfront and centre, you're in the drivers seat."
+        },
+        "savings": {
+          "title": "Current Savings & Investment",
+          "subtitle": "Tell us about any regular savings or investments you're already making."
+        },
+        "complete": {
+          "title": "Budget Setup Complete!",
+          "subtitle": "Review your financial analysis and start optimizing your budget."
+        }
+      },
+      "navigation": {
+        "next": "Next",
+        "letsTrackExpenses": "Lets track your expenses",
+        "completeBudget": "Save your plan and proceed"
+      },
+      "modals": {
+        "livingExpense": {
+          "add": "Add Living Expense",
+          "edit": "Edit Living Expense"
+        },
+        "funEntertainment": {
+          "add": "Add Fun & Entertainment",
+          "edit": "Edit Fun & Entertainment"
+        },
+        "medicalInsurance": {
+          "add": "Add Medical & Insurance",
+          "edit": "Edit Medical & Insurance"
+        },
+        "debtRepayment": {
+          "add": "Add Debt Repayment",
+          "edit": "Edit Debt Repayment"
+        },
+        "delete": {
+          "heading": "Delete Expense",
+          "title": "Are you sure you want to delete this expense?",
+          "description": "This action cannot be undone. The expense will be permanently removed from your list.",
+          "confirm": "Delete"
+        }
+      },
+      "display": {
+        "netIncomePer": "Net income per",
+        "livingExpenses": "Living expenses"
+      },
+      "validation": {
+        "incomeSourceRequired": "Income source is required",
+        "incomeAmountRequired": "Income amount is required",
+        "payFrequencyRequired": "Pay frequency is required",
+        "nextPayDateRequired": "Next pay date is required"
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "extends": "@mono/typescript-config/base.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "allowImportingTsExtensions": true,
+    "moduleResolution": "NodeNext",
+    "verbatimModuleSyntax": true,
+    "module": "NodeNext",
+    "target": "ESNext",
+
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/index.tsx", "**/*.ts", "**/*.tsx"]
+}

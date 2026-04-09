@@ -1,0 +1,20 @@
+{
+  "name": "@mono/utils",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "^7.27.6",
+    "@mono/hooks": "workspace:*",
+    "@mono/messages": "workspace:*",
+    "@mono/models": "workspace:*",
+    "moment": "^2.30.1",
+    "moment-timezone": "^0.5.47",
+    "react": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/styled-components": "^5.1.34",
+    "eslint-plugin-react-refresh": "^0.4.20"
+  }
+}

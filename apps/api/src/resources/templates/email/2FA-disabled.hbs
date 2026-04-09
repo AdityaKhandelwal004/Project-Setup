@@ -1,0 +1,73 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{#if emailTitle}}{{emailTitle}}{{else}}Obiemoney{{/if}}</title>
+  <!--[if mso]>
+    <style type="text/css">
+        table { border-collapse: collapse; }
+        .divider { height: 1px !important; }
+    </style>
+    <![endif]-->
+</head>
+
+<body
+  style="margin: 0; padding: 0; width: 100%; background-color: #F5F5F5; font-family: Arial, sans-serif; -webkit-font-smoothing: antialiased;">
+  <!-- Wrapper Table -->
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #F5F5F5;">
+    <tr>
+      <td align="center" style="padding: 40px 20px;">
+        <!-- Container Table -->
+        <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="700"
+          style="max-width: 700px; background-color: #FFFFFF; border-radius: 12px; overflow: hidden;">
+          <!-- HEADER -->
+          {{> header}}
+          <tr>
+            <td align="center" style="padding: 40px 50px;">
+              <h1 style="margin: 0 0 20px 0; font-size: 26px; font-weight: 700; color: #2C2A5C; line-height: 1.3;">
+                Disable Two-Factor Authentication
+              </h1>
+
+              <p style="margin: 0 0 15px 0; font-size: 16px; color: #666666; line-height: 1.6;">
+                We received a request to <strong>deactivate</strong> Two-Factor Authentication (2FA) for your account.
+                This action will reduce your account security.
+              </p>
+
+              <p style="margin: 0 0 25px 0; font-size: 16px; color: #666666; line-height: 1.6;">
+                Please use the secure <strong>verification code</strong> below to authorize this change:
+              </p>
+
+              <div
+                style="background-color: #F9F7FF; border: 1px dashed #6A40E5; border-radius: 12px; padding: 30px 20px; margin: 20px 0; text-align: center;">
+                <p style="
+                    font-size: 50px; 
+                    font-weight: 800; 
+                    letter-spacing: 8px; 
+                    margin: 0;
+                    color: #6A40E5;
+                    font-family: 'Courier New', Courier, monospace;
+                    ">
+                  {{code}}
+                </p>
+              </div>
+
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #EEEEEE;">
+                <p style="margin: 0; font-size: 14px; color: #000000; line-height: 1.6; font-weight: 600;">
+                  If you did not initiate this request:
+                </p>
+                <p style="margin: 5px 0 0 0; font-size: 14px; color: #999999; line-height: 1.6;">
+                  Your account security may be compromised. Please ignore this email and contact our support team
+                  immediately to secure your assets.
+                </p>
+              </div>
+            </td>
+          </tr>
+          {{> footer}}
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+
+</html>

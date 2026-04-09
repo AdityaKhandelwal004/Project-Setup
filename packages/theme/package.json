@@ -1,0 +1,16 @@
+{
+  "name": "@mono/theme",
+  "version": "0.0.0",
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "@babel/runtime": "^7.27.6",
+    "@mui/material": "^6.4.0",
+    "react": "^19.1.0",
+    "styled-components": "^6.1.14"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/styled-components": "^5.1.34"
+  }
+}

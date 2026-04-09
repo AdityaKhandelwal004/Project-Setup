@@ -1,0 +1,65 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Build output
+dist/
+build/
+coverage/
+.tmp/
+.cache/
+.next/
+out/
+
+# Local env files
+.env
+.env.*
+
+# Editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Misc
+*.local
+*.swp
+*.swo
+*.tmp
+
+# Yarn / pnpm caches
+.pnp/
+.pnp.js
+
+# Optional npm cache directory
+.npm
+
+# macOS
+.AppleDouble
+.LSOverride
+
+# Windows image file caches
+ehthumbs.db
+Desktop.ini
+
+# Storybook
+storybook-static/
