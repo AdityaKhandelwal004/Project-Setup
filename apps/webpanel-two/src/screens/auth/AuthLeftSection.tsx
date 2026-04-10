@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Sparkles, TrendingUp, Target } from 'lucide-react';
 
 import { brand, primitiveColors } from '@mono/theme/style.palette';
-
-import financialCollaboration from '../../assets/welcome.png';
 import { achievementStats, empoweringMessages } from '../../constants/messages';
 import messages from '../../messages';
 
@@ -128,11 +126,6 @@ export const AuthLeftSection: React.FC<AuthLeftSectionProps> = ({
           className="relative hidden md:block"
         >
           <div className="w-full max-w-xs sm:max-w-sm md:max-w-md mx-auto rounded-2xl md:rounded-3xl overflow-hidden relative">
-            <img
-              src={financialCollaboration}
-              alt="Financial collaboration illustration"
-              className="w-full h-48 sm:h-56 md:h-64 lg:h-80 object-contain"
-            />
           </div>
 
           {/* Floating success indicators */}

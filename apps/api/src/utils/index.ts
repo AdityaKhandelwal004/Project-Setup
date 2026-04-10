@@ -1,5 +1,4 @@
 export * as HttpException from './httpException.ts';
-export * from './uniqueArray.ts';
 export * from './encryptor.ts';
 export * from './httpClient.ts';
 export * from './randomGenerators.ts';

@@ -1,9 +1,9 @@
-import React,{JSX, useState} from 'react';
-import { StyledChildrenContainer, StyledContainer, StyledContentWrapper, StyledIcon, StyledLogoutMenuIcon, StyledPersonIcon, StyledSideBarContainer } from "./styles"
+import React, { useState } from 'react';
+import type { JSX } from 'react';
+import { StyledChildrenContainer, StyledContainer, StyledContentWrapper, StyledLogoutMenuIcon, StyledPersonIcon, StyledSideBarContainer } from "./styles"
 import { Header, Sidebar } from '@mono/components';
 import { useDispatch, useSelector } from 'react-redux';
 import messages from '../messages';
-import { logout } from '@mono/redux-global/src/actions';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import { routes } from '../myUtils';
 import { push } from 'connected-react-router';
@@ -60,7 +60,8 @@ const Container:React.FC<Props> = ({
           id: 'logout',
           text: messages?.general?.logout,
           onClick: () => {
-            reduxDispatch(logout());
+            // reduxDispatch(logout());
+            reduxDispatch(push(routes.login));
           },
           icon: <StyledLogoutMenuIcon />,
         },
@@ -73,10 +74,8 @@ const Container:React.FC<Props> = ({
             </StyledSideBarContainer>}
             <StyledContentWrapper noPadding={noPadding}>
                 {!hideHeader && (<Header
-                    heading={heading}
-                    headingCount={headingCount}
-                    showCount={showCount}
-                    showGoBack={showGoBack}
+                    panel="dashboard"
+                    image=""
                     actions={actions}
                     sidebarOpen={sidebarOpen}
                     setSidebarOpen={setSidebarOpen}

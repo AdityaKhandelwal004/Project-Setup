@@ -116,13 +116,6 @@ export function Signup({ onComplete, onSignIn }: { onComplete: () => void; onSig
 
   const handleSubmit = formHandleSubmit(handleFormSubmit);
 
-  const getFieldSuccessMessage = (name: string) => {
-    const value = formValues?.[name]?.value;
-    const hasError = formValues?.[name]?.error;
-
-    return getSuccessMessage(name, value, !!hasError, 'signUp');
-  };
-
   return (
     <MainContainer>
       <ContentWrapper>

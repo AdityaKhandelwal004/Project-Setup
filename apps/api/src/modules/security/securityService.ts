@@ -296,7 +296,7 @@ class SecurityService extends BaseService {
         const user = await this.userService.createUser(client, {
           ...signUpDto,
           status: STATUS.ACTIVE,
-          role: [Role.roleValues.OBIE_USER],
+          role: ["ADMIN"]
         });
 
         const type = user.roleIds;

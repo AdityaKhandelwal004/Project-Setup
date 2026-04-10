@@ -16,7 +16,7 @@ async function startServer(): Promise<void> {
     try {
       console.log(`
       ####################################################################
-      🛡️  Obiemoney Server listening on port: ${config.port} with feature level ${config.featureLevel}, 
+      🛡️  Server listening on port: ${config.port} with feature level ${config.featureLevel}, 
           server start took ${moment().diff(now)} ms 🛡️ 
       ####################################################################`);
     } catch (err) {

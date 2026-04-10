@@ -1,6 +1,0 @@
-ALTER TABLE user_insurance_policies
-DROP CONSTRAINT IF EXISTS user_insurance_policies_policy_number_key;
-
-ALTER TABLE user_insurance_policies
-ADD CONSTRAINT user_insurance_policies_policy_number_user_id_key
-UNIQUE (policy_number, user_id);

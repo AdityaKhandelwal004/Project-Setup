@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import md5 from 'md5';
 import { AlertCircle } from 'lucide-react';
 import { ModuleThemeProvider } from '@mono/theme/providers/ModuleThemeProvider';
@@ -7,8 +7,6 @@ import { useFormReducer } from '@mono/hooks/src/form';
 import { required, emailValidator } from '@mono/utils/src/validators';
 import messages from '../../messages';
 import packageMessages from '@mono/messages';
-
-
 import {
   MainContainer,
   ContentWrapper,
@@ -17,9 +15,6 @@ import {
   FormTitle,
   FormSubtitle,
   ForgotPasswordLink,
-  SignUpContainer,
-  SignUpText,
-  AuthNavLink,
   CenteredContainer,
   HeaderContainer,
   FormWrapper,
@@ -27,15 +22,13 @@ import {
   ErrorContent,
   ErrorIcon,
   ErrorText,
-  Logo
 } from './styles';
 import { otherColour, primitiveColors } from '@mono/theme';
 import { ChipSize } from '@mono/components/src/customChip/styles';
 // import { login } from '@mono/redux-global/src/actions';
+import { useDispatch } from 'react-redux';
 import { push } from 'connected-react-router';
 import { routes } from '../../myUtils';
-import { useDispatch } from 'react-redux';
-import { login } from '../../redux/actions';
 
 const validators = {
   email: [required(packageMessages?.signIn?.errors?.email?.required), emailValidator],
@@ -43,8 +36,6 @@ const validators = {
 };
 
 function SignInContent({
-  onComplete,
-  onSignUp,
   onForgotPassword,
 }: {
   onComplete: () => void;
@@ -54,7 +45,6 @@ function SignInContent({
   const {
     connectField,
     handleSubmit,
-    formValues,
     submitting,
     submitError,
     setSubmitError,
@@ -64,38 +54,24 @@ function SignInContent({
 
 
 
-  const onSubmit = async (data: any) =>
-    new Promise<any>((resolve, reject) => {     
-      reduxDispatch(
-        login(
-          {
-            email: data?.email?.toLowerCase(),
-            password: md5(data?.password),
-          },
-          resolve,
-          reject,
-        ),
-      );
-    }).then((res) => {        
-        if(res?.data) {
-        reduxDispatch(
-          push(routes.twoFactorAuthentication, {
-            email: data?.email,
-            password: data?.password,
-            method: res?.data?.method?.name,
-            senderDetail: res?.data?.senderDetail,
-          }),
-        );
-        } 
-      })
-      .catch((error) => {
-        setSubmitError(messages?.login?.form?.errors?.[error?.message] || messages?.general?.generalError);
-      });
-
-
-
-  const handleSignUpClick = () => {
-    onSignUp();
+  const onSubmit = async (data: any) => {
+    // Check if email and password are provided
+    if (data?.email && data?.password) {
+      // Comment out login validation - just redirect to dashboard for any valid input
+      // reduxDispatch(
+      //   login(
+      //     {
+      //       email: data?.email?.toLowerCase(),
+      //       password: md5(data?.password),
+      //     },
+      //     (value?: any) => resolve(value),
+      //     (error?: any) => reject(error),
+      //   ),
+      // );
+      reduxDispatch(push(routes.dashboard.root));
+    } else {
+      setSubmitError('Please enter both email and password');
+    }
   };
 
   return (
