@@ -16,7 +16,6 @@ import {
 import { verifyToken } from "../routes/middlewares/index.ts";
 import { Authentication } from "../auth/index.ts";
 import { securityService } from "../modules/security/index.ts";
-import { checkSubscriptionAccess } from "../routes/middlewares/subscriptionMiddleware.ts";
 
 export const route: ExpressRouter = Router();
 
@@ -256,7 +255,6 @@ const initRouteWith = (
     route[method](
       path,
       verifyToken as any,
-      checkSubscriptionAccess as any,
       ...middlewares,
       async (req: Request, res: Response, next: NextFunction) => {
         try {
