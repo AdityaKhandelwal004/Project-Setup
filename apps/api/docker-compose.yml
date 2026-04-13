@@ -2,26 +2,26 @@ version: "3.7"
 services:
   api:
       image: node:23.11.0-alpine
-      container_name: obiemoney_api
-      working_dir: /Obiemoney-API
+      container_name: api
+      working_dir: /API
       env_file:
         - .env 
       entrypoint: ["/bin/sh", "./scripts/startup.sh"]
       volumes:
-          - ./:/Obiemoney-API
+          - ./:/API
       depends_on:
           - db
       ports:
         - "8080:8080"
   db:
       image: postgres:14
-      container_name: obiemoney_db
+      container_name: template_db
       restart: always
       ports:
           - "5427:5432"
       environment:
-          POSTGRES_USER: obiemoney
+          POSTGRES_USER: template
           POSTGRES_PASSWORD: password
-          POSTGRES_DB: obiemoney-db
+          POSTGRES_DB: template-db
       volumes:
-        - ./obiemoney-db:/var/lib/postgresql/data
+        - ./template-db:/var/lib/postgresql/data

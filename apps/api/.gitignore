@@ -100,7 +100,7 @@ Thumbs.db
 *.db
 
 # Docker
-obiemoney-db/
+template-db/
 
 # SonarQube
 .scannerwork/

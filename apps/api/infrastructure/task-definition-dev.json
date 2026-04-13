@@ -2,7 +2,7 @@
     "executionRoleArn": "arn:aws:iam::312347353656:role/ecsTaskExecutionRole_dev",
     "containerDefinitions": [
         {
-            "name": "obiemoney-api-dev",
+            "name": "api-dev",
             "image": ":ECR_IMAGE",
             "cpu": 0,
             "memory": 512,
@@ -16,109 +16,109 @@
             "secrets": [
                 {
                 "name": "NODE_ENV",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/NODE_ENV"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/NODE_ENV"
                 },
                 {
                 "name": "PORT",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/PORT"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/PORT"
                 },
                 {
                 "name": "FEATURE_LEVEL",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/FEATURE_LEVEL"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/FEATURE_LEVEL"
                 },
                 {
                 "name": "ALLOWED_ORIGINS",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/ALLOWED_ORIGINS"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/ALLOWED_ORIGINS"
                 },
                 {
                 "name": "DB_USER",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/DB_USER"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/DB_USER"
                 },
                 {
                 "name": "DB_PASSWORD",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/DB_PASSWORD"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/DB_PASSWORD"
                 },
                 {
                 "name": "DB_HOST",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/DB_HOST"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/DB_HOST"
                 },
                 {
                 "name": "DB_NAME",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/DB_NAME"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/DB_NAME"
                 },
                 {
                 "name": "DB_PORT",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/DB_PORT"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/DB_PORT"
                 },
                 {
                 "name": "JWT_PRIVATE_KEY",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/JWT_PRIVATE_KEY"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/JWT_PRIVATE_KEY"
                 },
                 {
                 "name": "ENCRYPTION_KEY",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/ENCRYPTION_KEY"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/ENCRYPTION_KEY"
                 },
                 {
                 "name": "JWT_PUBLIC_KEY",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/JWT_PUBLIC_KEY"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/JWT_PUBLIC_KEY"
                 },
                 {
                 "name": "STRIPE_SECRET_KEY",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/STRIPE_SECRET_KEY"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/STRIPE_SECRET_KEY"
                 },
                 {
                 "name": "AWS_REGION",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/AWS_REGION"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/AWS_REGION"
                 },
                 {
                 "name": "S3_UPLOADS_BUCKET_NAME",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/S3_UPLOADS_BUCKET_NAME"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/S3_UPLOADS_BUCKET_NAME"
                 },
                 {
                 "name": "S3_VAULT_BUCKET_NAME",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/S3_VAULT_BUCKET_NAME"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/S3_VAULT_BUCKET_NAME"
                 },
                 {
                 "name": "INVOICE_LAMBDA_ARN",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/INVOICE_LAMBDA_ARN"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/INVOICE_LAMBDA_ARN"
                 },
                 {
                 "name": "SENDGRID_API_KEY",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/SENDGRID_API_KEY"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/SENDGRID_API_KEY"
                 },
                 {
                 "name": "SENDGRID_FROM_EMAIL",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/SENDGRID_FROM_EMAIL"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/SENDGRID_FROM_EMAIL"
                 },
                 {
                 "name": "SENDGRID_FROM_NAME",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/SENDGRID_FROM_NAME"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/SENDGRID_FROM_NAME"
                 },
                 {
                 "name": "APP_BASEURL",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/APP_BASEURL"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/APP_BASEURL"
                 },
                 {
                 "name": "ADMIN_BASEURL",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/ADMIN_BASEURL"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/ADMIN_BASEURL"
                 },
                 {
                 "name": "API_BASEURL",
-                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/obiemoney/dev/API_BASEURL"
+                "valueFrom": "arn:aws:ssm:ap-southeast-2:312347353656:parameter/api/dev/API_BASEURL"
                 }
             ],
             "essential": true,
             "logConfiguration": {
                 "logDriver": "awslogs",
                 "options": {
-                    "awslogs-group": "obiemoney-api-dev",
+                    "awslogs-group": "api-dev",
                     "awslogs-region": "ap-southeast-2",
                     "awslogs-stream-prefix": "api"
                 }
             }
         }
     ],
-    "family": "obiemoney-api-dev",
+    "family": "api-dev",
     "taskRoleArn": "arn:aws:iam::312347353656:role/ecsTaskRole_dev",
     "networkMode": "awsvpc",
     "requiresCompatibilities": [

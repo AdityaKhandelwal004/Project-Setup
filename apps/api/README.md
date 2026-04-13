@@ -1,4 +1,4 @@
-# Obiemoney-API
+# API
 
 A comprehensive financial management API built with Node.js, TypeScript, and PostgreSQL.
 

@@ -106,7 +106,7 @@ class MessageService {
     user: MappedUser,
     tokenDto: TokenDTO,
   ): Promise<boolean> {
-    const subject = "Obiemoney: Reset Password";
+    const subject = "Template: Reset Password";
     const path = "/reset-password";
     const data = {
       firstName: user?.firstName,
@@ -131,7 +131,7 @@ class MessageService {
     validitySecs: number;
     isEnabling: boolean;
   }) {
-    const subject = "Obiemoney: Your Two-Factor Authentication Code";
+    const subject = "Template: Your Two-Factor Authentication Code";
     const data = {
       firstName: dto.firstName,
       code: dto.token,
@@ -153,7 +153,7 @@ class MessageService {
   }
 
   static async sendTwoFaConfirmationCode(user: User, tokenDto: TokenDetails) {
-    const subject = "Obiemoney: 2FA Confirmation";
+    const subject = "Template: 2FA Confirmation";
     const data = {
       firstName: user.firstName,
       code: tokenDto.token,
@@ -169,7 +169,7 @@ class MessageService {
   }
 
   static async sendSignupMail(user: User) {
-    const subject = "Welcome to Obiemoney!";
+    const subject = "Welcome to Template!";
     const data = {
       firstName: user.firstName,
       url: `https://${sanitizeUrl(config.url.appBaseUrl)}`,
@@ -184,7 +184,7 @@ class MessageService {
     dto: PaymentSuccessDetails,
     attachment?: any[],
   ) {
-    const subject = "Obiemoney: Payment Successful";
+    const subject = "Template: Payment Successful";
     const data = {
       firstName: user.firstName,
       amount: (dto.amount / 100).toFixed(2),
@@ -198,7 +198,7 @@ class MessageService {
   }
 
   static async paymentFailure(user: User, dto: PaymentFailureDetails) {
-    const subject = "Obiemoney: Payment Failed";
+    const subject = "Template: Payment Failed";
     const data = {
       firstName: user.firstName,
       amount: (dto.amount / 100).toFixed(2),
@@ -215,7 +215,7 @@ class MessageService {
     dto: SubscriptionSuccessDetails,
     attachment?: any[],
   ) {
-    const subject = "Obiemoney: Subscription Successful";
+    const subject = "Template: Subscription Successful";
     const data = {
       firstName: user.firstName,
       planName: dto.planName,
@@ -239,7 +239,7 @@ class MessageService {
     user: User,
     dto: SubscriptionCancellationDetails,
   ) {
-    const subject = "Obiemoney: Subscription Cancelled";
+    const subject = "Template: Subscription Cancelled";
     const data = {
       firstName: user.firstName,
       planName: dto.planName,
@@ -260,7 +260,7 @@ class MessageService {
     user: User,
     dto: SubscriptionRenewalDetails,
   ) {
-    const subject = "Obiemoney: Subscription Renewed";
+    const subject = "Template: Subscription Renewed";
     const data = {
       firstName: user.firstName,
       planName: dto.planName,
@@ -280,7 +280,7 @@ class MessageService {
   }
 
   static async subscriptionExpiry(user: User, dto: SubscriptionExpiryDetails) {
-    const subject = "Obiemoney: Subscription Expired";
+    const subject = "Template: Subscription Expired";
     const data = {
       firstName: user.firstName,
       planName: dto.planName,
@@ -297,7 +297,7 @@ class MessageService {
   }
 
   static async gracePeriodWarning(user: User, dto: GracePeriodWarningDetails) {
-    const subject = "Obiemoney: Subscription Expiring Soon";
+    const subject = "Template: Subscription Expiring Soon";
 
     const data = {
       firstName: user.firstName,
@@ -320,7 +320,7 @@ class MessageService {
     user: User,
     dto: PaymentAttemptExhaustedDetails,
   ) {
-    const subject = "Obiemoney: Payment Attempts Exhausted";
+    const subject = "Template: Payment Attempts Exhausted";
     const data = {
       firstName: user.firstName,
       planName: dto.planName,
@@ -339,7 +339,7 @@ class MessageService {
   }
 
   static async accountExpiry(user: User, dto: AccountExpiryDetails) {
-    const subject = "Obiemoney: Account Access Expired";
+    const subject = "Template: Account Access Expired";
     const data = {
       firstName: user.firstName,
       planName: dto.planName,
@@ -356,7 +356,7 @@ class MessageService {
   }
 
   static async subscriptionRenewalAlert(user: User, dto: AccountExpiryDetails) {
-    const subject = "Obiemoney: Subscription Renewal Alert";
+    const subject = "Template: Subscription Renewal Alert";
     const data = {
       firstName: user.firstName,
       planName: dto.planName,
@@ -380,7 +380,7 @@ class MessageService {
     email: string,
     token: string,
   ) {
-    const subject = "Obiemoney: Verify your email";
+    const subject = "Template: Verify your email";
     const data = {
       name,
       email,
@@ -400,7 +400,7 @@ class MessageService {
 
   static async sendPasswordResetConfirmation(user: MappedUser) {
     try {
-      const subject = "Obiemoney: Your password has been reset";
+      const subject = "Template: Your password has been reset";
       const data = {
         firstName: user.firstName,
         loginUrl: `${sanitizeUrl(config.url.appBaseUrl)}/login`,
@@ -457,7 +457,7 @@ class MessageService {
 
   static async sendAddUserConfirmationEmail(user: User) {
     try {
-      const subject = "Obiemoney: You're invited to join Obiemoney";
+      const subject = "Template: You're invited to join Template";
       const path = "/login";
       const data = {
         name: user.firstName,

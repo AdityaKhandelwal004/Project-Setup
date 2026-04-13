@@ -70,7 +70,7 @@ const configLoader = convict({
     },
     issuer: {
       format: String,
-      default: "obiemoney",
+      default: "template",
     },
     algorithm: {
       format: String,
