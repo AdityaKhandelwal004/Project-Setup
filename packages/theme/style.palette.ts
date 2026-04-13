@@ -406,7 +406,7 @@ export const colors: Colors = {
 };
 
 // =============================================================================
-// BRAND COLORS (Obiemoney-specific brand color system)
+// BRAND COLORS (template-specific brand color system)
 // =============================================================================
 
 export interface Brand {

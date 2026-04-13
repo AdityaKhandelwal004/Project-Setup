@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { AlertCircle, Sparkles, TrendingUp, Target } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion } from 'motion/react';
+import { AlertCircle } from 'lucide-react';
 import md5 from 'md5';
-import { Checkbox, SvgIcon, Typography, FormControlLabel } from "@mui/material";
+import { Checkbox, SvgIcon} from "@mui/material";
 import { TextInput, PasswordInput, MaterialDateInput, Button } from '@mono/components';
 import { useFormReducer } from '@mono/hooks/src/form';
 import {
@@ -14,8 +14,6 @@ import {
 } from '@mono/utils/src/validators';
 import messages from '../../messages';
 import packageMessages from '@mono/messages';
-import { brand, primitiveColors } from '@mono/theme/style.palette';
-import { AuthLeftSection } from './AuthLeftSection';
 
 import {
   ContentWrapper,
@@ -119,8 +117,6 @@ export function Signup({ onComplete, onSignIn }: { onComplete: () => void; onSig
   return (
     <MainContainer>
       <ContentWrapper>
-        {/* Left side  */}
-        <AuthLeftSection showEmpoweringMessage />
 
         {/* Right side - Sign up form */}
         <RightSection
@@ -251,10 +247,6 @@ export function Signup({ onComplete, onSignIn }: { onComplete: () => void; onSig
                       {messages?.signUp?.read}{' '}
                       <StyledTermsLink
                         onClick={() => {
-                          window.open(
-                            "https://www.obiemoney.com/terms-of-use",
-                            "_blank"
-                          );
                         }}
                       >
                         {messages?.signUp?.termsConditions}
@@ -262,10 +254,6 @@ export function Signup({ onComplete, onSignIn }: { onComplete: () => void; onSig
                       {messages?.signUp?.and}{' '}
                       <StyledTermsLink
                         onClick={() => {
-                          window.open(
-                            "https://www.obiemoney.com/privacy-policy",
-                            "_blank"
-                          );
                         }}
                       >
                         {messages?.signUp?.privacyPolicy}

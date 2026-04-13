@@ -9,7 +9,7 @@ async function startServer(): Promise<void> {
   const app : Application = express();
   const now = moment();
 
-  console.log('Initializing Obiemoney application');
+  console.log('Initializing server application');
   await appLoaders({ expressApp: app });
 
   app.listen(config.port, () => {

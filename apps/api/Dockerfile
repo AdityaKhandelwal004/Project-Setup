@@ -1,17 +1,17 @@
 FROM node:23.11.0-alpine
 RUN npm install pm2 -g
 # Working Dir
-RUN mkdir -p /Obiemoney-API
-WORKDIR /Obiemoney-API
+RUN mkdir -p /API
+WORKDIR /API
 # Copy Package Json Files
-COPY package*.json /Obiemoney-API/
+COPY package*.json /API/
 # Copy .env File
-# COPY .env /Obiemoney-API/
+# COPY .env /API/
 RUN mkdir uploads
 # Install Files
 RUN npm ci
 # Copy Source Files
-COPY . /Obiemoney-API/
+COPY . /API/
 # Build
 RUN npm run build
 CMD [ "npm", "run", "serve:prod" ]

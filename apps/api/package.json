@@ -1,8 +1,8 @@
 {
-  "name": "obiemoney-api",
+  "name": "api",
   "type": "module",
   "version": "1.0.0",
-  "description": "Obiemoney API - Financial management system",
+  "description": "API",
   "main": "app.ts",
   "scripts": {
     "start": "nodemon --exec tsx src/app.ts",
