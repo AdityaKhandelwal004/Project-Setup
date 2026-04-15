@@ -1,5 +1,5 @@
 // =============================================================================
-// OBIEMONEY - DASHBOARD MODULE THEME
+// TEMPLATE - DASHBOARD MODULE THEME
 // =============================================================================
 
 import { primitiveColors } from '../style.palette.ts';

@@ -1,5 +1,5 @@
 // =============================================================================
-// OBIEMONEY - PROTECT MODULE THEME
+// TEMPLATE - PROTECT MODULE THEME
 // =============================================================================
 
 import { primitiveColors } from '../style.palette.ts';

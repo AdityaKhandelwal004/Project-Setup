@@ -1,4 +1,4 @@
-# ObieMoney - Financial Management Platform
+# Template - Boiler Template For Monorepo
 
 Monorepo managed with pnpm workspaces.
 

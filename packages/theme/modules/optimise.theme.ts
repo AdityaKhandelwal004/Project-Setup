@@ -1,5 +1,5 @@
 // =============================================================================
-// OBIEMONEY - OPTIMISE MODULE THEME
+// TEMPLATE - OPTIMISE MODULE THEME
 // =============================================================================
 
 import { borderRadius, spacing } from '../style.layout.ts';

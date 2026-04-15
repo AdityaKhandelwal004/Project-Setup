@@ -7,27 +7,27 @@ import {
   primitiveColors,
 } from '@mono/theme/style.palette.ts';
 import { fontWeight, fontSize, baseFontFamily } from '@mono/theme/style.typography.ts';
-import { obiemoneyTheme, respondTo } from '@mono/theme/index.ts';
+import { templateTheme, respondTo } from '@mono/theme/index.ts';
 import { CloseOutlined } from '@mui/icons-material';
 
 
 export const StyledContainer = styled.div<{ fitContent?: boolean; reduceMargin?: boolean; maxWidth?: string; maxHeight?: string , marginTop?: string}>`
   max-width: ${({ maxWidth }) => maxWidth || '650px'};
   margin: 0 auto;
-  margin-top: ${({ reduceMargin }) => (reduceMargin ? obiemoneyTheme.components.modal.marginTop.reduced : obiemoneyTheme.components.modal.marginTop.default)};
+  margin-top: ${({ reduceMargin }) => (reduceMargin ? templateTheme.components.modal.marginTop.reduced : templateTheme.components.modal.marginTop.default)};
   display: flex;
   flex-direction: column;
   max-height: 90vh;
   opacity: 1;
   padding: 0px 16px;
   transform: rotate(0deg);
-  @media (max-height: ${obiemoneyTheme.components.modal.breakpoints.smallHeight}) {
-    margin-top: ${obiemoneyTheme.components.modal.marginTop.small};
+  @media (max-height: ${templateTheme.components.modal.breakpoints.smallHeight}) {
+    margin-top: ${templateTheme.components.modal.marginTop.small};
   }
 
  ${respondTo.smOnly}{
    max-height: ${({ maxHeight }) => maxHeight || '95vh'};
-  margin-top: ${obiemoneyTheme.components.modal.marginTop.small};
+  margin-top: ${templateTheme.components.modal.marginTop.small};
    margin-top: ${({ marginTop }) => marginTop };
  }   
   
@@ -37,8 +37,8 @@ export const StyledHeaderContainer = styled.div`
   align-items: flex-start;
   justify-content: space-between;
   padding: 24px 24px 20px 24px;
-  // gap: ${obiemoneyTheme.components.modal.header.gap};
-  // min-height: ${obiemoneyTheme.components.modal.header.height};
+  // gap: ${templateTheme.components.modal.header.gap};
+  // min-height: ${templateTheme.components.modal.header.height};
   font-weight: ${fontWeight.semiBold};
   font-size: ${fontSize.h4};
   font-family: ${baseFontFamily};
@@ -64,19 +64,19 @@ export const StyledSubHeading = styled(Typography)`
 export const StyledCloseContainer = styled.div`
 display: flex;
   cursor: pointer;
-  margin-left: ${obiemoneyTheme.components.modal.closeMarginLeft};
-  // margin-top: ${obiemoneyTheme.components.modal.closeMarginTop};
+  margin-left: ${templateTheme.components.modal.closeMarginLeft};
+  // margin-top: ${templateTheme.components.modal.closeMarginTop};
 `;
 export const StyledLeftContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: ${obiemoneyTheme.components.modal.contentGap};
+  gap: ${templateTheme.components.modal.contentGap};
 `;
 export const StyledTextContent = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${obiemoneyTheme.components.modal.textGap};
+  gap: ${templateTheme.components.modal.textGap};
 `;
 export const StyledHeadingImgContainer = styled.div`
   display: flex;
@@ -85,8 +85,8 @@ export const StyledHeadingImgContainer = styled.div`
   flex-shrink: 0;
 `;
 export const StyledHeadingImg = styled.img`
-  width: ${obiemoneyTheme.components.modal.iconSize};
-  height: ${obiemoneyTheme.components.modal.iconSize};
+  width: ${templateTheme.components.modal.iconSize};
+  height: ${templateTheme.components.modal.iconSize};
 `;
 export const StyledButtonContainer = styled.div`
   display: flex;
@@ -94,9 +94,9 @@ export const StyledButtonContainer = styled.div`
 `;
 // New styled components for improved modal structure
 export const StyledFormArea = styled.div`
-  padding: ${obiemoneyTheme.components.modal.form.padding};
-  gap: ${obiemoneyTheme.components.modal.form.gap};
-  min-height: ${obiemoneyTheme.components.modal.form.minHeight};
+  padding: ${templateTheme.components.modal.form.padding};
+  gap: ${templateTheme.components.modal.form.gap};
+  min-height: ${templateTheme.components.modal.form.minHeight};
   display: flex;
   flex-direction: column;
   opacity: 1;
@@ -107,19 +107,19 @@ export const StyledButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  gap: ${obiemoneyTheme.components.modal.buttonWrapper.gap};
-  padding: ${obiemoneyTheme.components.modal.buttonWrapper.padding};
-  min-height: ${obiemoneyTheme.components.modal.buttonWrapper.minHeight};
+  gap: ${templateTheme.components.modal.buttonWrapper.gap};
+  padding: ${templateTheme.components.modal.buttonWrapper.padding};
+  min-height: ${templateTheme.components.modal.buttonWrapper.minHeight};
   opacity: 1;
   transform: rotate(0deg);
   border-top: 1px solid ${greyScaleColour.grey10};
   background-color: ${brand.white};
 `;
 export const StyledModalButton = styled.div<{ variant?: 'outlined' | 'contained' }>`
-  height: ${obiemoneyTheme.components.modal.button.height};
-  padding: ${obiemoneyTheme.components.modal.button.padding};
-  border-radius: ${obiemoneyTheme.components.modal.button.borderRadius};
-  min-width: ${obiemoneyTheme.components.modal.button.minWidth};
+  height: ${templateTheme.components.modal.button.height};
+  padding: ${templateTheme.components.modal.button.padding};
+  border-radius: ${templateTheme.components.modal.button.borderRadius};
+  min-width: ${templateTheme.components.modal.button.minWidth};
   display: flex;
   align-items: center;
   justify-content: center;
