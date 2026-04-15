@@ -480,7 +480,7 @@ const theme = createTheme({
 export default theme;
 
 
-export const obiemoneyTheme = {
+export const templateTheme = {
   components: {
     modal: {
       // Container
@@ -536,6 +536,4 @@ export const obiemoneyTheme = {
     },
   },
 } as const;
-
-export type ObiemoneyTheme = typeof obiemoneyTheme;
 
